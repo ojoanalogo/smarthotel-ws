@@ -6,6 +6,7 @@ import xyz.mrarc.smarthotel.rutas.Filtros;
 import xyz.mrarc.smarthotel.rutas.Ruta;
 import xyz.mrarc.smarthotel.usuario.Usuario;
 import xyz.mrarc.smarthotel.vistas.admin.ControladorAdminPanel;
+import xyz.mrarc.smarthotel.vistas.index.ControladorIndex;
 
 public class SmartHotel extends Spark {
 
@@ -19,10 +20,9 @@ public class SmartHotel extends Spark {
             usuario = new Usuario();
         }
         // Rutas web
-        //get(Ruta.Publica.INDEX, ControladorIndex.servirIndex);
+        get(Ruta.Publica.INDEX, ControladorIndex.servirIndex);
         get(Ruta.Login.LOGIN_URL, ControladorLogin.servirLogin);
         get(Ruta.Admin.PANEL, ControladorAdminPanel.servirPanel);
-        // Rutas API
         // Rutas POST
         post(Ruta.Login.LOGIN_POST, ControladorLogin.verificarAcceso);
     }
@@ -31,7 +31,7 @@ public class SmartHotel extends Spark {
      * Configurar servidor al momento de llamarlo
      */
     private static void configurarServidor() {
-        staticFiles.location("/admin"); // Static files
+        staticFiles.location(Ruta.Otras.UBICACION_ARCHIVOS); // Static files
         port(80);
         before("*", Filtros.añadirSlashes);
         before("*", Filtros.checarAccesoAPI);

@@ -10,10 +10,10 @@ public class Ruta {
         public static final String INDEX = "/";
     }
 
-    // Rutas para login
+    // Rutas para index
     public static class Login {
-        public static final String LOGIN_URL = "/login/";
-        public static final String LOGIN_POST = "/login/";
+        public static final String LOGIN_URL = "/index/";
+        public static final String LOGIN_POST = "/index/";
     }
 
     // Rutas panel Administración
@@ -28,9 +28,9 @@ public class Ruta {
 
     // Rutas plantillas
     public static class Plantillas {
-        public static final String PUBLICA_INDEX = "src/plantillas/index.vm";
-        public static final String PUBLICA_ACERCA = "public/acerca.vm";
-        public static final String PUBLICA_LOGIN = "public/login.vm";
+        public static final String PUBLICA_INDEX = "index.vm";
+        public static final String PUBLICA_ACERCA = "acerca.vm";
+        public static final String PUBLICA_LOGIN = "admin/index.vm";
         public static final String PANEL_PRINCIPAL = "admin/panel.vm";
         public static final String PANEL_PROBAR_API = "admin/probar.vm";
         public static final String ERROR_404 = "404.vm";
@@ -38,6 +38,6 @@ public class Ruta {
 
     // Otras Rutas
     public static class Otras {
-        public static final String UBICACION_ARCHIVOS = "admin/";
+        public static final String UBICACION_ARCHIVOS = "public/";
     }
 }
