@@ -1,5 +1,7 @@
 package xyz.mrarc.smarthotel.database;
 
+import org.skife.jdbi.v2.DBI;
+
 public class MySQL {
 
     private String host;
@@ -8,6 +10,7 @@ public class MySQL {
     private String usuario;
     private String clave;
     private boolean debug;
+    private DBI dbi;
 
     /**
      * Constructor para la clase MySQL
@@ -28,4 +31,12 @@ public class MySQL {
         this.debug = debug;
     }
 
+    public void inicializarDatabase() {
+        this.dbi = new DBI("jdbc:mysql://" + this.host + "/" + this.database, this.usuario, this.clave);
+        System.out.println(dbi.getSQLLog());
+    }
+
+    public DBI obtenerDBI() {
+        return this.dbi;
+    }
 }

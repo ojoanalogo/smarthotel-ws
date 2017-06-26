@@ -3,9 +3,10 @@ package xyz.mrarc.smarthotel.usuario;
 import java.util.UUID;
 
 public class Usuario {
-    private boolean identificado;
-    private String correo;
-    private String clave;
-    private String usuario;
     private UUID userID;
+    private String nombre;
+    private String clave;
+    private String correo;
+    private boolean identificado;
+
 }
