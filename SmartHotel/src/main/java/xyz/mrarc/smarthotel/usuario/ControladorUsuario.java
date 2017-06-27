@@ -9,16 +9,35 @@ public class ControladorUsuario {
 
     public static Route crearUsuario = (Request solicitud, Response respuesta) -> {
         UsuarioDAO usuarioDAO = SmartHotel.database.obtenerDBI().onDemand(UsuarioDAO.class);
-        System.out.println("h3");
         String cuarto = solicitud.queryParams("cuarto");
         String nombre = solicitud.queryParams("nombre");
         String apellido = solicitud.queryParams("apellido");
         String correo = solicitud.queryParams("correo");
         String clave = solicitud.queryParams("clave");
         String id_pais = solicitud.queryParams("id_pais");
-        System.out.println("h4");
-        usuarioDAO.crearUsuario(cuarto, nombre, apellido, correo, clave, Integer.parseInt(id_pais));
-        System.out.println("h5");
-        return "HOLA";
+        if (!yaExiste(correo)) {
+            usuarioDAO.crearUsuario(cuarto, nombre, apellido, correo, clave, Integer.parseInt(id_pais));
+            return 1;
+        }
+        return 0;
     };
+
+    public static Route checarClave = (Request solicitud, Response respuesta) -> {
+        UsuarioDAO usuarioDAO = SmartHotel.database.obtenerDBI().onDemand(UsuarioDAO.class);
+        System.out.println("HE");
+        int size = usuarioDAO.verificarClave(solicitud.queryParams("cuarto"), solicitud.queryParams("clave")).size();
+        System.out.println("HE");
+        System.out.format("CANTIDAD DE REGISTROS %d", size);
+        if (size >= 1) {
+            return 1;
+        }
+        return 0;
+    };
+
+    private static boolean yaExiste(String correo) {
+        UsuarioDAO usuarioDAO = SmartHotel.database.obtenerDBI().onDemand(UsuarioDAO.class);
+        int size = usuarioDAO.yaExiste(correo).size();
+        System.out.format("CANTIDAD ENCONTRADA %d", size);
+        return size >= 0;
+    }
 }

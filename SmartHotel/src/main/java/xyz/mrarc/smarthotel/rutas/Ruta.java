@@ -24,7 +24,10 @@ public class Ruta {
     // Rutas API
     public static class API {
         public static final String API_INDEX = "/api/";
-        public static final String CREAR_USUARIO = API.API_INDEX + "usuario/crear/";
+        public static class USUARIO {
+            public static final String CREAR_USUARIO = API.API_INDEX + "usuario/crear/";
+            public static final String CHECAR_CLAVE = API.API_INDEX + "usuario/clave/";
+        }
 
     }
 
