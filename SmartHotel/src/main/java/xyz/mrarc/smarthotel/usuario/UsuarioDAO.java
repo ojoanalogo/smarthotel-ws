@@ -1,12 +1,8 @@
 package xyz.mrarc.smarthotel.usuario;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
-
-import java.util.List;
-import java.util.Map;
 
 public interface UsuarioDAO {
 
@@ -34,8 +30,7 @@ public interface UsuarioDAO {
      * @return Cantidad de filas con ese parametro (debería ser 1 si la clave es correcta)
      */
     @SqlQuery("SELECT id_usuario FROM app_usuarios WHERE cuarto = :cuarto AND clave = :clave")
-    @GetGeneratedKeys
-    List<Map<String, Object>> verificarClave(@Bind("cuarto") String cuarto, @Bind("clave") String clave);
+    int verificarClave(@Bind("cuarto") String cuarto, @Bind("clave") String clave);
 
     /**
      * Checa si ya existe el correo registrado
@@ -43,8 +38,7 @@ public interface UsuarioDAO {
      * @return Cantidad de filas con ese correo (max 1)
      */
     @SqlQuery("SELECT id_usuario FROM app_usuarios WHERE correo = :correo")
-    @GetGeneratedKeys
-    List<Map<String, Object>> yaExiste(@Bind("correo") String correo);
+    int yaExiste(@Bind("correo") String correo);
 
     /**
      * Obtener el cuarto donde se hospeda el usuario

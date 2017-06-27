@@ -24,10 +24,7 @@ public class ControladorUsuario {
 
     public static Route checarClave = (Request solicitud, Response respuesta) -> {
         UsuarioDAO usuarioDAO = SmartHotel.database.obtenerDBI().onDemand(UsuarioDAO.class);
-        System.out.println("HE");
-        int size = usuarioDAO.verificarClave(solicitud.queryParams("cuarto"), solicitud.queryParams("clave")).size();
-        System.out.println("HE");
-        System.out.format("CANTIDAD DE REGISTROS %d", size);
+        int size = usuarioDAO.verificarClave(solicitud.queryParams("cuarto"), solicitud.queryParams("clave"));
         if (size >= 1) {
             return 1;
         }
@@ -36,8 +33,7 @@ public class ControladorUsuario {
 
     private static boolean yaExiste(String correo) {
         UsuarioDAO usuarioDAO = SmartHotel.database.obtenerDBI().onDemand(UsuarioDAO.class);
-        int size = usuarioDAO.yaExiste(correo).size();
-        System.out.format("CANTIDAD ENCONTRADA %d", size);
+        int size = usuarioDAO.yaExiste(correo);
         return size >= 0;
     }
 }
