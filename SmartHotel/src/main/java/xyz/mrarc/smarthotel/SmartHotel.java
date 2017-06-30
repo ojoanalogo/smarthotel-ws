@@ -30,7 +30,6 @@ public class SmartHotel extends Spark {
         get(Ruta.Login.LOGIN_POST, ControladorLogin.verificarAcceso);
         post(Ruta.API.USUARIO.CREAR_USUARIO, ControladorUsuario.crearUsuario);
         get(Ruta.API.USUARIO.CHECAR_CLAVE, ControladorUsuario.checarClave);
-
     }
 
     /**

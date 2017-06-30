@@ -2,17 +2,20 @@ package xyz.mrarc.smarthotel.utilidades;
 
 public class CodigoEstatus {
 
-    private String msgEstatus;
     private int codigoEstatus;
+    private String msgEstatus;
 
     public CodigoEstatus(Estatus estatus) {
-        this.msgEstatus = estatus.obtenerMensaje();
         this.codigoEstatus = estatus.obtenerCodigo();
+        this.msgEstatus = estatus.obtenerMensaje();
     }
 
     public enum Estatus {
         USUARIO_REGISTRADO(1, "Usuario registrado"),
-        USUARIO_YA_EXISTE(2, "Usuario ya existe");
+        USUARIO_YA_EXISTE(2, "Usuario ya existe"),
+        AUTH_APP_CLAVE_CORRECTA(1, "Clave correcta"),
+        AUTH_APP_CLAVE_INCORRECTA(2, "Clave incorrecta o usuario no encontrado");
+
 
         int codigoEstatus;
         String mensaje;
@@ -21,14 +24,14 @@ public class CodigoEstatus {
             this.codigoEstatus = codigoEstatus;
             this.mensaje = mensaje;
         }
+        public int obtenerCodigo() {
+            return this.codigoEstatus;
+        }
 
         public String obtenerMensaje() {
             return this.mensaje;
         }
 
-        public int obtenerCodigo() {
-            return this.codigoEstatus;
-        }
     }
 
 }

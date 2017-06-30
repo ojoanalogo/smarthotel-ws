@@ -33,7 +33,6 @@ public class MySQL {
 
     public void inicializarDatabase() {
         this.dbi = new DBI("jdbc:mysql://" + this.host + "/" + this.database, this.usuario, this.clave);
-        System.out.println(dbi.getSQLLog());
     }
 
     public DBI obtenerDBI() {
