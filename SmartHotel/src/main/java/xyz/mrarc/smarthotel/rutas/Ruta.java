@@ -27,6 +27,7 @@ public class Ruta {
         public static class USUARIO {
             public static final String CREAR_USUARIO = API.API_INDEX + "usuario/crear/";
             public static final String CHECAR_CLAVE = API.API_INDEX + "usuario/clave/";
+            public static final String OBTENER_TOKEN = API.API_INDEX + "usuario/clave/token/";
         }
 
     }

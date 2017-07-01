@@ -11,8 +11,9 @@ public class CodigoEstatus {
     }
 
     public enum Estatus {
-        USUARIO_REGISTRADO(1, "Usuario registrado"),
-        USUARIO_YA_EXISTE(2, "Usuario ya existe"),
+        REGISTRO_REGISTRADO(1, "Usuario registrado"),
+        REGISTRO_YA_EXISTE(2, "Usuario ya existe"),
+        REGISTRO_CAMPO_VACIO(3, "Error valor de datos"),
         AUTH_APP_CLAVE_CORRECTA(1, "Clave correcta"),
         AUTH_APP_CLAVE_INCORRECTA(2, "Clave incorrecta o usuario no encontrado");
 
