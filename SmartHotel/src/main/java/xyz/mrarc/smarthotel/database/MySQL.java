@@ -1,6 +1,12 @@
 package xyz.mrarc.smarthotel.database;
 
 import org.skife.jdbi.v2.DBI;
+import spark.Spark;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class MySQL {
 
@@ -31,8 +37,26 @@ public class MySQL {
         this.debug = debug;
     }
 
-    public void inicializarDatabase() {
-        this.dbi = new DBI("jdbc:mysql://" + this.host + "/" + this.database, this.usuario, this.clave);
+    private static boolean isDbConnected(Connection db) {
+        final String CHECK_SQL_QUERY = "SELECT 1";
+        boolean isConnected = false;
+        try {
+            final PreparedStatement statement = db.prepareStatement(CHECK_SQL_QUERY);
+            isConnected = true;
+        } catch (SQLException | NullPointerException e) {
+            // handle SQL error here!
+        }
+        return isConnected;
+    }
+
+    public void inicializarDatabase() throws SQLException {
+        Connection db = DriverManager.getConnection("jdbc:mysql://" + this.host + "/" + this.database, this.usuario, this.clave);
+        if (isDbConnected(db)) {
+            this.dbi = new DBI("jdbc:mysql://" + this.host + "/" + this.database, this.usuario, this.clave);
+        } else {
+            System.out.println("DB NO ABIERTA");
+            Spark.stop();
+        }
     }
 
     public DBI obtenerDBI() {

@@ -10,6 +10,8 @@ import xyz.mrarc.smarthotel.usuario.Usuario;
 import xyz.mrarc.smarthotel.vistas.admin.ControladorAdminPanel;
 import xyz.mrarc.smarthotel.vistas.index.ControladorIndex;
 
+import java.sql.SQLException;
+
 public class SmartHotel extends Spark {
 
     public static boolean accesoAPI = false;
@@ -42,6 +44,10 @@ public class SmartHotel extends Spark {
         before("*", Filtros.añadirSlashes);
         before("*", Filtros.checarAccesoAPI);
         database = new MySQL("localhost", "80", "smarthotel", "root", "", false);
-        database.inicializarDatabase();
+        try {
+            database.inicializarDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

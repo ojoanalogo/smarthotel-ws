@@ -7,6 +7,8 @@ import xyz.mrarc.smarthotel.SmartHotel;
 import xyz.mrarc.smarthotel.utilidades.AuthHandler;
 import xyz.mrarc.smarthotel.utilidades.CodigoEstatus;
 
+import java.util.HashMap;
+
 import static xyz.mrarc.smarthotel.utilidades.CodigoEstatus.Estatus.*;
 import static xyz.mrarc.smarthotel.utilidades.JSON.convertirAJSON;
 
@@ -35,20 +37,15 @@ public class ControladorUsuario {
         } else return convertirAJSON(new CodigoEstatus(REGISTRO_YA_EXISTE));
     };
     public static Route solicitarToken = (Request solicitud, Response respuesta) -> {
-        class modeloJSON {
-            private int codigoEstatus;
-            private String token;
-
-            private modeloJSON() {
-                this.codigoEstatus = 1;
-                this.token = new AuthHandler().obtenerToken("MACHACA");
-            }
-        }
         respuesta.type("text/json");
         respuesta.status(200);
         UsuarioDAO usuarioDAO = SmartHotel.database.obtenerDBI().onDemand(UsuarioDAO.class);
+        final HashMap<String, String> jsonObject = new HashMap<>();
         if (usuarioDAO.verificarClave(solicitud.queryParams("cuarto"), solicitud.queryParams("clave")) >= 1) {
-            return convertirAJSON(new modeloJSON());
+            AuthHandler authHandler = new AuthHandler("MACHACA");
+            jsonObject.put("token", authHandler.obtenerToken());
+            jsonObject.put("codigoEstatus", String.valueOf(authHandler.obtenerCodigoEstatus()));
+            return convertirAJSON(jsonObject);
         } else {
             return convertirAJSON(new CodigoEstatus(AUTH_APP_CLAVE_INCORRECTA));
         }
@@ -69,3 +66,4 @@ public class ControladorUsuario {
         return size >= 1;
     }
 }
+
