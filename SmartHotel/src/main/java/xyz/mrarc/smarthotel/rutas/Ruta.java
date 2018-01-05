@@ -33,16 +33,16 @@ public class Ruta {
 
     // Rutas plantillas
     public static class Plantillas {
-        public static final String PUBLICA_INDEX = "index.vm";
-        public static final String PUBLICA_ACERCA = "acerca.vm";
-        public static final String PUBLICA_LOGIN = "admin/index.vm";
-        public static final String PANEL_PRINCIPAL = "admin/panel.vm";
-        public static final String PANEL_PROBAR_API = "admin/probar.vm";
-        public static final String ERROR_404 = "404.vm";
+        public static final String PUBLICA_INDEX = "/index.vm";
+        public static final String PUBLICA_ACERCA = "/acerca.vm";
+        public static final String PUBLICA_LOGIN = "/admin/index.vm";
+        public static final String PANEL_PRINCIPAL = "/admin/panel.vm";
+        public static final String PANEL_PROBAR_API = "/admin/probar.vm";
+        public static final String ERROR_404 = "/404.vm";
     }
 
     // Otras Rutas
     public static class Otras {
-        public static final String UBICACION_ARCHIVOS = "public/";
+        public static final String UBICACION_ARCHIVOS = "/public";
     }
 }
