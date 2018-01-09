@@ -7,7 +7,7 @@
             <ul>
                 <li>
                     <a href="#">
-                        Inicio
+                        Hecho con <span style="color: #D32F2F;">❤</span> por Alfonso Reyes
                     </a>
                 </li>
 
@@ -28,4 +28,6 @@
 <script src="/public/js/chartist.min.js"></script>
 <!--  Plugin notificaciones    -->
 <script src="/public/js/bootstrap-notify.js"></script>
+<!-- Plugin DatePicker -->
+<script src="/public/js/datepicker.min.js"></script>
 </html>

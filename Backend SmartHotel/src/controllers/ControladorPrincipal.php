@@ -8,12 +8,18 @@
  */
 
 class ControladorPrincipal {
-    public function verificarAcceso() {
-        session_start();
-        return isset($_SESSION['login_usuario']);
-    }
-    public function deslogear() {
-        session_start();
-        session_destroy();
+    public function variablesUsuario($usuario) {
+        global $db;
+        $args = array($usuario);
+        $datos = array();
+        $query = "SELECT * FROM sh_usuarios WHERE correo=?";
+        $rs = $db->query($query, $args);
+        if ($rs === false) {
+            return null;
+        }
+        foreach ($rs as $row) {
+            $datos = $row;
+        }
+        return $datos;
     }
 }

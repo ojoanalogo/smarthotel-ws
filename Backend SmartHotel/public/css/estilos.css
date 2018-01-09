@@ -57,3 +57,15 @@ body {
     margin-right: auto;
     text-align: center;
 }
+
+.page-header {
+    margin: -10px 0 20px !important;
+}
+.fondo-verde {
+    font-weight: bold;
+    background-color: #5cb85c;
+    color: #fff;
+}
+.panel-green {
+    border: 1px solid #5cb85c;
+}

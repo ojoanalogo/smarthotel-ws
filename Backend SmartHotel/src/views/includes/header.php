@@ -1,10 +1,9 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-function obtenerSeccionNavbar($requestUri)
-{
+function obtenerSeccionNavbar($requestUri) {
     $current_file_name = basename($_SERVER['REQUEST_URI']);
     if ($current_file_name == $requestUri) {
-        echo 'class="seleccionado"';
+        echo 'class="active"';
     }
 }
 ?>
@@ -27,9 +26,13 @@ function obtenerSeccionNavbar($requestUri)
     <link href="/public/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
     <!-- Fuentes e iconos -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <!-- Estilos de fuentes -->
     <link href="/public/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/public/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <!-- Estilos otros -->
     <link href="/public/css/estilos.css" rel="stylesheet" />
+    <!-- Date picker css -->
+    <link href="/public/css/datepicker.min.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Wrapper -->
@@ -43,28 +46,34 @@ function obtenerSeccionNavbar($requestUri)
                 </a>
             </div>
             <ul class="nav">
-                <li <?php obtenerSeccionNavbar("/dashboard") ?>>
-                    <a href="/index">
+                <li <?php obtenerSeccionNavbar("dashboard") ?>>
+                    <a href="/dashboard">
                         <i class="fa fa-dashboard"></i>
                         <p>Panel</p>
                     </a>
                 </li>
-                <li <?php obtenerSeccionNavbar("/habitaciones") ?>>
-                    <a href="/habitaciones">
+                <li <?php obtenerSeccionNavbar("habitaciones") ?>>
+                    <a href="/dashboard/habitaciones">
                         <i class="fa fa-bed"></i>
                         <p>Habitaciones</p>
                     </a>
                 </li>
-                <li <?php obtenerSeccionNavbar("huespedes.php") ?>>
-                    <a href="huespedes.html">
+                <li <?php obtenerSeccionNavbar("huespedes") ?>>
+                    <a href="/dashboard/huespedes">
                         <i class="fa fa-users"></i>
                         <p>Huespedes</p>
                     </a>
                 </li>
-                <li <?php obtenerSeccionNavbar("mapa.php") ?>>
-                    <a href="mapa.html">
+                <li <?php obtenerSeccionNavbar("mapa") ?>>
+                    <a href="/dashboard/mapa">
                         <i class="fa fa-map"></i>
                         <p>Mapa</p>
+                    </a>
+                </li>
+                <li <?php obtenerSeccionNavbar("configuracion") ?>>
+                    <a href="/dashboard/configuracion">
+                        <i class="fa fa-gear"></i>
+                        <p>Configuración</p>
                     </a>
                 </li>
             </ul>
@@ -93,10 +102,16 @@ function obtenerSeccionNavbar($requestUri)
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="">
-                                ADMIN
-                            </a>
+                        <li style="margin-top: 20px !important;">
+                            <div class="dropdown show">
+                                <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Usuario: <?php echo $datos["correo"]; ?>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="/logout">Deslogear</a>
+                                </div>
+                            </div>
+
                         </li>
                     </ul>
                 </div>

@@ -13,28 +13,90 @@ require_once('src/core/one_framework.php');
 $app = new \OnePHP\App();
 
 /**
+ * DB
+ */
+
+require_once __DIR__ . "/src/libs/database_manager/pdo_database.class.php";
+require_once __DIR__ . "/src/config/config.php";
+$db = new wArLeY_DBMS(DB_TYPE, DB_HOST, DB_DB, DB_USR, DB_PWD, DB_PORT);
+if ($db->Cnxn() == false) {
+    die(HNDLR_CNXNDB);
+}
+
+/**
  * Controladores
  */
-require __DIR__ . "/src/controllers/ControladorPrincipal.php";
+require_once __DIR__ . "/src/controllers/ControladorPrincipal.php";
+require_once __DIR__ . "/src/controllers/ControladorLogin.php";
+
 
 /**
  * Rutas de la aplicación
  */
 // Index
-$app->get('/',function() use ( $app ) {
-    $master = new ControladorPrincipal();
-    $logeado = $master->verificarAcceso();
-    if ($logeado)
-        return $app->Response('dashboard.php', array(),201);
+$app->get('/dashboard',function() use ( $app ) {
+    $controladorLogin = new ControladorLogin();
+    $logeado = $controladorLogin->verificarAcceso();
+    if ($logeado) {
+        $controladorPrincipal = new ControladorPrincipal();
+        return $app->Response('dashboard.php', array("datos" =>
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+    }
     else
-        return $app->getRequest();
+        return $app->Response('login.php', array(),201);
+});
+
+$app->get('/dashboard/habitaciones',function() use ( $app ) {
+    $controladorLogin = new ControladorLogin();
+    $logeado = $controladorLogin->verificarAcceso();
+    if ($logeado) {
+        $controladorPrincipal = new ControladorPrincipal();
+        return $app->Response('habitaciones.php', array("datos" =>
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+    }
+    else
+        return $app->Response('login.php', array(),201);
+});
+$app->get('/dashboard/huespedes',function() use ( $app ) {
+    $controladorLogin = new ControladorLogin();
+    $logeado = $controladorLogin->verificarAcceso();
+    if ($logeado) {
+        $controladorPrincipal = new ControladorPrincipal();
+        return $app->Response('huespedes.php', array("datos" =>
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+    }
+    else
+        return $app->Response('login.php', array(),201);
 });
 
 // Logout
 $app->get('/logout',function() use ( $app ) {
-    $master = new ControladorPrincipal();
-    $master->deslogear();
-    return $app->Response('login.php', array(), 201);
+    $controladorLogin = new ControladorLogin();
+    $controladorLogin->deslogear();
+    header("Location: /dashboard");
+});
+
+$app->get("/", function() use ($app) {
+    $controladorLogin = new ControladorLogin();
+    $logeado = $controladorLogin->verificarAcceso();
+    if ($logeado) {
+        $controladorPrincipal = new ControladorPrincipal();
+        header("Location: /dashboard");
+        return $app->Response('dashboard.php', array("datos" =>
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+    }
+    else
+
+        return $app->Response('login.php', array(),201);
+});
+
+$app->post("/authme_panel", function() use ($app) {
+    $controladorLogin = new ControladorLogin();
+    if ($controladorLogin->validarUsuario($app->getRequest()->post("correo"), $app->getRequest()->post("clave"))) {
+        header("Location: /dashboard");
+    } else {
+        return $app->Response('login.php', array("error" => true),201);
+    }
 });
 
 // 404

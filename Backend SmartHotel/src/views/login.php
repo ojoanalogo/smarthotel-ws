@@ -1,49 +1,3 @@
-<?php
-ini_set('default_charset', 'utf-8');
-header("Content-Type: text/html; charset=utf-8");
-require("/../../src/libs/database_manager/pdo_database.class.php");
-require("/../../src/config/config.php");
-$db = new wArLeY_DBMS(DB_TYPE, DB_HOST, DB_DB, DB_USR, DB_PWD, DB_PORT);
-if ($db->Cnxn() == false) {
-    die(HNDLR_CNXNDB);
-}
-$userInvalido = null;
-$loggedId = null;
-?>
-<?php
-if (isset($_POST['correo']) && isset($_POST['clave'])) {
-    $correo = strtolower(trim($_POST['correo']));
-    $clavePost = stripslashes($_POST['clave']);
-    $clave = hash('sha256', $clavePost);
-    $arrayArgs = array($correo, $clave);
-    $loginQuery = "SELECT id_usuario FROM sh_usuarios WHERE correo=? AND clave=?";
-    $resultCheck = $db->query($loginQuery, $arrayArgs);
-    if($resultCheck===false) {
-        $loggedId = "error";
-    } else {
-        foreach ($resultCheck as $row) {
-            if ($row["id_usuario"] > 0) {
-                $loggedId = "correcto";
-            } else {
-                $loggedId = "incorrecto";
-            }
-        }
-
-    }
-    if ($loggedId == "correcto") {
-        $userInvalido = false;
-        crearValidacion($_POST['correo']);
-        header("Location: /");
-        die();
-    } else {
-        $userInvalido = true;
-    }
-}
-function crearValidacion($usuario){
-    $_SESSION["login_usuario"] = $usuario;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,11 +26,13 @@ function crearValidacion($usuario){
             padding-bottom: 40px;
             background-color: #eee;
         }
-
-        .form-signin {
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
+        #bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            min-width: 100%;
+            min-height: 100%;
         }
         .form-signin .form-signin-heading,
         .form-signin .checkbox {
@@ -108,50 +64,41 @@ function crearValidacion($usuario){
     </style>
 </head>
 <body>
-
+<img src="/public/img/fondo.jpg" id="bg" alt="">
 <div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading" align="center">
+                    <img src="/public/img/logo.png" width="150" alt=""/> </div>
+                <div class="panel-body">
+                    <p class="lead">
+                        MySmartHotel - Acceso
+                    </p>
+                    <?php if (isset($error)): ?>
+                        <div class="text-danger">Correo/clave incorrectos</div>
+                    <?php endif; ?>
+                    <form role="form" method="post" action="/authme_panel">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Correo" name="correo" type="email" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Clave" name="clave" type="password" required>
+                            </div>
+                            <button type="submit" name="login" class="btn btn-lg btn-default btn-block"><i class="fa fa-lock fa-fw"></i>Acceder</button>
+                        </fieldset>
+                    </form>
+                    <p style="margin-top: 15px;" class="text-muted centrar">También puedes presionar la tecla <kbd>ENTER</kbd> para acceder</p>
+                    <div style="color:#CCC; text-align:center; padding-top:10px;">ENEIT 2018</div>
+                </div>
 
-    <form class="form-signin" method="get">
-        <h2 class="form-signin-heading">Please sign in</h2>
-
-
-        <label for="usuario" class="sr-only">Correo</label>
-        <input type="email" name='correo' id="correo" class="form-control" placeholder="Correo" required autofocus>
-
-        <label for="clave" class="sr-only">Clave de usuario</label>
-        <input type="password" name="clave" id="clave" class="form-control" placeholder="Clave" required>
-        <div class="form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" checked="">
-                <span class="form-check-sign"></span>
-            </label>
+            </div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Acceder</button>
-    </form>
-
-</div> <!-- /container -->
+    </div>
+</div>
 </body>
 <!-- Archivos JS  -->
 <script src="/public/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="/public/js/bootstrap.min.js" type="text/javascript"></script>
-<!--  Plugin notificaciones    -->
-<script src="/public/js/bootstrap-notify.js"></script>
-<?php
-
-if ($userInvalido) {
-    echo '<script> $.notify({
-	message: "Correo/Clave incorrectos" 
-},{
-	type: "danger"
-}); </script>';
-}
-if ($loggedId === "error") {
-    echo '<script> $.notify({
-	message: "Error en el sistema" 
-},{
-	type: "danger"
-}); </script>';
-}
-?>
 </html>
-
