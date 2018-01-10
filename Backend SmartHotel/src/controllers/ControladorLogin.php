@@ -1,4 +1,8 @@
 <?php
+// Require
+include_once "/../libs/firebase/firebase.php";
+use Firebase\JWT\JWT;
+
 /**
  * Controlador Login MySmartHotel
  *
@@ -6,8 +10,6 @@
  * @author Alfonso Reyes Cortés <hola@mrarc.xyz>
  * @version 1.0
  */
-
-// Require
 
 class ControladorLogin
 {
@@ -23,10 +25,10 @@ class ControladorLogin
     /**
      * @param $user_post - Usuario o correo solicitud
      * @param $password_post - Clave solicitud
+     * @param bool $appLogin
      * @return bool - Valida si las credenciales son correctas
      */
-    public function validarUsuario($user_post, $password_post)
-    {
+    public function validarUsuario($user_post, $password_post, $appLogin=false) {
         global $db;
         $user = strtolower(trim($user_post));
         $password = stripslashes(hash("sha256", $password_post));
@@ -38,7 +40,9 @@ class ControladorLogin
         }
         foreach ($rs as $row) {
             if ($row["id_usuario"] >= 1) {
-                $this->crearSesion($user);
+                if(!$appLogin) {
+                    $this->crearSesion($user);
+                }
                 return true;
             }
         }
@@ -74,4 +78,29 @@ class ControladorLogin
         session_destroy();
     }
 
+    public function authMe($correo_get, $password_get) {
+        if(!$correo_get|| !$password_get)  {
+            echo json_encode(array("code" => 1, "response" => "Datos insuficientes"));
+        }
+        $login = $this->validarUsuario($correo_get, $password_get, true);
+        if($login) {
+            //ha hecho login
+            $res = array("iat" => time(), "exp" => time() + $this->diasMinutos(3));
+            $jwt = JWT::encode($res, '');
+            echo json_encode(
+                array(
+                    "code" => 0,
+                    "response" => array(
+                        "token" => $jwt
+                    )
+                )
+            );
+        } else {
+            echo json_encode(array("code" => 0, "response" => "Usuario/Clave no valido"));
+        }
+    }
+
+    private function diasMinutos($dias) {
+        return $dias * 24 * 60;
+    }
 }

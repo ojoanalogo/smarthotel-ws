@@ -138,6 +138,11 @@ $app->post("/authme_panel", function() use ($app) {
     return $app->Response('login.php', array("error" => true),201);
 });
 
+$app->get("/authme", function() use ($app) {
+    $controladorLogin = new ControladorLogin();
+    $controladorLogin->authMe($app->getRequest()->get("correo"), $app->getRequest()->get("clave"));
+});
+
 // 404
 $app->respond( function() use ( $app ){
     return $app->ResponseHTML('<p> 404 </p>', 404);
