@@ -26,8 +26,16 @@
 <script src="/public/js/bootstrap.min.js" type="text/javascript"></script>
 <!--  Plugin Chartist JS -->
 <script src="/public/js/chartist.min.js"></script>
+<!--  Dashboard código JS helper  -->
+<script src="/public/js/light-bootstrap-dashboard.js"></script>
 <!--  Plugin notificaciones    -->
 <script src="/public/js/bootstrap-notify.js"></script>
 <!-- Plugin DatePicker -->
 <script src="/public/js/datepicker.min.js"></script>
+<!-- Plugin tablas  -->
+<script src="/public/js/datatables.min.js"></script>
+<!-- Google Maps -->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3t37wmitrNWtfbKcIyfjRbKN8yp7duLk">
+</script>
 </html>

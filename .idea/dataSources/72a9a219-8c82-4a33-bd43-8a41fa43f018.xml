@@ -13,100 +13,209 @@
     <schema id="7" parent="1" name="performance_schema"/>
     <schema id="8" parent="1" name="phpmyadmin"/>
     <schema id="9" parent="1" name="test"/>
-    <table id="10" parent="2" name="sh_roles"/>
-    <table id="11" parent="2" name="sh_usuarios"/>
-    <column id="12" parent="10" name="id_rol">
+    <table id="10" parent="2" name="sh_habitaciones"/>
+    <table id="11" parent="2" name="sh_habitaciones_tipos"/>
+    <table id="12" parent="2" name="sh_pisos"/>
+    <table id="13" parent="2" name="sh_reservas"/>
+    <table id="14" parent="2" name="sh_roles"/>
+    <table id="15" parent="2" name="sh_sensor_data"/>
+    <table id="16" parent="2" name="sh_usuarios"/>
+    <column id="17" parent="10" name="id_habitacion">
       <Position>1</Position>
       <DataType>int(16)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="13" parent="10" name="rol">
+    <column id="18" parent="10" name="tipo_habitacion">
+      <Position>2</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="19" parent="10" name="id_piso">
+      <Position>3</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="20" parent="10" name="estatus">
+      <Position>4</Position>
+      <DataType>int(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="21" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_habitacion</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="22" parent="11" name="id_tipo_habitacion">
+      <Position>1</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="11" name="tipo_habitacion">
       <Position>2</Position>
       <DataType>varchar(64)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="14" parent="10" name="rol">
-      <ColNames>rol</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="15" parent="10" name="PRIMARY">
+    <key id="24" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id_rol</ColNames>
+      <ColNames>id_tipo_habitacion</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="16" parent="10" name="rol">
-      <ColNames>rol</ColNames>
-      <UnderlyingIndexName>rol</UnderlyingIndexName>
-    </key>
-    <column id="17" parent="11" name="id_usuario">
+    <column id="25" parent="12" name="id_piso">
       <Position>1</Position>
       <DataType>int(16)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="18" parent="11" name="correo">
+    <column id="26" parent="12" name="nombre">
+      <Position>2</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="27" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_piso</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="28" parent="13" name="id_reserva">
+      <Position>1</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="29" parent="13" name="huesped">
+      <Position>2</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="13" name="desde">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="31" parent="13" name="hasta">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="13" name="id_habitacion">
+      <Position>5</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="13" name="notas">
+      <Position>6</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="34" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_reserva</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="35" parent="14" name="id_rol">
+      <Position>1</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="36" parent="14" name="rol">
+      <Position>2</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="37" parent="14" name="rol">
+      <ColNames>rol</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="38" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_rol</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="39" parent="14" name="rol">
+      <ColNames>rol</ColNames>
+      <UnderlyingIndexName>rol</UnderlyingIndexName>
+    </key>
+    <column id="40" parent="15" name="id_habitacion">
+      <Position>1</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="15" name="data">
+      <Position>2</Position>
+      <DataType>varchar(1024)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="16" name="id_usuario">
+      <Position>1</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="43" parent="16" name="correo">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="19" parent="11" name="usuario">
+    <column id="44" parent="16" name="usuario">
       <Position>3</Position>
       <DataType>varchar(16)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="20" parent="11" name="nombre">
+    <column id="45" parent="16" name="nombre">
       <Position>4</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="21" parent="11" name="apellido">
+    <column id="46" parent="16" name="apellido">
       <Position>5</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="11" name="fecha_registro">
+    <column id="47" parent="16" name="fecha_registro">
       <Position>6</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <column id="23" parent="11" name="rol">
+    <column id="48" parent="16" name="rol">
       <Position>7</Position>
       <DataType>int(64)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="11" name="ultimo_login">
+    <column id="49" parent="16" name="ultimo_login">
       <Position>8</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="25" parent="11" name="clave">
+    <column id="50" parent="16" name="clave">
       <Position>9</Position>
       <DataType>char(64)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="26" parent="11" name="correo">
+    <index id="51" parent="16" name="correo">
       <ColNames>correo</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="27" parent="11" name="correo_2">
+    <index id="52" parent="16" name="correo_2">
       <ColNames>correo</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="28" parent="11" name="id_usuario">
+    <index id="53" parent="16" name="id_usuario">
       <ColNames>id_usuario</ColNames>
     </index>
-    <key id="29" parent="11" name="PRIMARY">
+    <key id="54" parent="16" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_usuario</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="30" parent="11" name="correo">
+    <key id="55" parent="16" name="correo">
       <ColNames>correo</ColNames>
       <UnderlyingIndexName>correo</UnderlyingIndexName>
     </key>
-    <key id="31" parent="11" name="correo_2">
+    <key id="56" parent="16" name="correo_2">
       <ColNames>correo</ColNames>
       <UnderlyingIndexName>correo_2</UnderlyingIndexName>
     </key>

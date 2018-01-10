@@ -33,12 +33,23 @@ function obtenerSeccionNavbar($requestUri) {
     <link href="/public/css/estilos.css" rel="stylesheet" />
     <!-- Date picker css -->
     <link href="/public/css/datepicker.min.css" rel="stylesheet" />
+    <!-- Date tables css -->
+    <link href="/public/css/datatables.min.css" rel="stylesheet" />
+    <!-- Magia negra favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/public/favicon/manifest.json">
+    <link rel="mask-icon" href="/public/favicon/safari-pinned-tab.svg" color="#009688">
+    <link rel="shortcut icon" href="/public/favicon/favicon.ico">
+    <meta name="msapplication-config" content="/public/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#009688">
 </head>
 <body>
 <!-- Wrapper -->
 <div class="wrapper">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="teal" data-image="assets/img/sidebar.jpg">
+    <div class="sidebar" data-color="teal" data-image="/public/img/sidebar.jpg">
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
@@ -102,16 +113,21 @@ function obtenerSeccionNavbar($requestUri) {
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li style="margin-top: 20px !important;">
-                            <div class="dropdown show">
-                                <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Usuario: <?php echo $datos["correo"]; ?>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="/logout">Deslogear</a>
-                                </div>
-                            </div>
 
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <p>
+                                    <?php echo $datos["correo"]; ?>
+                                    <b class="caret"></b>
+                                </p>
+
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Ajustes cuenta</a></li>
+                                <li><a href="#">Configuración panel</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/logout">Deslogear</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

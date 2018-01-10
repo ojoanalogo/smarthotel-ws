@@ -61,11 +61,21 @@ body {
 .page-header {
     margin: -10px 0 20px !important;
 }
-.fondo-verde {
+.habitacion-disponible .panel-heading {
     font-weight: bold;
     background-color: #5cb85c;
     color: #fff;
 }
-.panel-green {
+.habitacion-disponible {
     border: 1px solid #5cb85c;
+}
+
+.habitacion-ocupada {
+    border: 1px solid #d9534f;
+}
+
+.habitacion-ocupada .panel-heading {
+    font-weight: bold;
+    background-color: #d9534f;
+    color: #fff;
 }

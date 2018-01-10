@@ -33,7 +33,11 @@ require_once __DIR__ . "/src/controllers/ControladorLogin.php";
 /**
  * Rutas de la aplicación
  */
-// Index
+
+
+/**
+ * Servir Index
+ */
 $app->get('/dashboard',function() use ( $app ) {
     $controladorLogin = new ControladorLogin();
     $logeado = $controladorLogin->verificarAcceso();
@@ -46,6 +50,9 @@ $app->get('/dashboard',function() use ( $app ) {
         return $app->Response('login.php', array(),201);
 });
 
+/**
+ * Servir pag habitaciones
+ */
 $app->get('/dashboard/habitaciones',function() use ( $app ) {
     $controladorLogin = new ControladorLogin();
     $logeado = $controladorLogin->verificarAcceso();
@@ -57,6 +64,22 @@ $app->get('/dashboard/habitaciones',function() use ( $app ) {
     else
         return $app->Response('login.php', array(),201);
 });
+
+$app->get('/dashboard/habitaciones/detalle/:habitacion',function($habitacion) use ( $app ) {
+    $controladorLogin = new ControladorLogin();
+    $logeado = $controladorLogin->verificarAcceso();
+    if ($logeado) {
+        $controladorPrincipal = new ControladorPrincipal();
+        return $app->Response('detalle_habitacion.php', array("datos" =>
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario()), "habitacion" => $habitacion) , 201);
+    }
+    else
+        return $app->Response('login.php', array(),201);
+});
+
+/**
+ * Servir pag huespedes
+ */
 $app->get('/dashboard/huespedes',function() use ( $app ) {
     $controladorLogin = new ControladorLogin();
     $logeado = $controladorLogin->verificarAcceso();
@@ -68,6 +91,23 @@ $app->get('/dashboard/huespedes',function() use ( $app ) {
     else
         return $app->Response('login.php', array(),201);
 });
+
+
+/**
+ * Servir pag huespedes
+ */
+$app->get('/dashboard/mapa',function() use ( $app ) {
+    $controladorLogin = new ControladorLogin();
+    $logeado = $controladorLogin->verificarAcceso();
+    if ($logeado) {
+        $controladorPrincipal = new ControladorPrincipal();
+        return $app->Response('mapa.php', array("datos" =>
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+    }
+    else
+        return $app->Response('login.php', array(),201);
+});
+
 
 // Logout
 $app->get('/logout',function() use ( $app ) {
@@ -86,7 +126,6 @@ $app->get("/", function() use ($app) {
             $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
     }
     else
-
         return $app->Response('login.php', array(),201);
 });
 
@@ -94,9 +133,9 @@ $app->post("/authme_panel", function() use ($app) {
     $controladorLogin = new ControladorLogin();
     if ($controladorLogin->validarUsuario($app->getRequest()->post("correo"), $app->getRequest()->post("clave"))) {
         header("Location: /dashboard");
-    } else {
-        return $app->Response('login.php', array("error" => true),201);
+        return null;
     }
+    return $app->Response('login.php', array("error" => true),201);
 });
 
 // 404

@@ -59,7 +59,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <button href="/dashboard/habitaciones/" class="btn btn-fill btn-primary">Administrar habitaciones</button>
+                                <a href="/dashboard/habitaciones/" class="btn btn-fill btn-primary">Administrar habitaciones</a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <button href="#" class="btn btn-fill btn-primary">Administrar usuarios</button>
+                                <a href="/dashboard/huespedes/" class="btn btn-fill btn-primary">Administrar usuarios</a>
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,6 @@
             [5, 2, 3, 1, 2, 1, 0, 0, 0]
         ]
     };
-
     var opciones = {
         lineSmooth: true,
         low: 0,
@@ -179,7 +178,5 @@
             }
         }]
     ];
-
     Chartist.Line('#chartHours', dataUso, opciones, responsivo);
-
 </script>
