@@ -195,7 +195,7 @@ class App extends CoreFramework{
      * @param $uri string for the Route example: /book/{number}/edit
      * @param callable $function executable
      */
-    public function get($uri,callable $callback){
+    public function get($uri, callable $callback){
         //save route and function
         $this->routes['GET'][] = new Route($uri, $callback);
     }

@@ -20,6 +20,15 @@
     <link href="/public/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/public/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link href="/public/css/estilos.css" rel="stylesheet" />
+    <!-- Magia negra favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/public/favicon/manifest.json">
+    <link rel="mask-icon" href="/public/favicon/safari-pinned-tab.svg" color="#009688">
+    <link rel="shortcut icon" href="/public/favicon/favicon.ico">
+    <meta name="msapplication-config" content="/public/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#009688">
     <style>
         body {
             padding-top: 40px;

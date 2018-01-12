@@ -33,7 +33,7 @@ class ControladorLogin
         $user = strtolower(trim($user_post));
         $password = stripslashes(hash("sha256", $password_post));
         $args = array($user, $password);
-        $query = "SELECT * FROM sh_usuarios WHERE correo=? AND clave=?";
+        $query = "SELECT * FROM sh_panel_usuarios WHERE correo=? AND clave=?";
         $rs = $db->query($query, $args);
         if ($rs === false) {
             return false;

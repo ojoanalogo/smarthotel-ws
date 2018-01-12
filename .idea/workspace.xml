@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1cb0af5-64c9-41dc-b1b2-f875ca8b1bf0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/libs/firebase/firebase.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backend SmartHotel/public/js/esp_datatables.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorHabitaciones.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/views/configuracion.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/views/configuracion_pisos.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/72a9a219-8c82-4a33-bd43-8a41fa43f018.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/72a9a219-8c82-4a33-bd43-8a41fa43f018.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend SmartHotel/index.php" afterPath="$PROJECT_DIR$/Backend SmartHotel/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend SmartHotel/src/config/config.php" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/config/config.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorLogin.php" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorLogin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorPrincipal.php" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorPrincipal.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend SmartHotel/src/core/one_framework.php" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/core/one_framework.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend SmartHotel/src/views/huespedes.php" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/views/huespedes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend SmartHotel/src/views/includes/header.php" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/views/includes/header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Backend SmartHotel/src/views/login.php" afterPath="$PROJECT_DIR$/Backend SmartHotel/src/views/login.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,8 +55,22 @@
         <option name="myItemId" value="smarthotel" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
+    </PATH>
+    <PATH>
       <PATH_ELEMENT>
-        <option name="myItemId" value="sh_usuarios" />
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="smarthotel@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="smarthotel" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="sh_sensor_data" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
@@ -63,6 +87,28 @@
         <option name="myItemId" value="smarthotel" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="sh_roles" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="smarthotel@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="smarthotel" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="sh_pisos" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
     </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
@@ -74,11 +120,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ControladorLogin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorLogin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-307">
+              <caret line="41" column="42" lean-forward="false" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+              <folding>
+                <marker date="1515707208327" expanded="true" signature="873:887" ph="SELECT * FRO... sh_usuarios" />
+                <marker date="1515707208327" expanded="true" signature="873:931" ph="SELECT * FRO... sh_usuarios" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="configuracion_pisos.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/configuracion_pisos.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="737">
+              <caret line="112" column="48" lean-forward="false" selection-start-line="112" selection-start-column="48" selection-end-line="112" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Backend SmartHotel/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1452">
-              <caret line="18" column="15" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="737">
+              <caret line="154" column="5" lean-forward="false" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
               <folding>
                 <element signature="e#6#156#0#PHP" expanded="true" />
               </folding>
@@ -86,15 +155,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ControladorLogin.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorLogin.php">
+      <file leaf-file-name="ControladorHabitaciones.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorHabitaciones.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="101" column="0" lean-forward="true" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+            <state relative-caret-position="230">
+              <caret line="10" column="46" lean-forward="true" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
               <folding>
-                <marker date="1515615264266" expanded="true" signature="873:898" ph="SELECT * FRO... sh_usuarios" />
-                <marker date="1515615264266" expanded="true" signature="873:925" ph="SELECT * FRO... sh_usuarios" />
+                <element signature="e#6#175#0#PHP" expanded="true" />
+                <marker date="1515720635353" expanded="true" signature="300:334" ph="INSERT INTO sh_pisos... " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/72a9a219-8c82-4a33-bd43-8a41fa43f018/console.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="57" lean-forward="true" selection-start-line="0" selection-start-column="57" selection-end-line="0" selection-end-column="57" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -119,36 +198,48 @@
       <find>Habitaciones activas</find>
       <find>103</find>
       <find>sidebar</find>
-      <find>get</find>
       <find>sha256</find>
       <find>HS256</find>
       <find>encode</find>
+      <find>$prod</find>
+      <find>before</find>
+      <find>get</find>
+      <find>Panel</find>
+      <find>card</find>
+      <find>huespedes</find>
+      <find>btn</find>
+      <find>a</find>
+      <find>configuracion</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="dummy://restClient/response107.html" root0="SKIP_INSPECTION" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Backend SmartHotel/src/config/config.php" />
         <option value="$PROJECT_DIR$/Backend SmartHotel/src/libs/database_manager/pdo_database.class.php" />
-        <option value="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorPrincipal.php" />
-        <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/login.php" />
         <option value="$PROJECT_DIR$/Backend SmartHotel/public/css/estilos.css" />
-        <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/huespedes.php" />
         <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/habitaciones.php" />
         <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/detalle_habitacion.php" />
         <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/includes/footer.php" />
         <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/mapa.php" />
-        <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/includes/header.php" />
         <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/dashboard.php" />
         <option value="$PROJECT_DIR$/Backend SmartHotel/src/libs/firebase/firebase.php" />
-        <option value="$PROJECT_DIR$/Backend SmartHotel/index.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/login.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/core/one_framework.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/includes/header.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/public/js/esp_datatables.json" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/config/config.php" />
         <option value="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorLogin.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/configuracion.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/huespedes.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorCuarto.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorPrincipal.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/index.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/views/configuracion_pisos.php" />
+        <option value="$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorHabitaciones.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/72a9a219-8c82-4a33-bd43-8a41fa43f018/console.sql" />
       </list>
     </option>
   </component>
@@ -160,10 +251,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="x" value="-7" />
+    <option name="width" value="1934" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -183,6 +273,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -226,30 +317,8 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHotel-WS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHotel-WS" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Backend SmartHotel" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="firebase" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -270,8 +339,26 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
+              <option name="myItemId" value="SmartHotel-WS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SmartHotel-WS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Backend SmartHotel" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -289,35 +376,16 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHotel-WS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHotel-WS" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Backend SmartHotel" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -346,6 +414,49 @@
   <component name="RestClientSettings">
     <option name="REQUEST_HISTORY">
       <list>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="-1" />
+                <option name="domain" value="localhost" />
+                <option name="name" value="PHPSESSID" />
+                <option name="path" value="/" />
+                <option name="value" value="6l3k0njccgp66h4l2b603475t4" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:80" />
+          <option name="urlPath" value="/authme" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="correo" />
+                <option name="value" value="arc980103@gmail.com" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="clave" />
+                <option name="value" value="comodorops3" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
         <RestClientRequest>
           <option name="biscuits">
             <list>
@@ -735,12 +846,14 @@
       <workItem from="1515189384364" duration="18069000" />
       <workItem from="1515445359555" duration="14666000" />
       <workItem from="1515522613707" duration="17761000" />
-      <workItem from="1515613002980" duration="2913000" />
+      <workItem from="1515613002980" duration="3151000" />
+      <workItem from="1515621127777" duration="3119000" />
+      <workItem from="1515692355326" duration="21270000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53409000" />
+    <option name="totallyTimeSpent" value="78036000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -752,26 +865,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="-7" y="0" width="1934" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18423855" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18763326" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1943557" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1945629" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32834226" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="866" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32834226" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -790,6 +904,16 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#156#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Backend SmartHotel/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2783">
@@ -813,7 +937,7 @@
         <state relative-caret-position="1173">
           <caret line="51" column="62" lean-forward="false" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="62" />
           <folding>
-            <marker date="1515564893180" expanded="true" signature="2281:2310" ph="..." />
+            <marker date="1515697873608" expanded="true" signature="2281:2310" ph="..." />
           </folding>
         </state>
       </provider>
@@ -854,7 +978,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1794">
           <caret line="78" column="29" lean-forward="false" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -871,8 +994,8 @@
         <state relative-caret-position="782">
           <caret line="40" column="42" lean-forward="true" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
           <folding>
-            <marker date="1515615264266" expanded="true" signature="873:898" ph="SELECT * FRO... sh_usuarios" />
-            <marker date="1515615264266" expanded="true" signature="873:925" ph="SELECT * FRO... sh_usuarios" />
+            <marker date="1515707208327" expanded="true" signature="873:887" ph="SELECT * FRO... sh_usuarios" />
+            <marker date="1515707208327" expanded="true" signature="873:931" ph="SELECT * FRO... sh_usuarios" />
           </folding>
         </state>
       </provider>
@@ -890,7 +1013,7 @@
         <state relative-caret-position="736">
           <caret line="32" column="7" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
           <folding>
-            <marker date="1515564893180" expanded="true" signature="2281:2310" ph="..." />
+            <marker date="1515697873608" expanded="true" signature="2281:2310" ph="..." />
           </folding>
         </state>
       </provider>
@@ -899,7 +1022,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1403">
           <caret line="61" column="26" lean-forward="false" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -923,23 +1045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11178">
           <caret line="492" column="13" lean-forward="true" selection-start-line="492" selection-start-column="13" selection-end-line="492" selection-end-column="13" />
-          <folding>
-            <marker date="1515200982077" expanded="true" signature="4173:4287" ph="..." />
-            <marker date="1515200982077" expanded="true" signature="4319:4325" ph=" " />
-            <marker date="1515200982077" expanded="true" signature="4376:4382" ph=" " />
-            <marker date="1515200982077" expanded="true" signature="4470:4476" ph=" " />
-            <marker date="1515200982077" expanded="true" signature="12637:12651" ph="SELECT * FRO... ${$table}" />
-            <marker date="1515200982077" expanded="true" signature="13499:13563" ph="INSERT INTO ${$table}... " />
-            <marker date="1515200982077" expanded="true" signature="14475:14504" ph="DELETE FROM " />
-            <marker date="1515200982077" expanded="true" signature="14542:14554" ph="DELETE FROM " />
-            <marker date="1515200982077" expanded="true" signature="16763:16806" ph="SELECT name sysobjects" />
-            <marker date="1515200982077" expanded="true" signature="16983:17009" ph="SELECT table... cat" />
-            <marker date="1515200982077" expanded="true" signature="17080:17201" ph="SELECT RDB$R... RDB$RELATIONS" />
-            <marker date="1515200982077" expanded="true" signature="17381:17445" ph="SELECT relna... pg_stat_user_tables" />
-            <marker date="1515200982077" expanded="true" signature="18220:18250" ph="SELECT name Databases" />
-            <marker date="1515200982077" expanded="true" signature="18429:18452" ph="SELECT * FRO... $database" />
-            <marker date="1515200982077" expanded="true" signature="18641:18680" ph="SELECT datna... pg_database" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -948,8 +1053,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1515615264266" expanded="true" signature="873:898" ph="SELECT * FRO... sh_usuarios" />
-            <marker date="1515615264266" expanded="true" signature="873:925" ph="SELECT * FRO... sh_usuarios" />
+            <marker date="1515707208327" expanded="true" signature="873:887" ph="SELECT * FRO... sh_usuarios" />
+            <marker date="1515707208327" expanded="true" signature="873:931" ph="SELECT * FRO... sh_usuarios" />
           </folding>
         </state>
       </provider>
@@ -968,7 +1073,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10350">
           <caret line="450" column="5" lean-forward="true" selection-start-line="450" selection-start-column="5" selection-end-line="450" selection-end-column="5" />
-          <folding />
+          <folding>
+            <marker date="1515696701856" expanded="false" signature="10752:10790" ph="..." />
+            <marker date="1515696701856" expanded="true" signature="10792:11072" ph="..." />
+            <marker date="1515696701856" expanded="false" signature="11186:11224" ph="..." />
+            <marker date="1515696701856" expanded="true" signature="11226:18529" ph="..." />
+            <marker date="1515696701856" expanded="false" signature="11277:18371" ph="data:" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -987,28 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/logout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/config/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="49" lean-forward="false" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/72a9a219-8c82-4a33-bd43-8a41fa43f018/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/c4c61c65/72a9a219-8c82-4a33-bd43-8a41fa43f018/smarthotel.sh_usuarios">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1018,14 +1107,6 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/core/one_framework.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10350">
-          <caret line="450" column="5" lean-forward="false" selection-start-line="450" selection-start-column="5" selection-end-line="450" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,42 +1121,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1565">
           <caret line="492" column="13" lean-forward="false" selection-start-line="492" selection-start-column="13" selection-end-line="492" selection-end-column="13" />
-          <folding>
-            <marker date="1515200982077" expanded="true" signature="4173:4287" ph="..." />
-            <marker date="1515200982077" expanded="true" signature="4319:4325" ph=" " />
-            <marker date="1515200982077" expanded="true" signature="4376:4382" ph=" " />
-            <marker date="1515200982077" expanded="true" signature="4470:4476" ph=" " />
-            <marker date="1515200982077" expanded="true" signature="12637:12651" ph="SELECT * FRO... ${$table}" />
-            <marker date="1515200982077" expanded="true" signature="13499:13563" ph="INSERT INTO ${$table}... " />
-            <marker date="1515200982077" expanded="true" signature="14475:14504" ph="DELETE FROM " />
-            <marker date="1515200982077" expanded="true" signature="14542:14554" ph="DELETE FROM " />
-            <marker date="1515200982077" expanded="true" signature="16763:16806" ph="SELECT name sysobjects" />
-            <marker date="1515200982077" expanded="true" signature="16983:17009" ph="SELECT table... cat" />
-            <marker date="1515200982077" expanded="true" signature="17080:17201" ph="SELECT RDB$R... RDB$RELATIONS" />
-            <marker date="1515200982077" expanded="true" signature="17381:17445" ph="SELECT relna... pg_stat_user_tables" />
-            <marker date="1515200982077" expanded="true" signature="18220:18250" ph="SELECT name Databases" />
-            <marker date="1515200982077" expanded="true" signature="18429:18452" ph="SELECT * FRO... $database" />
-            <marker date="1515200982077" expanded="true" signature="18641:18680" ph="SELECT datna... pg_database" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="90" column="27" lean-forward="true" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorPrincipal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding>
-            <marker date="1515460068204" expanded="true" signature="346:385" ph="SELECT * FRO... sh_usuarios" />
-            <marker date="1515460068204" expanded="true" signature="346:386" ph="SELECT * FRO... sh_usuarios" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1090,7 +1135,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1794">
           <caret line="78" column="29" lean-forward="false" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1101,26 +1145,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/habitaciones.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1265">
-          <caret line="55" column="76" lean-forward="false" selection-start-line="55" selection-start-column="76" selection-end-line="55" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/detalle_habitacion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/includes/footer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="644">
           <caret line="28" column="37" lean-forward="false" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/libs/firebase/firebase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1277">
+          <caret line="151" column="28" lean-forward="true" selection-start-line="151" selection-start-column="28" selection-end-line="151" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/core/one_framework.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="32" column="40" lean-forward="false" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
+          <folding>
+            <marker date="1515696701856" expanded="false" signature="10752:10790" ph="..." />
+            <marker date="1515696701856" expanded="true" signature="10792:11072" ph="..." />
+            <marker date="1515696701856" expanded="false" signature="11186:11224" ph="..." />
+            <marker date="1515696701856" expanded="true" signature="11226:18529" ph="..." />
+            <marker date="1515696701856" expanded="false" signature="11277:18371" ph="data:" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/public/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2208">
+          <caret line="4" column="11379" lean-forward="false" selection-start-line="4" selection-start-column="11375" selection-end-line="4" selection-end-column="11379" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/includes/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="117" column="50" lean-forward="false" selection-start-line="117" selection-start-column="50" selection-end-line="117" selection-end-column="50" />
+          <folding>
+            <marker date="1515697873608" expanded="true" signature="2281:2310" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/public/js/esp_datatables.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="22" column="3" lean-forward="true" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/logout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/c4c61c65/72a9a219-8c82-4a33-bd43-8a41fa43f018/smarthotel.sh_roles">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="50" lean-forward="true" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
           <folding />
         </state>
       </provider>
@@ -1133,59 +1238,135 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/huespedes.php">
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="34" column="14" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        <state relative-caret-position="2438">
+          <caret line="106" column="10" lean-forward="false" selection-start-line="106" selection-start-column="10" selection-end-line="106" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/includes/header.php">
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/huespedes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="51" column="62" lean-forward="false" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="62" />
+        <state relative-caret-position="391">
+          <caret line="17" column="35" lean-forward="true" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding>
-            <marker date="1515564893180" expanded="true" signature="2281:2310" ph="..." />
+            <marker date="1515712091949" expanded="true" signature="906:1182" ph="..." />
+            <marker date="1515712091949" expanded="true" signature="906:1183" ph="..." />
+            <marker date="1515712091949" expanded="true" signature="906:1767" ph="..." />
+            <marker date="1515712091949" expanded="true" signature="983:989" ph=" " />
+            <marker date="1515712091949" expanded="true" signature="1259:1757" ph="..." />
+            <marker date="1515712091949" expanded="true" signature="1484:1495" ph="..." />
+            <marker date="1515712091949" expanded="true" signature="1496:1576" ph="..." />
+            <marker date="1515712091949" expanded="true" signature="1649:1742" ph="..." />
+            <marker date="1515712091949" expanded="true" signature="4781:4793" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="910">
+        <state relative-caret-position="-1738">
           <caret line="75" column="52" lean-forward="true" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/habitaciones.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3427">
+          <caret line="8" column="40" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/detalle_habitacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/configuracion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="82" column="129" lean-forward="false" selection-start-line="82" selection-start-column="124" selection-end-line="82" selection-end-column="129" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorPrincipal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="26" />
+          <folding>
+            <element signature="e#6#169#0#PHP" expanded="true" />
+            <marker date="1515712361113" expanded="true" signature="450:457" ph="SELECT * FRO... sh_usuarios" />
+            <marker date="1515712361113" expanded="true" signature="450:520" ph="SELECT id_us... sh_panel_usuarios" />
+            <marker date="1515712361113" expanded="true" signature="450:608" ph="SELECT id_us... sh_panel_usuarios" />
+            <marker date="1515712361113" expanded="true" signature="919:1016" ph="SELECT id_us... sh_usuarios" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/c4c61c65/72a9a219-8c82-4a33-bd43-8a41fa43f018/smarthotel.apps_countries">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/72a9a219-8c82-4a33-bd43-8a41fa43f018/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="57" lean-forward="true" selection-start-line="0" selection-start-column="57" selection-end-line="0" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorLogin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-307">
+          <caret line="41" column="42" lean-forward="false" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+          <folding>
+            <marker date="1515707208327" expanded="true" signature="873:887" ph="SELECT * FRO... sh_usuarios" />
+            <marker date="1515707208327" expanded="true" signature="873:931" ph="SELECT * FRO... sh_usuarios" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/views/configuracion_pisos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="737">
+          <caret line="112" column="48" lean-forward="false" selection-start-line="112" selection-start-column="48" selection-end-line="112" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Backend SmartHotel/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1452">
-          <caret line="18" column="15" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="737">
+          <caret line="154" column="5" lean-forward="false" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
           <folding>
             <element signature="e#6#156#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/libs/firebase/firebase.php">
+    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorHabitaciones.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="151" column="28" lean-forward="true" selection-start-line="151" selection-start-column="28" selection-end-line="151" selection-end-column="28" />
+        <state relative-caret-position="230">
+          <caret line="10" column="46" lean-forward="true" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
           <folding>
-            <element signature="e#30#51#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Backend SmartHotel/src/controllers/ControladorLogin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="101" column="0" lean-forward="true" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding>
-            <marker date="1515615264266" expanded="true" signature="873:898" ph="SELECT * FRO... sh_usuarios" />
-            <marker date="1515615264266" expanded="true" signature="873:925" ph="SELECT * FRO... sh_usuarios" />
+            <element signature="e#6#175#0#PHP" expanded="true" />
+            <marker date="1515720635353" expanded="true" signature="300:334" ph="INSERT INTO sh_pisos... " />
           </folding>
         </state>
       </provider>

@@ -111,20 +111,17 @@ function obtenerSeccionNavbar($requestUri) {
                             </a>
                         </li>
                     </ul>
-
                     <ul class="nav navbar-nav navbar-right">
-
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <p>
                                     <?php echo $datos["correo"]; ?>
                                     <b class="caret"></b>
                                 </p>
-
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Ajustes cuenta</a></li>
-                                <li><a href="#">Configuración panel</a></li>
+                                <li><a href="/dashboard/configuracion">Configuración panel</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/logout">Deslogear</a></li>
                             </ul>

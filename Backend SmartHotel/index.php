@@ -28,24 +28,36 @@ if ($db->Cnxn() == false) {
  */
 require_once __DIR__ . "/src/controllers/ControladorPrincipal.php";
 require_once __DIR__ . "/src/controllers/ControladorLogin.php";
+require_once __DIR__ . "/src/controllers/ControladorHabitaciones.php";
 
+$controladorPrincipal = new ControladorPrincipal();
+$controladorLogin = new ControladorLogin();
+$controladorHabitaciones = new ControladorHabitaciones();
 
 /**
  * Rutas de la aplicación
  */
 
+/**
+ * Ruta principal
+ */
+$app->get("/", function() use ($app, $controladorLogin, $controladorPrincipal) {
+    if (checkAuth()) {
+        header("Location: /dashboard");
+        return $app->Response('dashboard.php', array("datos" =>
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+    }
+    else
+        return $app->Response('login.php', array(),201);
+});
 
 /**
  * Servir Index
  */
-$app->get('/dashboard',function() use ( $app ) {
-    $controladorLogin = new ControladorLogin();
-    $logeado = $controladorLogin->verificarAcceso();
-    if ($logeado) {
-        $controladorPrincipal = new ControladorPrincipal();
+$app->get('/dashboard', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+    if (checkAuth())
         return $app->Response('dashboard.php', array("datos" =>
             $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
-    }
     else
         return $app->Response('login.php', array(),201);
 });
@@ -53,26 +65,21 @@ $app->get('/dashboard',function() use ( $app ) {
 /**
  * Servir pag habitaciones
  */
-$app->get('/dashboard/habitaciones',function() use ( $app ) {
-    $controladorLogin = new ControladorLogin();
-    $logeado = $controladorLogin->verificarAcceso();
-    if ($logeado) {
-        $controladorPrincipal = new ControladorPrincipal();
+$app->get('/dashboard/habitaciones', function() use ( $app, $controladorLogin, $controladorPrincipal ) {
+    if (checkAuth())
         return $app->Response('habitaciones.php', array("datos" =>
             $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
-    }
     else
         return $app->Response('login.php', array(),201);
 });
 
-$app->get('/dashboard/habitaciones/detalle/:habitacion',function($habitacion) use ( $app ) {
-    $controladorLogin = new ControladorLogin();
-    $logeado = $controladorLogin->verificarAcceso();
-    if ($logeado) {
-        $controladorPrincipal = new ControladorPrincipal();
+/**
+ * Servir Detalle habitación
+ */
+$app->get('/dashboard/habitaciones/detalle/:habitacion', function($habitacion) use ( $app, $controladorLogin, $controladorPrincipal ) {
+    if (checkAuth())
         return $app->Response('detalle_habitacion.php', array("datos" =>
             $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario()), "habitacion" => $habitacion) , 201);
-    }
     else
         return $app->Response('login.php', array(),201);
 });
@@ -80,57 +87,57 @@ $app->get('/dashboard/habitaciones/detalle/:habitacion',function($habitacion) us
 /**
  * Servir pag huespedes
  */
-$app->get('/dashboard/huespedes',function() use ( $app ) {
-    $controladorLogin = new ControladorLogin();
-    $logeado = $controladorLogin->verificarAcceso();
-    if ($logeado) {
-        $controladorPrincipal = new ControladorPrincipal();
+$app->get('/dashboard/huespedes',function() use ( $app, $controladorLogin, $controladorPrincipal ) {
+    if (checkAuth())
         return $app->Response('huespedes.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
-    }
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario()),
+            "usuarios" => $controladorPrincipal->obtenerUsuarios()) , 201);
     else
         return $app->Response('login.php', array(),201);
 });
 
 
 /**
- * Servir pag huespedes
+ * Servir pag Mapa
  */
-$app->get('/dashboard/mapa',function() use ( $app ) {
-    $controladorLogin = new ControladorLogin();
-    $logeado = $controladorLogin->verificarAcceso();
-    if ($logeado) {
-        $controladorPrincipal = new ControladorPrincipal();
+$app->get('/dashboard/mapa',function() use ( $app, $controladorLogin, $controladorPrincipal ) {
+    if (checkAuth())
         return $app->Response('mapa.php', array("datos" =>
             $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
-    }
     else
         return $app->Response('login.php', array(),201);
 });
 
+/**
+ * Servir Configuración
+ */
+$app->get('/dashboard/configuracion', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+    if (checkAuth())
+        return $app->Response('configuracion.php', array("datos" =>
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+    else
+        return $app->Response('login.php', array(),201);
+});
+
+/**
+ * Config pisos
+ */
+
+$app->get('/dashboard/configuracion/pisos', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+    if (checkAuth())
+        return $app->Response('configuracion_pisos.php', array("datos" =>
+            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+    else
+        return $app->Response('login.php', array(),201);
+});
 
 // Logout
-$app->get('/logout',function() use ( $app ) {
-    $controladorLogin = new ControladorLogin();
+$app->get('/logout',function() use ( $app, $controladorLogin ) {
     $controladorLogin->deslogear();
     header("Location: /dashboard");
 });
 
-$app->get("/", function() use ($app) {
-    $controladorLogin = new ControladorLogin();
-    $logeado = $controladorLogin->verificarAcceso();
-    if ($logeado) {
-        $controladorPrincipal = new ControladorPrincipal();
-        header("Location: /dashboard");
-        return $app->Response('dashboard.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
-    }
-    else
-        return $app->Response('login.php', array(),201);
-});
-
-$app->post("/authme_panel", function() use ($app) {
-    $controladorLogin = new ControladorLogin();
+$app->post("/authme_panel", function() use ($app, $controladorLogin) {
     if ($controladorLogin->validarUsuario($app->getRequest()->post("correo"), $app->getRequest()->post("clave"))) {
         header("Location: /dashboard");
         return null;
@@ -138,14 +145,24 @@ $app->post("/authme_panel", function() use ($app) {
     return $app->Response('login.php', array("error" => true),201);
 });
 
-$app->get("/authme", function() use ($app) {
-    $controladorLogin = new ControladorLogin();
-    $controladorLogin->authMe($app->getRequest()->get("correo"), $app->getRequest()->get("clave"));
+$app->post("/authme", function() use ($app, $controladorLogin) {
+    $controladorLogin->authMe($app->getRequest()->post("correo"), $app->getRequest()->post("clave"));
+});
+
+$app->post("/api/cuarto/{funcion}", function($funcion) use ($app, $controladorHabitaciones) {
+    if($funcion == "add") {
+        echo json_encode($controladorHabitaciones->añadirPiso($app->getRequest()->post("piso"), $app->getRequest()->post("nombre")));
+    }
 });
 
 // 404
 $app->respond( function() use ( $app ){
     return $app->ResponseHTML('<p> 404 </p>', 404);
 });
+
+function checkAuth() {
+    global $controladorLogin;
+    return $controladorLogin->verificarAcceso();
+}
 
 $app->listen();
