@@ -9,6 +9,7 @@
         <li class="active">Huespedes</li>
     </ol>
 
+<a href="#" style="margin-bottom: 15px;" data-toggle="modal" data-target="#añadirMiembro" class="btn btn-default btn-fill btn-lg"><i class="fa fa-plus-circle fa-fw"></i> Añadir huesped</a>
 
 <div class="panel panel-default">
     <div class="panel-heading">Pisos</div>
@@ -47,7 +48,6 @@
 </table>
     </div>
 </div>
-<a href="#"  data-toggle="modal" data-target="#añadirMiembro" class="btn btn-default btn-fill btn-md"><i class="fa fa-plus-circle fa-fw"></i> Añadir huesped</a>
 
 <?php include "includes/footer.php" ?>
 
@@ -58,7 +58,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Añadir huesped</h4>
+                <h2>Añadir huesped <small>usuarios</small></h2>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -93,8 +93,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
-                <button type="submit" name="guardar" class="btn btn-primary btn-sm"><i class="fa fa-save fa-fw"></i>Guardar</button>
+                <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
+                <button type="submit" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar</button>
             </div>
         </div>
         <!-- /.modal-content -->

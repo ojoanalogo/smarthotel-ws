@@ -9,9 +9,8 @@
         <li><a href="/dashboard/configuracion">Configuración</a></li>
         <li class="active">Editar pisos</li>
     </ol>
-    <a href="#"  data-toggle="modal" data-target="#añadirPiso" class="btn btn-default btn-fill btn-md">
+    <a href="#" style="margin-bottom: 15px;" data-toggle="modal" data-target="#añadirPiso" class="btn btn-default btn-fill btn-lg">
         <i class="fa fa-plus-circle fa-fw"></i> Añadir piso</a>
-
 
 <div class="panel panel-default">
     <div class="panel-heading">Pisos</div>
@@ -49,7 +48,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Añadir piso</h4>
+                <h2>Añadir piso <small>configuración</small></h2>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -60,9 +59,10 @@
                             <input type="text" name="añadirPisoNombre" id="añadirPisoNombre" class="form-control"> </div>
                     </div>
                 </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
-                <button type="submit" id="guardarPiso" name="guardar" class="btn btn-primary btn-sm"><i class="fa fa-save fa-fw"></i>Guardar</button>
+                <div class="msgError"></div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
+                <button type="submit" id="guardarPiso" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -82,19 +82,23 @@
                 }
             });
         });
+
         $('#guardarPiso').click(function(){
-            var $piso = $('#añadirPisoNumero');
-            var $nombre = $('#añadirPisoNombre');
-            if (!$.isNumeric($piso.val())) {
-                notificar("No es un numero de piso valido", "danger");
+            var $piso = $('#añadirPisoNumero').val();
+            var $nombre = $('#añadirPisoNombre').val();
+            if (!$.isNumeric($piso)) {
+                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' +
+                    'No es un numero de piso valido</div>');
                 return true;
             }
-            if ($piso.val() === "" || $piso.val() === null) {
-                notificar("Introduce un numero de piso", "danger");
+            if ($piso === "" || $piso === null) {
+                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' +
+                    'Introduce un numero de piso</div>');
                 return true;
             }
-            if ($nombre.val() === "" || $nombre.val() === null) {
-                notificar("Introduce un nombre de piso", "danger");
+            if ($nombre === "" || $nombre === null) {
+                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' +
+                    'Introduce un nombre de piso</div>');
                 return true;
             }
             $.ajax({
@@ -102,25 +106,20 @@
                 url: '/api/cuarto/add',
                 data: "piso=" + $piso + "&nombre=" + $nombre,
                 success: function(data) {
-                    console.log(data);
-                    if (data.code === 1) {
-                        alert("AÑADIDO");
+                    var $res = (JSON.parse(data));
+                    if ($res.code === 1) {
                         $('#añadirPiso').modal('toggle');
+                        $('.msgError').html('');
                     } else {
-                        alert("ERROR");
+                        $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' +
+                            'Este piso ya existe</div>');
                     }
                  },
                 error: function(xhr, type, exception) {
-                    alert("ajax error response type "+type);
+                    console.log("ajax error response type "+type);
+                    $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' +
+                        'Error en el servidor, no se pudo añadir el piso</div>');
                 }
             });
         });
-
-        function notificar($msg, $severidad) {
-            $.notify({
-                message: $msg
-            },{
-                type: $severidad
-            });
-        }
     </script>

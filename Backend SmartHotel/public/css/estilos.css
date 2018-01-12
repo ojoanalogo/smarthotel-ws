@@ -79,3 +79,12 @@ body {
     background-color: #d9534f;
     color: #fff;
 }
+
+.modal-header {
+    background-color: #00796B;
+    color: #fff;
+}
+
+small {
+    color: #EAEAEA !important;
+}

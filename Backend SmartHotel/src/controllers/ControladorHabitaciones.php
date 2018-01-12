@@ -11,10 +11,10 @@ class ControladorHabitaciones {
     public function añadirPiso($piso, $nombre)
     {
         global $db;
-        $query = "INSERT INTO sh_pisos VALUES (?, ?)";
+        $query = "INSERT INTO sh_pisos(piso, nombre) VALUES (?, ?)";
         $rs = $db->query($query, array($piso, $nombre));
         if ($rs === false) {
-            return array("code" => 0, "msg" => "Error al intentar añadir piso");
+            return array("code" => 0, "msg" => "Piso ya existe");
         }
         return array("code" => 1, "msg" => "Si funciona");
     }

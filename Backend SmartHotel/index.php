@@ -151,7 +151,9 @@ $app->post("/authme", function() use ($app, $controladorLogin) {
 
 $app->post("/api/cuarto/{funcion}", function($funcion) use ($app, $controladorHabitaciones) {
     if($funcion == "add") {
-        echo json_encode($controladorHabitaciones->añadirPiso($app->getRequest()->post("piso"), $app->getRequest()->post("nombre")));
+        echo json_encode($controladorHabitaciones->añadirPiso(
+            $app->getRequest()->post("piso"),
+            $app->getRequest()->post("nombre")));
     }
 });
 

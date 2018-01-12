@@ -194,28 +194,29 @@
       <ColNames>correo</ColNames>
       <UnderlyingIndexName>correo_2</UnderlyingIndexName>
     </key>
-    <column id="54" parent="15" name="piso">
+    <column id="54" parent="15" name="id_piso">
       <Position>1</Position>
+      <DataType>int(16)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="55" parent="15" name="piso">
+      <Position>2</Position>
       <DataType>int(8)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="55" parent="15" name="nombre">
-      <Position>2</Position>
-      <DataType>varchar(64)|0</DataType>
+    <column id="56" parent="15" name="nombre">
+      <Position>3</Position>
+      <DataType>varchar(128)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="56" parent="15" name="sh_pisos_piso_uindex">
-      <ColNames>piso</ColNames>
+    <index id="57" parent="15" name="id_piso">
+      <ColNames>id_piso</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="57" parent="15" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>piso</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="58" parent="15" name="sh_pisos_piso_uindex">
-      <ColNames>piso</ColNames>
-      <UnderlyingIndexName>sh_pisos_piso_uindex</UnderlyingIndexName>
+    <key id="58" parent="15" name="id_piso">
+      <ColNames>id_piso</ColNames>
+      <UnderlyingIndexName>id_piso</UnderlyingIndexName>
     </key>
     <column id="59" parent="16" name="id_reserva">
       <Position>1</Position>
