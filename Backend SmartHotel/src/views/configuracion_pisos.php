@@ -15,29 +15,22 @@
 <div class="row">
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading">Pisos</div>
+            <div class="panel-heading panel-success">Pisos</div>
             <div class="table-responsive">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="tabla-pisos">
                     <thead>
-                    <tr style="color:#FFF;">
-                        <th width="3%">#ID</th>
+                    <tr>
+                        <th width="3%">Piso</th>
                         <th width="74%">Nombre del piso</th>
                         <th width="23%">Administrar</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td align="center">1</td>
-                        <td>&nbsp;1</td>
-                        <td align="center" valign="middle">
-                            <a href="#" data-toggle="modal" data-target="#editarPiso" class="btn btn-md btn-info btn-fill" style="color:#FFF;">
-                                <i class="fa fa-edit fa-fw"></i> Editar</a>
-                            <a href="#" class="btn btn-danger btn-md btn-fill">
-                                <i class="fa fa-trash fa-fw"></i> Eliminar</a></td>
-                    </tr>
+                    <tbody id="tabla-ajx">
+
                     </tbody>
                 </table>
             </div>
+            <h4 class="centrar" id="msgEmpty"></h4>
         </div>
     </div>
 </div>
@@ -79,32 +72,91 @@
          * Código configuración de pisos
          */
         $(document).ready(function() {
-            $('#tabla-pisos').dataTable({
-                "language": {
-                    "url": "/public/js/esp_datatables.json"
-                }
-            });
+            obtenerPisos();
+            handlerEliminarPiso();
         });
-
         /**
          * Obtener pisos e introducirlos en tabla
         */
-        $.ajax({
-            type: 'POST',
-            url: '/api/cuarto/obtenerPisos',
-            data: "",
-            success: function(data) {
-                var $datos = JSON.parse(data);
-                var $itera = $datos["data"];
-                $.each($itera, function(i, item) {
-                   console.log(item);
-                });
-            },
-            error: function(xhr, type, exception) {
-                console.log("ajax error response type "+type);
-            }
-        });
+        function obtenerPisos() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/cuarto/obtenerPisos',
+                data: "",
+                success: function (data) {
+                    var $datos = JSON.parse(data);
+                    if ($datos.code === 1) {
+                        var $itera = $datos["data"];
+                        console.log($itera);
+                        if ($itera.length === 0) {
+                            $('#msgEmpty').html('No hay pisos añadidos, <a href="#" data-toggle="modal" data-target="#añadirPiso">¿qué tal si añades uno?</a>');
+                        }
+                        // Template:
+                        function template($id, $piso, $nombre) {
+                            return '<tr>' +
+                                '<td align="center">' + $piso + '</td>' +
+                                '<td>' + $nombre + '</td>' +
+                                '<td align="center" valign="middle">' +
+                                '<a href="#" data-toggle="modal" data-target="#editarUsuario" class="btn btn-md btn-info btn-fill" style="color:#FFF;">' +
+                                '<i class="fa fa-edit fa-fw"></i> Editar' +
+                                '</a>&nbsp;' +
+                                '<a href="#" data-idPiso="' + $id + '" class="btn btn-danger btn-md btn-fill eliminarPiso">' +
+                                '<i class="fa fa-trash fa-fw"></i> Eliminar' +
+                                '</a>' +
+                                '</td>' +
+                                '</tr>';
+                        }
 
+                        $('#tabla-ajx').html('');
+                        $.each($itera, function (i, item) {
+                            console.log(item);
+                            $('#tabla-ajx').append(template(item.id_piso, item.piso, item.nombre));
+                        });
+                        handlerEliminarPiso();
+                    } else {
+                        alert("Error al intentar obtener los pisos");
+                    }
+                },
+                error: function (xhr, type, exception) {
+                    console.log("ajax error response type " + type);
+                }
+            });
+        }
+        function handlerEliminarPiso() {
+            $('.eliminarPiso').unbind();
+            $('.eliminarPiso').click(function () {
+                console.log("he");
+                var $id = $(this).attr('data-idPiso');
+                swal({
+                        title: "¿Estás seguro que quieres eliminar este piso?",
+                        text: "Esta acción no se puede revertir",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Si, borralo!",
+                        closeOnConfirm: false
+                    },
+                    function () {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/cuarto/eliminarPiso',
+                            data: "id_piso=" + $id,
+                            success: function (data) {
+                                var $datos = JSON.parse(data);
+                                if ($datos.code === 1) {
+                                    swal("Piso eliminado", "Se ha eliminado este piso", "success");
+                                    obtenerPisos();
+                                } else {
+                                    swal("No se pudo eliminar", "Ha ocurrido un error.", "danger");
+                                }
+                            },
+                            error: function (xhr, type, exception) {
+                                console.log("ajax error response type " + type);
+                            }
+                        });
+                    });
+            });
+        }
         /**
          * Guardar piso en la base de datos
          */
@@ -128,13 +180,17 @@
             }
             $.ajax({
                 type: 'POST',
-                url: '/api/cuarto/add',
+                url: '/api/cuarto/addPiso',
                 data: "piso=" + $piso + "&nombre=" + $nombre,
                 success: function(data) {
                     var $res = (JSON.parse(data));
                     if ($res.code === 1) {
                         $('#añadirPiso').modal('toggle');
                         $('.msgError').html('');
+                        $('#msgEmpty').html('');
+                        $('#añadirPisoNumero').val('');
+                        $('#añadirPisoNombre').val('');
+                        obtenerPisos();
                     } else {
                         $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' +
                             'Este piso ya existe</div>');

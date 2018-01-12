@@ -150,14 +150,14 @@ $app->post("/authme", function() use ($app, $controladorLogin) {
 });
 
 $app->post("/api/cuarto/{funcion}", function($funcion) use ($app, $controladorHabitaciones) {
-    if($funcion == "add") {
+    if($funcion == "addPiso")
         echo json_encode($controladorHabitaciones->añadirPiso(
             $app->getRequest()->post("piso"),
             $app->getRequest()->post("nombre")));
-    }
-    if($funcion == "obtenerPisos") {
+    if($funcion == "eliminarPiso")
+        echo json_encode($controladorHabitaciones->eliminarPiso($app->getRequest()->post("id_piso")));
+    if($funcion == "obtenerPisos")
         echo json_encode($controladorHabitaciones->obtenerPisos());
-    }
 });
 
 // 404

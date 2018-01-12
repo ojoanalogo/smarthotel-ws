@@ -8,8 +8,8 @@
  */
 
 class ControladorHabitaciones {
-    public function añadirPiso($piso, $nombre)
-    {
+
+    public function añadirPiso($piso, $nombre) {
         global $db;
         $query = "INSERT INTO sh_pisos(piso, nombre) VALUES (?, ?)";
         $rs = $db->query($query, array($piso, $nombre));
@@ -18,8 +18,8 @@ class ControladorHabitaciones {
         }
         return array("code" => 1, "msg" => "Piso añadido");
     }
-    public function obtenerPisos()
-    {
+
+    public function obtenerPisos() {
         global $db;
         $query = "SELECT * FROM sh_pisos";
         $rs = $db->query($query);
@@ -31,5 +31,16 @@ class ControladorHabitaciones {
             $datos[] = $row;
         }
         return array("code" => 1, "msg" => "Pisos obtenidos", "data" => $datos);
+    }
+
+    public function eliminarPiso($id_piso) {
+        global $db;
+        $args = array($id_piso);
+        $query = "DELETE FROM sh_pisos WHERE id_piso=?";
+        $rs = $db->query($query, $args);
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Error al intentar borrar piso");
+        }
+        return array("code" => 1, "msg" => "Pisos eliminado");
     }
 }

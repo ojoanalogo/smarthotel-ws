@@ -35,6 +35,8 @@ function obtenerSeccionNavbar($requestUri) {
     <link href="/public/css/datepicker.min.css" rel="stylesheet" />
     <!-- Date tables css -->
     <link href="/public/css/datatables.min.css" rel="stylesheet" />
+    <!-- Sweet Alert css -->
+    <link href="/public/css/sweetalert.css" rel="stylesheet" />
     <!-- Magia negra favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
