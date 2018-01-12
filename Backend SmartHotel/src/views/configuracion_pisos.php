@@ -9,37 +9,40 @@
         <li><a href="/dashboard/configuracion">Configuración</a></li>
         <li class="active">Editar pisos</li>
     </ol>
-    <a href="#" style="margin-bottom: 15px;" data-toggle="modal" data-target="#añadirPiso" class="btn btn-default btn-fill btn-lg">
+    <a href="#" style="margin-bottom: 15px;" data-toggle="modal" data-target="#añadirPiso" class="btn btn-success btn-fill btn-lg">
         <i class="fa fa-plus-circle fa-fw"></i> Añadir piso</a>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Pisos</div>
-    <div class="table-responsive">
-        <table width="100%" class="table table-striped table-bordered table-hover" id="tabla-pisos">
-            <thead>
-            <tr style="color:#FFF;">
-                <th width="3%">#ID</th>
-                <th width="74%">Nombre del piso</th>
-                <th width="23%">Administrar</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td align="center">1</td>
-                <td>&nbsp;1</td>
-                <td align="center" valign="middle">
-                    <a href="#" data-toggle="modal" data-target="#editarPiso" class="btn btn-md btn-info btn-fill" style="color:#FFF;">
-                        <i class="fa fa-edit fa-fw"></i> Editar</a>
-                    <a href="#" class="btn btn-danger btn-md btn-fill">
-                        <i class="fa fa-trash fa-fw"></i> Eliminar</a></td>
-            </tr>
-            </tbody>
-        </table>
+<div class="row">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">Pisos</div>
+            <div class="table-responsive">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="tabla-pisos">
+                    <thead>
+                    <tr style="color:#FFF;">
+                        <th width="3%">#ID</th>
+                        <th width="74%">Nombre del piso</th>
+                        <th width="23%">Administrar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td align="center">1</td>
+                        <td>&nbsp;1</td>
+                        <td align="center" valign="middle">
+                            <a href="#" data-toggle="modal" data-target="#editarPiso" class="btn btn-md btn-info btn-fill" style="color:#FFF;">
+                                <i class="fa fa-edit fa-fw"></i> Editar</a>
+                            <a href="#" class="btn btn-danger btn-md btn-fill">
+                                <i class="fa fa-trash fa-fw"></i> Eliminar</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
 <?php include "includes/footer.php" ?>
-
 
 <!-- Modales -->
 
@@ -83,6 +86,28 @@
             });
         });
 
+        /**
+         * Obtener pisos e introducirlos en tabla
+        */
+        $.ajax({
+            type: 'POST',
+            url: '/api/cuarto/obtenerPisos',
+            data: "",
+            success: function(data) {
+                var $datos = JSON.parse(data);
+                var $itera = $datos["data"];
+                $.each($itera, function(i, item) {
+                   console.log(item);
+                });
+            },
+            error: function(xhr, type, exception) {
+                console.log("ajax error response type "+type);
+            }
+        });
+
+        /**
+         * Guardar piso en la base de datos
+         */
         $('#guardarPiso').click(function(){
             var $piso = $('#añadirPisoNumero').val();
             var $nombre = $('#añadirPisoNombre').val();

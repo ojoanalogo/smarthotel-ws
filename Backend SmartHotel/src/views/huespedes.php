@@ -9,8 +9,9 @@
         <li class="active">Huespedes</li>
     </ol>
 
-<a href="#" style="margin-bottom: 15px;" data-toggle="modal" data-target="#añadirMiembro" class="btn btn-default btn-fill btn-lg"><i class="fa fa-plus-circle fa-fw"></i> Añadir huesped</a>
-
+<a href="#" style="margin-bottom: 15px;" data-toggle="modal" data-target="#añadirMiembro" class="btn btn-success btn-fill btn-lg"><i class="fa fa-plus-circle fa-fw"></i> Añadir huesped</a>
+<div class="row">
+    <div class="container">
 <div class="panel panel-default">
     <div class="panel-heading">Pisos</div>
     <div class="table-responsive">
@@ -18,10 +19,10 @@
     <thead>
     <tr style=" font-weight:bold;">
         <th width="10%" >ID huesped</th>
-        <th width="20%">Nombre</th>
-        <th width="30">Apellido</th>
+        <th width="15%">Nombre</th>
+        <th width="25">Apellido</th>
         <th width="20%">Num telefono</th>
-        <th width="20%">Administrar</th>
+        <th width="30%">Administrar</th>
     </tr>
     </thead>
     <tbody>
@@ -48,7 +49,8 @@
 </table>
     </div>
 </div>
-
+    </div>
+</div>
 <?php include "includes/footer.php" ?>
 
 <!-- Modales -->

@@ -155,6 +155,9 @@ $app->post("/api/cuarto/{funcion}", function($funcion) use ($app, $controladorHa
             $app->getRequest()->post("piso"),
             $app->getRequest()->post("nombre")));
     }
+    if($funcion == "obtenerPisos") {
+        echo json_encode($controladorHabitaciones->obtenerPisos());
+    }
 });
 
 // 404

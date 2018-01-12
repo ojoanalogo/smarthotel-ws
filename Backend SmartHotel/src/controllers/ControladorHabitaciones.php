@@ -16,6 +16,20 @@ class ControladorHabitaciones {
         if ($rs === false) {
             return array("code" => 0, "msg" => "Piso ya existe");
         }
-        return array("code" => 1, "msg" => "Si funciona");
+        return array("code" => 1, "msg" => "Piso añadido");
+    }
+    public function obtenerPisos()
+    {
+        global $db;
+        $query = "SELECT * FROM sh_pisos";
+        $rs = $db->query($query);
+        $datos = array();
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Error al intentar obtener pisos");
+        }
+        foreach ($rs as $row) {
+            $datos[] = $row;
+        }
+        return array("code" => 1, "msg" => "Pisos obtenidos", "data" => $datos);
     }
 }
