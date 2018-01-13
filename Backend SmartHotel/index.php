@@ -158,6 +158,11 @@ $app->post("/api/cuarto/{funcion}", function($funcion) use ($app, $controladorHa
         echo json_encode($controladorHabitaciones->eliminarPiso($app->getRequest()->post("id_piso")));
     if($funcion == "obtenerPisos")
         echo json_encode($controladorHabitaciones->obtenerPisos());
+    if($funcion == "obtenerPiso")
+        echo json_encode($controladorHabitaciones->obtenerPiso($app->getRequest()->post("id_piso")));
+    if($funcion == "editarPiso")
+        echo json_encode($controladorHabitaciones->editarPiso($app->getRequest()->post("id_piso"), $app->getRequest()->post("piso"),
+            $app->getRequest()->post("nombre")));
 });
 
 // 404
