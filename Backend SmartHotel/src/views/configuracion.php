@@ -21,13 +21,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nombre del hotel</label>
-                                    <input type="text" class="form-control" placeholder="Hotel Todos Felices">
+                                    <input type="text" class="form-control" placeholder="Hotel Todos Felices" value="<?php echo $datosConfig["nombre_hotel"] ?>">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Correo de contacto</label>
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input type="email" class="form-control" placeholder="Email" value="<?php echo $datosConfig["correo"] ?>">
                                 </div>
                             </div>
                         </div>
@@ -35,19 +35,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Ciudad</label>
-                                    <input type="text" class="form-control" placeholder="Ciudad del hotel">
+                                    <input type="text" class="form-control" placeholder="Ciudad del hotel" value="<?php echo $datosConfig["ciudad"] ?>">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>País</label>
-                                    <input type="text" class="form-control" placeholder="País del hotel">
+                                    <input type="text" class="form-control" placeholder="País del hotel" value="<?php echo $datosConfig["pais"] ?>">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Código Postal</label>
-                                    <input type="number" class="form-control" placeholder="C.P">
+                                    <input type="number" class="form-control" placeholder="C.P" value="<?php echo $datosConfig["codigo_postal"] ?>">
                                 </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Dirección</label>
-                                    <input type="text" class="form-control" placeholder="Calle, numero, etc">
+                                    <input type="text" class="form-control" placeholder="Calle, numero, etc" value="<?php echo $datosConfig["direccion"] ?>">
                                 </div>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Información extra</label>
-                                    <textarea rows="5" class="form-control" placeholder="Descripción del hotel""></textarea>
+                                    <textarea rows="5" class="form-control" placeholder="Descripción del hotel""><?php echo $datosConfig["info"]?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                         <a href="/dashboard/configuracion/pisos" class="h2"><i class="fa fa-building fa-fw"></i> Configurar pisos </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/dashboard/configuracion/cuartos" class="h2"><i class="fa fa-bed fa-fw"></i> Configurar habitaciones </a>
+                        <a href="/dashboard/configuracion/habitaciones" class="h2"><i class="fa fa-bed fa-fw"></i> Configurar habitaciones </a>
                     </li>
                 </ul>
             </div>
@@ -99,5 +99,4 @@
             </div>
         </div>
     </div>
-
 <?php include "includes/footer.php" ?>

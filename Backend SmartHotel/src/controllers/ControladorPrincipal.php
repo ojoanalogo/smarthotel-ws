@@ -43,4 +43,18 @@ class ControladorPrincipal {
         }
         return $datos;
     }
+
+    public function variablesConfig() {
+        global $db;
+        $datos = array();
+        $query = "SELECT * FROM sh_config";
+        $rs = $db->query($query);
+        if ($rs === false) {
+            return null;
+        }
+        foreach ($rs as $row) {
+            $datos = $row;
+        }
+        return $datos;
+    }
 }

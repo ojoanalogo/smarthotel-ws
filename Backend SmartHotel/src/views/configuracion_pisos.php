@@ -11,7 +11,6 @@
     </ol>
     <a href="#" style="margin-bottom: 15px;" data-toggle="modal" data-target="#añadirPiso" class="btn btn-success btn-fill btn-lg">
         <i class="fa fa-plus-circle fa-fw"></i> Añadir piso</a>
-
 <div class="row">
     <div class="container">
         <div class="panel panel-default">

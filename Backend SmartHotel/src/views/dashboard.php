@@ -14,8 +14,8 @@
                 <div class="author">
                     <a href="#">
                         <img class="avatar border-gray" src="/public/img/logo.png" alt="..."/>
-                        <h4 class="title">{hotel}<br />
-                            <small><?php echo $datos["correo"]?></small>
+                        <h4 class="title"><?php echo $datosConfig["nombre_hotel"]?><br />
+                            <small><?php echo $datosUsuario["correo"]?></small>
                         </h4>
                     </a>
                 </div>
@@ -69,8 +69,8 @@
             <div class="col-md-6 col-lg-4 col-xs-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Usuarios activos</h4>
-                        <p class="category">Usuarios</p>
+                        <h4 class="title">Huespedes activos</h4>
+                        <p class="category">Huespedes</p>
                     </div>
                     <div class="content">
                         <div class="row text-muted">
@@ -84,7 +84,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <a href="/dashboard/huespedes/" class="btn btn-fill btn-primary">Administrar usuarios</a>
+                                <a href="/dashboard/huespedes/" class="btn btn-fill btn-primary">Administrar huespedes</a>
                             </div>
                         </div>
                     </div>

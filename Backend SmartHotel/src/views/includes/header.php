@@ -117,7 +117,7 @@ function obtenerSeccionNavbar($requestUri) {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <p>
-                                    <?php echo $datos["correo"]; ?>
+                                    <?php echo $datosUsuario["correo"]; ?>
                                     <b class="caret"></b>
                                 </p>
                             </a>

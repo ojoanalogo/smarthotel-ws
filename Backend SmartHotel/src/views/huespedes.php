@@ -27,7 +27,7 @@
     </thead>
     <tbody>
     <?php
-    foreach ($usuarios as $usuario) {
+    foreach ($datosUsuarios as $usuario) {
     echo '<tr id="usuario">
         <td align="center">' . $usuario["id_usuario"] . '</td>
         <td>&nbsp;<span data-toggle="tooltip" data-placement="right" title="Nombre">' . $usuario["nombre"] . '</span></td>

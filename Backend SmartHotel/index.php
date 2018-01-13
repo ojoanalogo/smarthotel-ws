@@ -44,8 +44,7 @@ $controladorHabitaciones = new ControladorHabitaciones();
 $app->get("/", function() use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth()) {
         header("Location: /dashboard");
-        return $app->Response('dashboard.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+        return $app->Response('dashboard.php', valoresDefault()  , 201);
     }
     else
         return $app->Response('login.php', array(),201);
@@ -56,8 +55,7 @@ $app->get("/", function() use ($app, $controladorLogin, $controladorPrincipal) {
  */
 $app->get('/dashboard', function() use ($app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
-        return $app->Response('dashboard.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+        return $app->Response('dashboard.php', valoresDefault()  , 201);
     else
         return $app->Response('login.php', array(),201);
 });
@@ -67,8 +65,7 @@ $app->get('/dashboard', function() use ($app, $controladorLogin, $controladorPri
  */
 $app->get('/dashboard/habitaciones', function() use ( $app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
-        return $app->Response('habitaciones.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+        return $app->Response('habitaciones.php', valoresDefault() , 201);
     else
         return $app->Response('login.php', array(),201);
 });
@@ -78,8 +75,7 @@ $app->get('/dashboard/habitaciones', function() use ( $app, $controladorLogin, $
  */
 $app->get('/dashboard/habitaciones/detalle/:habitacion', function($habitacion) use ( $app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
-        return $app->Response('detalle_habitacion.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario()), "habitacion" => $habitacion) , 201);
+        return $app->Response('detalle_habitacion.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(),201);
 });
@@ -89,9 +85,7 @@ $app->get('/dashboard/habitaciones/detalle/:habitacion', function($habitacion) u
  */
 $app->get('/dashboard/huespedes',function() use ( $app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
-        return $app->Response('huespedes.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario()),
-            "usuarios" => $controladorPrincipal->obtenerUsuarios()) , 201);
+        return $app->Response('huespedes.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(),201);
 });
@@ -102,8 +96,7 @@ $app->get('/dashboard/huespedes',function() use ( $app, $controladorLogin, $cont
  */
 $app->get('/dashboard/mapa',function() use ( $app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
-        return $app->Response('mapa.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+        return $app->Response('mapa.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(),201);
 });
@@ -113,8 +106,7 @@ $app->get('/dashboard/mapa',function() use ( $app, $controladorLogin, $controlad
  */
 $app->get('/dashboard/configuracion', function() use ($app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
-        return $app->Response('configuracion.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+        return $app->Response('configuracion.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(),201);
 });
@@ -125,8 +117,18 @@ $app->get('/dashboard/configuracion', function() use ($app, $controladorLogin, $
 
 $app->get('/dashboard/configuracion/pisos', function() use ($app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
-        return $app->Response('configuracion_pisos.php', array("datos" =>
-            $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario())) , 201);
+        return $app->Response('configuracion_pisos.php', valoresDefault(), 201);
+    else
+        return $app->Response('login.php', array(),201);
+});
+
+/**
+ * Config cuartos
+ */
+
+$app->get('/dashboard/configuracion/habitaciones', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+    if (checkAuth())
+        return $app->Response('configuracion_habitaciones.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(),201);
 });
@@ -173,6 +175,14 @@ $app->respond( function() use ( $app ){
 function checkAuth() {
     global $controladorLogin;
     return $controladorLogin->verificarAcceso();
+}
+
+function valoresDefault() {
+    global $controladorPrincipal, $controladorHabitaciones, $controladorLogin;
+    $datosUsuario = $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario());
+    $datosConfig = $controladorPrincipal->variablesConfig();
+    $datosUsuarios = $controladorPrincipal->obtenerUsuarios();
+    return array("datosUsuario" => $datosUsuario, "datosConfig" => $datosConfig, "datosUsuarios" => $datosUsuarios);
 }
 
 $app->listen();
