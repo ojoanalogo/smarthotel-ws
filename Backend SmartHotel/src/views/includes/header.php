@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
+header('Content-type: text/html; charset=UTF-8');
 function obtenerSeccionNavbar($requestUri) {
     $current_file_name = basename($_SERVER['REQUEST_URI']);
     if ($current_file_name == $requestUri) {
@@ -10,7 +10,7 @@ function obtenerSeccionNavbar($requestUri) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
     <link rel="icon" type="image/png" href="/public/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!-- Titulo -->
@@ -46,6 +46,7 @@ function obtenerSeccionNavbar($requestUri) {
     <link rel="shortcut icon" href="/public/favicon/favicon.ico">
     <meta name="msapplication-config" content="/public/favicon/browserconfig.xml">
     <meta name="theme-color" content="#009688">
+
 </head>
 <body>
 <!-- Wrapper -->

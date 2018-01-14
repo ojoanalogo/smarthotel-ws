@@ -46,6 +46,10 @@
                     <tbody id="tabla-ajx">
                     </tbody>
                 </table>
+                <div class="ajxLoader centrar" style="margin-top: 60px;">
+                    <i class="fa fa-circle-o-notch fa-spin fa-5x fa-fw text-muted"></i>
+                    <span class="sr-only">Loading...</span>
+                </div>
             </div>
             <h4 class="centrar" id="msgEmpty"></h4>
         </div>
@@ -134,6 +138,7 @@
                 url: '/api/cuarto/obtenerPisos',
                 data: "",
                 success: function(data) {
+                    $('.ajxLoader').hide();
                     var $datos = JSON.parse(data);
                     if ($datos.code === 1) {
                         var $itera = $datos["data"];
