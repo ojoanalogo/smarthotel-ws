@@ -10,6 +10,31 @@
     </ol>
 
     <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Habitaciones</h3>
+                </div>
+                <ul class="list-group centrar">
+                    <li class="list-group-item">
+                        <a href="/dashboard/configuracion/pisos" class="h2"><i class="fa fa-building fa-fw"></i> Configurar pisos </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/dashboard/configuracion/habitaciones" class="h2"><i class="fa fa-bed fa-fw"></i> Configurar habitaciones </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Avisos</h3>
+                </div>
+                <ul class="list-group centrar">
+                    <li class="list-group-item">
+                        <a href="/dashboard/configuracion/avisos" class="h2"><i class="fa fa-bullhorn fa-fw"></i> Configurar avisos </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="header">
@@ -71,31 +96,6 @@
                         <div class="clearfix"></div>
                     </form>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Habitaciones</h3>
-                </div>
-                <ul class="list-group centrar">
-                    <li class="list-group-item">
-                        <a href="/dashboard/configuracion/pisos" class="h2"><i class="fa fa-building fa-fw"></i> Configurar pisos </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/dashboard/configuracion/habitaciones" class="h2"><i class="fa fa-bed fa-fw"></i> Configurar habitaciones </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Avisos</h3>
-                </div>
-                <ul class="list-group centrar">
-                    <li class="list-group-item">
-                        <a href="/dashboard/configuracion/avisos" class="h2"><i class="fa fa-bullhorn fa-fw"></i> Configurar avisos </a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>

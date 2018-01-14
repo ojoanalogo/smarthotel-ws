@@ -5,7 +5,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card card-user">
             <div class="image">
                 <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
@@ -38,80 +38,54 @@
         </div>
 
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="row">
 
-            <div class="col-md-6 col-lg-4 col-xs-12">
+            <div class="col-md-6 col-lg-3 col-xs-12">
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Habitaciones activas</h4>
                         <p class="category">Hotel</p>
                     </div>
                     <div class="content">
-                        <div class="row text-muted">
-									<span class="col-md-4 col-xs-12">
-										<i class="fa fa-bed fa-3x" style="margin-top:35px; font-size: 60px" aria-hidden="true"></i>
-									</span>
-                            <span class="col-md-8 col-xs-12" style="font-size:85px">
-										15
-									</span>
-                        </div>
-                        <div class="footer">
-                            <hr>
-                            <div class="stats">
-                                <a href="/dashboard/habitaciones/" class="btn btn-fill btn-primary">Administrar habitaciones</a>
-                            </div>
-                        </div>
+                        asdasda
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-4 col-xs-12">
+
+            <div class="col-md-6 col-lg-3 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Solicitudes de limpieza</h4>
+                        <p class="category">Hotel</p>
+                    </div>
+                    <div class="content">
+                        asdasdasd
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-xs-12">
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Huespedes activos</h4>
                         <p class="category">Huespedes</p>
                     </div>
                     <div class="content">
-                        <div class="row text-muted">
-									<span class="col-md-4 col-xs-12">
-										<i class="fa fa-users fa-3x" style="margin-top:35px; font-size: 60px" aria-hidden="true"></i>
-									</span>
-                            <span class="col-md-8 col-xs-12" style="font-size:85px">
-										125
-									</span>
-                        </div>
-                        <div class="footer">
-                            <hr>
-                            <div class="stats">
-                                <a href="/dashboard/huespedes/" class="btn btn-fill btn-primary">Administrar huespedes</a>
-                            </div>
-                        </div>
+                        asdadasdasd
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-4 col-xs-12">
+            <div class="col-md-6 col-lg-3 col-xs-12">
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Mensajes recibidos</h4>
                         <p class="category">Soporte</p>
                     </div>
                     <div class="content">
-                        <div class="row text-muted">
-									<span class="col-md-4 col-xs-12">
-										<i class="fa fa-envelope fa-3x" style="margin-top:35px; font-size: 60px" aria-hidden="true"></i>
-									</span>
-                            <span class="col-md-8 col-xs-12" style="font-size:85px">
-										2
-									</span>
-                        </div>
-                        <div class="footer">
-                            <hr>
-                            <div class="stats">
-                                <button href="#" class="btn btn-fill btn-primary">Ver mensajes</button>
-                            </div>
-                        </div>
+                        asdasdasd
                     </div>
                 </div>
             </div>

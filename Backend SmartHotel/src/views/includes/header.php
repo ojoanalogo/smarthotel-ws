@@ -23,7 +23,7 @@ function obtenerSeccionNavbar($requestUri) {
     <!-- Libreria animaciones  -->
     <link href="/public/css/animate.min.css" rel="stylesheet"/>
     <!-- CSS Dashboard -->
-    <link href="/public/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+    <link href="/public/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
     <!-- Fuentes e iconos -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <!-- Estilos de fuentes -->
@@ -71,10 +71,28 @@ function obtenerSeccionNavbar($requestUri) {
                         <p>Habitaciones</p>
                     </a>
                 </li>
+                <li <?php obtenerSeccionNavbar("reservaciones") ?>>
+                    <a href="/dashboard/reservaciones">
+                        <i class="fa fa-bookmark"></i>
+                        <p>Reservaciones</p>
+                    </a>
+                </li>
                 <li <?php obtenerSeccionNavbar("huespedes") ?>>
                     <a href="/dashboard/huespedes">
                         <i class="fa fa-users"></i>
                         <p>Huespedes</p>
+                    </a>
+                </li>
+                <li <?php obtenerSeccionNavbar("mensajes") ?>>
+                    <a href="/dashboard/mensajes">
+                        <i class="fa fa-inbox"></i>
+                        <p>Mensajes</p>
+                    </a>
+                </li>
+                <li <?php obtenerSeccionNavbar("limpieza") ?>>
+                    <a href="/dashboard/limpieza">
+                        <i class="fa fa-paint-brush"></i>
+                        <p>Solicitudes limpieza</p>
                     </a>
                 </li>
                 <li <?php obtenerSeccionNavbar("mapa") ?>>
@@ -121,11 +139,11 @@ function obtenerSeccionNavbar($requestUri) {
                                     <b class="caret"></b>
                                 </p>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Ajustes cuenta</a></li>
-                                <li><a href="/dashboard/configuracion">Configuración panel</a></li>
+                            <ul class="dropdown-menu" style="font-size: 16px;">
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i> Ajustes cuenta</a></li>
+                                <li><a href="/dashboard/configuracion"><i class="fa fa-gears fa-fw"></i> Configuración panel</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/logout">Deslogear</a></li>
+                                <li><a style="color: #c9302c" href="/logout"><i class="fa fa-sign-out fa-fw"></i> Deslogear</a></li>
                             </ul>
                         </li>
                     </ul>

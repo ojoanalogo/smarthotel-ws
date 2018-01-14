@@ -70,6 +70,13 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
+        .input-group {
+            padding-bottom: 15px;
+        }
+        .input-group .input-group-addon {
+            color: #000;
+            background-color: #EAEAEA;
+        }
     </style>
 </head>
 <body>
@@ -82,20 +89,22 @@
                     <img src="/public/img/logo.png" width="150" alt=""/> </div>
                 <div class="panel-body">
                     <p class="lead">
-                        MySmartHotel - Acceso
+                        MySmartHotel <small style="color: #444444 !important;">Acceso</small>
                     </p>
                     <?php if (isset($error)): ?>
                         <div class="text-danger">Correo/clave incorrectos</div>
                     <?php endif; ?>
                     <form role="form" method="post" action="/authme_panel">
                         <fieldset>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Correo" name="correo" type="email" required autofocus>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="correo"><i class="fa fa-at fa-fw"></i></span>
+                                <input class="form-control" placeholder="Correo" name="correo" type="email" aria-describedby="correo" required autofocus>
                             </div>
-                            <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="clave"><i class="fa fa-lock fa-fw"></i></span>
                                 <input class="form-control" placeholder="Clave" name="clave" type="password" required>
                             </div>
-                            <button type="submit" name="login" class="btn btn-lg btn-default btn-block"><i class="fa fa-lock fa-fw"></i>Acceder</button>
+                            <button type="submit" name="login" class="btn btn-lg btn-default btn-block"><i class="fa fa-sign-in fa-fw"></i>Acceder</button>
                         </fieldset>
                     </form>
                     <p style="margin-top: 15px;" class="text-muted centrar">También puedes presionar la tecla <kbd>ENTER</kbd> para acceder</p>

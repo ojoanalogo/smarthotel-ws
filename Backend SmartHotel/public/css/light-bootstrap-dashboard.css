@@ -144,11 +144,11 @@ h1 .subtitle {
 }
 
 .text-warning, .text-warning:hover {
-    color: #FF9500 !important;
+    color: #FFA534 !important
 }
 
 .text-danger, .text-danger:hover {
-    color: #FF4A55 !important;
+    color: #FB404B !important;
 }
 
 /*     General overwrite     */
@@ -163,7 +163,7 @@ body {
 }
 
 a {
-    color: #1DC7EA;
+    color: #009688;
 }
 
 a:hover, a:focus {

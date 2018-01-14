@@ -9,10 +9,29 @@
         <li><a href="/dashboard/configuracion">Configuración</a></li>
         <li class="active">Editar pisos</li>
     </ol>
-    <a href="#" style="margin-bottom: 15px;" data-toggle="modal" data-target="#añadirPiso" class="btn btn-success btn-fill btn-lg">
-        <i class="fa fa-plus-circle fa-fw"></i> Añadir piso</a>
 <div class="row">
-    <div class="container">
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Ayuda</h4>
+                <p class="category">Soporte</p>
+            </div>
+            <div class="content">
+                <div class="centrar"><i class="fa fa-building fa-4x"></i></div>
+                <hr>
+                <p class="text-muted">Un hotel es un edificio conformado por 1 o más pisos, es necesario añadir un piso al cual serán asignadas las
+                habitaciones posteriormente, esto con el fin de localizarlas y tenerlas mejor organizadas en el panel.</p>
+                <div class="footer">
+                    <hr>
+                    <div class="stats">
+                        <a href="#" data-toggle="modal" data-target="#añadirPiso" class="btn btn-success btn-fill btn-lg">
+                            <i class="fa fa-plus-circle fa-fw"></i> Añadir piso</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading panel-success">Pisos</div>
             <div class="table-responsive">
@@ -25,7 +44,6 @@
                     </tr>
                     </thead>
                     <tbody id="tabla-ajx">
-
                     </tbody>
                 </table>
             </div>
