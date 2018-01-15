@@ -29,6 +29,18 @@
                     </div>
                 </div>
             </div>
+            <hr>
+            <div class="header">
+                <h4 class="title">Preguntas frecuentes</h4>
+                <p class="category">Soporte</p>
+            </div>
+            <div class="content">
+                <b class="text-info"><i class="fa fa-question-circle-o fa-fw"></i> ¿Cuantas habitaciones soporta cada piso?</b>
+                <div></div>
+                <p class="text-muted">Es un numero ilimitado, pero lo recomendado es tener un balance de habitaciones por piso para
+                    que la información no se colapse a la hora de visualizarlas y hacer reservaciones.
+                </p>
+            </div>
         </div>
     </div>
     <div class="col-lg-9 col-md-6">
@@ -72,7 +84,7 @@
                             <div class="col-md-12"> <label for="añadirPisoNumero">Piso</label>
                                 <input min="1" max="80" type="number" name="añadirPisoNumero" id="añadirPisoNumero" class="form-control" placeholder="1">
                             </div>
-                            <div class="col-md-12"><label for="añadirPisoNombre">Nombre de planta</label>
+                            <div class="col-md-12"><label for="añadirPisoNombre">Nombre de piso</label>
                                 <input type="text" name="añadirPisoNombre" id="añadirPisoNombre" class="form-control" placeholder="Introduce un nombre">
                             </div>
                         </div>
@@ -104,7 +116,7 @@
                         <div class="row">
                             <div class="col-md-12"> <label for="editarPisoNumero">Piso</label>
                                 <input min="1" max="80" type="number" name="editarPisoNumero" id="editarPisoNumero" class="form-control" placeholder="1"></div>
-                            <div class="col-md-12"><label for="editarPisoNombre">Nombre de planta</label>
+                            <div class="col-md-12"><label for="editarPisoNombre">Nombre de piso</label>
                                 <input type="text" name="editarPisoNombre" id="editarPisoNombre" class="form-control" placeholder="Introduce un nombre"> </div>
                         </div>
                     </div>
@@ -135,7 +147,7 @@
         function obtenerPisos() {
             $.ajax({
                 type: 'POST',
-                url: '/api/cuarto/obtenerPisos',
+                url: '/api/habitacion/obtenerPisos',
                 data: "",
                 success: function(data) {
                     $('.ajxLoader').hide();
@@ -156,11 +168,11 @@
                         handlerEliminarPiso();
                         handlerEditarPiso();
                     } else {
-                        alert("Error al intentar obtener los pisos");
+                        swal("Error", "Error en la base de datos", "error");
                     }
                 },
                 error: function(xhr, type, exception) {
-                    swal("Error", "Ha ocurrido un error.\nInformación: " + type, "danger");
+                    swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
                 }
             });
         }
@@ -173,7 +185,7 @@
                 var $id = $(this).attr('data-idPiso');
                 $.ajax({
                     type: 'POST',
-                    url: '/api/cuarto/obtenerPiso',
+                    url: '/api/habitacion/obtenerPiso',
                     data: "id_piso=" + $id,
                     success: function(data) {
                         var $datos = JSON.parse(data);
@@ -183,18 +195,17 @@
                             $('#editarPisoNombre').val($datos["data"][0]["nombre"]);
                             $('form#editarPiso').attr("id-piso", $datos["data"][0]["id_piso"]);
                         } else {
-                            swal("No se pudo obtener información", "Ha ocurrido un error.", "danger");
+                            swal("No se pudo obtener información", "Ha ocurrido un error.", "error");
                         }
                     },
                     error: function(xhr, type, exception) {
-                        swal("Error", "Ha ocurrido un error.\nInformación: " + type, "danger");
+                        swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
                     }
                 });
             });
         }
 
         $('form#editarPiso').on('submit', function(e) {
-            console.log("he");
             editarPiso();
             e.preventDefault();
         });
@@ -207,7 +218,7 @@
             }
             $.ajax({
                 type: 'POST',
-                url: '/api/cuarto/editarPiso',
+                url: '/api/habitacion/editarPiso',
                 data: "id_piso=" + $id_piso + "&piso=" + $piso + "&nombre=" + $nombre,
                 success: function(data) {
                     var $res = (JSON.parse(data));
@@ -242,11 +253,12 @@
                     showCancelButton: true,
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Si, borralo!",
-                    closeOnConfirm: false
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
                 }, function() {
                     $.ajax({
                         type: 'POST',
-                        url: '/api/cuarto/eliminarPiso',
+                        url: '/api/habitacion/eliminarPiso',
                         data: "id_piso=" + $id,
                         success: function(data) {
                             var $datos = JSON.parse(data);
@@ -254,11 +266,11 @@
                                 swal("Piso eliminado", "Se ha eliminado este piso", "success");
                                 obtenerPisos();
                             } else {
-                                swal("No se pudo eliminar", "Ha ocurrido un error.", "danger");
+                                swal("No se pudo eliminar", "Ha ocurrido un error.", "error");
                             }
                         },
                         error: function(xhr, type, exception) {
-                            swal("Error", "Ha ocurrido un error.\nInformación: " + type, "danger");
+                            swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
                         }
                     });
                 });
@@ -302,7 +314,7 @@
             }
             $.ajax({
                 type: 'POST',
-                url: '/api/cuarto/addPiso',
+                url: '/api/habitacion/addPiso',
                 data: "piso=" + $piso + "&nombre=" + $nombre,
                 success: function(data) {
                     var $res = (JSON.parse(data));

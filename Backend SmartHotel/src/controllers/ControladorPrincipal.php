@@ -33,7 +33,7 @@ class ControladorPrincipal {
         global $db;
         $datos = array();
         $query = "SELECT id_usuario, correo, usuario, nombre, apellido, telefono,
-  fecha_registro FROM sh_usuarios";
+  fecha_registro FROM sh_huespedes";
         $rs = $db->query($query);
         if ($rs === false) {
             return null;
@@ -43,18 +43,32 @@ class ControladorPrincipal {
         }
         return $datos;
     }
-
-    public function variablesConfig() {
+    public function obtenerConfig() {
         global $db;
-        $datos = array();
-        $query = "SELECT * FROM sh_config";
+        $query = "SELECT * FROM sh_configuracion";
         $rs = $db->query($query);
+        $datos = array();
         if ($rs === false) {
-            return null;
+            return array("code" => 0, "msg" => "Error al intentar obtener configuración");
         }
         foreach ($rs as $row) {
-            $datos = $row;
+            $datos[] = $row;
         }
-        return $datos;
+        return array("code" => 1, "msg" => "Configuración obtenida", "data" => $datos);
+    }
+
+    public function actualizarConfig($dataConfig) {
+        global $db;
+        $parametros = array();
+        parse_str($dataConfig, $parametros);
+        $args = array($parametros["nombre_hotel"], $parametros["correo"], $parametros["ciudad"],
+            $parametros["pais"], $parametros["codigo_postal"],
+            $parametros["direccion"], $parametros["info"]);
+        $query = "UPDATE sh_configuracion SET nombre_hotel=?, correo=?, ciudad=?, pais=?, codigo_postal=?, direccion=?, info=?";
+        $rs = $db->query($query, $args);
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Error al intentar obtener configuración");
+        }
+        return array("code" => 1, "msg" => "Configuración guardada", "data"=> $parametros);
     }
 }

@@ -312,16 +312,10 @@ class App extends CoreFramework{
      * Send json encoded Response
      * @param mixed $data
      * @param int $status
-     * @param array $headers
      */
-    public function JsonResponse($data = null, $status = 200, array $headers = array() ){
+    public function JsonResponse($data = null, $status = 200){
+        header("Content-Type: text/html;charset=utf-8");
         $this->setStatusCode($status);
-
-        header('Content-Type: application/json');//set content type to Json
-        if (count($headers)){//add extra headers
-            $this->addCustomHeaders($headers);
-        }
-
         echo json_encode($data);
     }
 

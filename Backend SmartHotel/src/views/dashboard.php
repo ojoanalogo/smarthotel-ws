@@ -14,7 +14,7 @@
                 <div class="author">
                     <a href="#">
                         <img class="avatar border-gray" src="/public/img/logo.png" alt="..."/>
-                        <h4 class="title"><?php echo $datosConfig["nombre_hotel"]?><br />
+                        <h4 class="title"> <br />
                             <small><?php echo $datosUsuario["correo"]?></small>
                         </h4>
                     </a>
@@ -22,7 +22,6 @@
             </div>
             <small class="title"><i class="fa fa-bed"></i> Habitaciones disponibles</small>
         </div>
-
         <div class="card">
             <div class="header">
                 <h4 class="title">Mandar aviso rápido</h4>
@@ -36,56 +35,103 @@
                 <a href="#" class="btn btn-fill btn-warning" id="enviarMensajeGSM"> <i class="fa fa-paper-plane fa-lg"></i>&nbsp; Mandar aviso</a>
             </div>
         </div>
-
     </div>
+
     <div class="col-md-9">
         <div class="row">
 
-            <div class="col-md-6 col-lg-3 col-xs-12">
+            <div class="col-lg-3 col-sm-6">
                 <div class="card">
-                    <div class="header">
-                        <h4 class="title">Habitaciones activas</h4>
-                        <p class="category">Hotel</p>
-                    </div>
                     <div class="content">
-                        asdasda
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="card-icon">
+                                    🛌
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                    <h4 class="title">Habitaciones activas</h4>
+                                    <h2 class="title text-success">4</h2>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="stats">
+                                <a href="/dashboard/habitaciones" class="btn btn-success btn-xs">
+                                    <i class="fa fa-link fa-fw"></i> Ver habitaciones</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-
-            <div class="col-md-6 col-lg-3 col-xs-12">
+            <div class="col-lg-3 col-sm-6">
                 <div class="card">
-                    <div class="header">
-                        <h4 class="title">Solicitudes de limpieza</h4>
-                        <p class="category">Hotel</p>
-                    </div>
                     <div class="content">
-                        asdasdasd
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="card-icon">
+                                    📝
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <h4 class="title">Solicitudes de limpieza</h4>
+                                <h2 class="title text-warning">1</h2>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="stats">
+                                <a href="/dashboard/limpieza" class="btn btn-warning btn-xs">
+                                    <i class="fa fa-link fa-fw"></i> Ver solicitudes</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3 col-xs-12">
+            <div class="col-lg-3 col-sm-6">
                 <div class="card">
-                    <div class="header">
-                        <h4 class="title">Huespedes activos</h4>
-                        <p class="category">Huespedes</p>
-                    </div>
                     <div class="content">
-                        asdadasdasd
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="card-icon">
+                                    👨‍👩‍👧‍👦
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <h4 class="title">Huespedes activos</h4>
+                                <h2 class="title text-primary">5</h2>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="stats">
+                                <a href="/dashboard/huespedes" class="btn btn-primary btn-xs">
+                                    <i class="fa fa-link fa-fw"></i> Administrar huespedes</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3 col-xs-12">
+            <div class="col-lg-3 col-sm-6">
                 <div class="card">
-                    <div class="header">
-                        <h4 class="title">Mensajes recibidos</h4>
-                        <p class="category">Soporte</p>
-                    </div>
                     <div class="content">
-                        asdasdasd
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="card-icon">
+                                    📬
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <h4 class="title">Mensajes recibidos</h4>
+                                <h2 class="title text-info">2</h2>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="stats">
+                                <a href="/dashboard/mensajes" class="btn btn-info btn-xs">
+                                    <i class="fa fa-envelope-open fa-fw"></i> Ver mensajes</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

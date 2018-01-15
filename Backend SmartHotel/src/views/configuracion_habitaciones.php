@@ -23,12 +23,26 @@
                 con sus datos correctos para habilitar la sincronización y el correcto funcionamiento de la aplicación movil, así como tener un
                 registro de los huespedes en donde se están alojando</p>
                 <div class="footer">
-                    <hr>
                     <div class="stats">
-                        <a href="#" data-toggle="modal" data-target="#añadirHabitacion" class="btn btn-success btn-fill btn-lg">
+                        <a href="#" data-toggle="modal" data-target="#añadirHabitacion" class="btn btn-success btn-fill btn-md">
                             <i class="fa fa-plus-circle fa-fw"></i> Añadir habitacion</a>
+                        <a href="#" data-toggle="modal" data-target="#añadirHabitacion" class="btn btn-success btn-fill btn-md">
+                            <i class="fa fa-hotel fa-fw"></i> Añadir tipo de habitación</a>
                     </div>
                 </div>
+            </div>
+            <hr>
+            <div class="header">
+                <h4 class="title">Preguntas frecuentes</h4>
+                <p class="category">Soporte</p>
+            </div>
+            <div class="content">
+                <b class="text-info"><i class="fa fa-question-circle-o fa-fw"></i> ¿Qué es el sistema IoT?</b>
+                <div></div>
+                <p class="text-muted">El sistema IoT permite a los usuarios interactuar con su habitación de manera remota,
+                    así como proveer a distintos aparatos dentro de la habitación de funciones extra.
+                    Para habilitar este sistema, es necesario configurar cada cuarto con su respectivo identificado de sistema.
+                </p>
             </div>
         </div>
     </div>
@@ -123,3 +137,34 @@
 </div>
 <!-- /.modal-dialog -->
 <!-- /.modal -->
+<script>
+    /**
+     * Código inicialización de pisos
+     */
+    $(document).ready(function() {
+        obtenerHabitaciones();
+    });
+    /**
+     * Obtener habitaciones e introducirlas en tabla
+     */
+    function obtenerHabitaciones() {
+        $.ajax({
+            type: 'POST',
+            url: '/api/habitacion/obtenerHabitaciones',
+            data: "",
+            success: function(data) {
+                $('.ajxLoader').hide();
+                var $datos = JSON.parse(data);
+                console.log($datos);
+                if ($datos.code === 1) {
+
+                } else {
+                    swal("Error", "Error en la base de datos", "error");
+                }
+            },
+            error: function(xhr, type, exception) {
+                swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
+            }
+        });
+    }
+</script>

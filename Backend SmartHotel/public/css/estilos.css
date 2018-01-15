@@ -80,6 +80,10 @@ body {
     color: #fff;
 }
 
+.card-icon {
+    font-size: 64px;
+}
+
 .modal-header {
     background-color: #00796B;
     color: #fff;
