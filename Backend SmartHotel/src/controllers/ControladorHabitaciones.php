@@ -28,20 +28,19 @@ class ControladorHabitaciones {
     }
 
     /**
-     * @param $id_piso
      * @param $piso
      * @param $nombre
      * @return array
      */
-    public function editarPiso($id_piso, $piso, $nombre) {
+    public function editarPiso($piso, $nombre) {
         global $db;
-        $args = array($piso, $nombre, $id_piso);
-        $query = "UPDATE sh_pisos SET piso=?, nombre=? WHERE id_piso=?";
+        $args = array($piso, $nombre, $piso);
+        $query = "UPDATE sh_pisos SET piso=?, nombre=? WHERE piso=?";
         $rs = $db->query($query, $args);
         if ($rs === false) {
             return array("code" => 0, "msg" => "Piso ya existe");
         }
-        return array("code" => 1, "msg" => "Piso editado");
+        return array("code" => 1, "msg" => "Piso editado", "data" => array($piso, $nombre));
     }
 
     /**
@@ -68,7 +67,7 @@ class ControladorHabitaciones {
     public function obtenerPiso($id_piso) {
         global $db;
         $args = array($id_piso);
-        $query = "SELECT * FROM sh_pisos WHERE id_piso=?";
+        $query = "SELECT * FROM sh_pisos WHERE piso=?";
         $rs = $db->query($query, $args);
         $datos = array();
         if ($rs === false) {
@@ -82,7 +81,7 @@ class ControladorHabitaciones {
     public function eliminarPiso($id_piso) {
         global $db;
         $args = array($id_piso);
-        $query = "DELETE FROM sh_pisos WHERE id_piso=?";
+        $query = "DELETE FROM sh_pisos WHERE piso=?";
         $rs = $db->query($query, $args);
         if ($rs === false) {
             return array("code" => 0, "msg" => "Error al intentar borrar piso");
@@ -94,7 +93,7 @@ class ControladorHabitaciones {
      * Habitaciones
      *
      *
-     * SELECT id_habitacion, estatus, tipo_habitacion, costo_mx,
+     * SELECT habitacion, estatus, tipo_habitacion, costo_mx,
      * costo_usd, piso, nombre FROM `sh_habitaciones`
      * JOIN sh_habitaciones_tipos ON sh_habitaciones.id_tipo_habitacion = sh_habitaciones_tipos.id_tipo_habitacion
      * JOIN sh_pisos ON sh_habitaciones.id_piso = sh_pisos.id_piso
@@ -102,19 +101,17 @@ class ControladorHabitaciones {
      */
     public function obtenerHabitaciones() {
         global $db;
-        $datos = array();
-        $query = "SELECT sh_habitaciones.id_habitacion, sh_habitaciones.estatus, sh_habitaciones_tipos.tipo_habitacion,
- sh_habitaciones_tipos.costo_mx, sh_habitaciones_tipos.costo_usd, sh_pisos.piso,
-  sh_pisos.nombre, sh_habitaciones.iot_id, sh_habitaciones.iot_key FROM sh_habitaciones
+        $query = "SELECT sh_habitaciones.habitacion, sh_habitaciones.estatus, sh_habitaciones_tipos.tipo_habitacion,
+ sh_habitaciones_tipos.costo_mx, sh_habitaciones_tipos.costo_usd, sh_pisos.piso, sh_pisos.nombre,
+  sh_habitaciones.iot_id, sh_habitaciones.iot_key FROM sh_habitaciones
    JOIN sh_habitaciones_tipos ON sh_habitaciones.id_tipo_habitacion = sh_habitaciones_tipos.id_tipo_habitacion
-    JOIN sh_pisos ON sh_habitaciones.id_piso = sh_pisos.id_piso ORDER BY sh_pisos.piso";
+   JOIN sh_pisos ON sh_habitaciones.id_piso = sh_pisos.piso ORDER BY sh_pisos.piso";
         $rs = $db->query($query, array());
-        if ($rs === false) {
+        if ($rs === false)
             return array("code" => 0, "msg" => "Error al intentar obtener habitaciones");
-        }
-        foreach ($rs as $row) {
-            $datos[] = $row;
-        }
+        $datos = array();
+        foreach ($rs as $row)
+            $datos[$row["nombre"]][] = $row;
         return array("code" => 1, "msg" => "Habitaciones obtenidas", "data" => $datos);
     }
 }

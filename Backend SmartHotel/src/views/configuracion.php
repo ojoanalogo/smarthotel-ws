@@ -89,6 +89,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>País</label>
+
                                     <input type="text" class="form-control" name="pais" id="cfg_pais" maxlength="32" placeholder="País del hotel">
                                 </div>
                             </div>

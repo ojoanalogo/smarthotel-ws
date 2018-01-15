@@ -56,6 +56,9 @@ class ControladorLogin
     private function crearSesion($usuario) {
         if (!isset($_SESSION["login_usuario"])) {
             $_SESSION["login_usuario"] = $usuario;
+            global $db;
+            $fecha = date('Y-m-d H:i:s');
+            $db->query("UPDATE sh_panel_usuarios SET ultimo_login=? WHERE correo=?", array($fecha, $usuario));
         }
     }
 

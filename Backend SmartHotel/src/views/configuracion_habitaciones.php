@@ -61,6 +61,7 @@
                     </tr>
                     </thead>
                     <tbody id="tabla-ajx">
+
                     </tbody>
                 </table>
                 <div class="ajxLoader centrar" style="margin-top: 60px;">
@@ -155,9 +156,14 @@
             success: function(data) {
                 $('.ajxLoader').hide();
                 var $datos = JSON.parse(data);
-                console.log($datos);
+                console.log($datos["data"]);
                 if ($datos.code === 1) {
-
+                    $.each($datos["data"], function(i, item) {
+                       console.log(i);
+                       $.each(item, function(i, item){
+                          console.log(item);
+                       });
+                    });
                 } else {
                     swal("Error", "Error en la base de datos", "error");
                 }

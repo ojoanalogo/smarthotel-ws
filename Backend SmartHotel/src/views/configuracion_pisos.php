@@ -158,12 +158,12 @@
                             $('#msgEmpty').html('No hay pisos añadidos, <a href="#" data-toggle="modal" data-target="#añadirPiso">¿qué tal si añades uno?</a>');
                         }
                         // Template:
-                        function template($id, $piso, $nombre) {
-                            return '<tr>' + '<td align="center">' + $piso + '</td>' + '<td>' + $nombre + '</td>' + '<td align="center" valign="middle">' + '<a href="#" data-idPiso="' + $id + '" class="btn btn-md btn-info btn-fill editarPiso" style="color:#FFF;">' + '<i class="fa fa-edit fa-fw"></i> Editar' + '</a>&nbsp;' + '<a href="#" data-idPiso="' + $id + '" class="btn btn-danger btn-md btn-fill eliminarPiso">' + '<i class="fa fa-trash fa-fw"></i> Eliminar' + '</a>' + '</td>' + '</tr>';
+                        function template($piso, $nombre) {
+                            return '<tr>' + '<td align="center">' + $piso + '</td>' + '<td>' + $nombre + '</td>' + '<td align="center" valign="middle">' + '<a href="#" data-idPiso="' + $piso + '" class="btn btn-md btn-info btn-fill editarPiso" style="color:#FFF;">' + '<i class="fa fa-edit fa-fw"></i> Editar' + '</a>&nbsp;' + '<a href="#" data-idPiso="' + $piso + '" class="btn btn-danger btn-md btn-fill eliminarPiso">' + '<i class="fa fa-trash fa-fw"></i> Eliminar' + '</a>' + '</td>' + '</tr>';
                         }
                         $('#tabla-ajx').html('');
                         $.each($itera, function(i, item) {
-                            $('#tabla-ajx').append(template(item.id_piso, item.piso, item.nombre));
+                            $('#tabla-ajx').append(template(item.piso, item.nombre));
                         });
                         handlerEliminarPiso();
                         handlerEditarPiso();
@@ -193,7 +193,7 @@
                             $('#editarPiso').modal('toggle');
                             $('#editarPisoNumero').val($datos["data"][0]["piso"]);
                             $('#editarPisoNombre').val($datos["data"][0]["nombre"]);
-                            $('form#editarPiso').attr("id-piso", $datos["data"][0]["id_piso"]);
+                            $('form#editarPiso').attr("id-piso", $datos["data"][0]["piso"]);
                         } else {
                             swal("No se pudo obtener información", "Ha ocurrido un error.", "error");
                         }
@@ -219,7 +219,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/api/habitacion/editarPiso',
-                data: "id_piso=" + $id_piso + "&piso=" + $piso + "&nombre=" + $nombre,
+                data: "piso=" + $id_piso + "&nombre=" + $nombre,
                 success: function(data) {
                     var $res = (JSON.parse(data));
                     if ($res.code === 1) {
