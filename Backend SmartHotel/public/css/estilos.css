@@ -92,3 +92,8 @@ body {
 small {
     color: #EAEAEA !important;
 }
+
+.close {
+    color: #fff;
+    opacity: .8;
+}

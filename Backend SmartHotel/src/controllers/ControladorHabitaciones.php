@@ -30,17 +30,18 @@ class ControladorHabitaciones {
     /**
      * @param $piso
      * @param $nombre
+     * @param $nuevoPiso
      * @return array
      */
-    public function editarPiso($piso, $nombre) {
+    public function editarPiso($piso, $nombre, $nuevoPiso) {
         global $db;
-        $args = array($piso, $nombre, $piso);
+        $args = array($nuevoPiso, $nombre, $piso);
         $query = "UPDATE sh_pisos SET piso=?, nombre=? WHERE piso=?";
         $rs = $db->query($query, $args);
         if ($rs === false) {
             return array("code" => 0, "msg" => "Piso ya existe");
         }
-        return array("code" => 1, "msg" => "Piso editado", "data" => array($piso, $nombre));
+        return array("code" => 1, "msg" => "Piso editado", "data" => array($nuevoPiso, $nombre));
     }
 
     /**
@@ -105,13 +106,27 @@ class ControladorHabitaciones {
  sh_habitaciones_tipos.costo_mx, sh_habitaciones_tipos.costo_usd, sh_pisos.piso, sh_pisos.nombre,
   sh_habitaciones.iot_id, sh_habitaciones.iot_key FROM sh_habitaciones
    JOIN sh_habitaciones_tipos ON sh_habitaciones.id_tipo_habitacion = sh_habitaciones_tipos.id_tipo_habitacion
-   JOIN sh_pisos ON sh_habitaciones.id_piso = sh_pisos.piso ORDER BY sh_pisos.piso";
+   JOIN sh_pisos ON sh_habitaciones.id_piso = sh_pisos.piso ORDER BY sh_habitaciones.habitacion";
+        $queryTipos = "SELECT * from sh_habitaciones_tipos";
         $rs = $db->query($query, array());
         if ($rs === false)
             return array("code" => 0, "msg" => "Error al intentar obtener habitaciones");
+        $rsTipos = $db->query($queryTipos, array());
+        if ($rsTipos === false)
+            return array("code" => 0, "msg" => "Error al intentar obtener tipos de habitación");
+        $queryPisos = "SELECT * from sh_pisos";
+        $rsPisos = $db->query($queryPisos, array());
+        if ($rsPisos === false)
+            return array("code" => 0, "msg" => "Error al intentar obtener pisos");
         $datos = array();
+        $categorias = array();
+        $pisos = array();
         foreach ($rs as $row)
             $datos[$row["nombre"]][] = $row;
-        return array("code" => 1, "msg" => "Habitaciones obtenidas", "data" => $datos);
+        foreach($rsTipos as $row)
+            $categorias[] = $row;
+        foreach($rsPisos as $row)
+            $pisos[] = $row;
+        return array("code" => 1, "msg" => "Habitaciones obtenidas", "data" => $datos, "categorias" => $categorias, "pisos" => $pisos);
     }
 }

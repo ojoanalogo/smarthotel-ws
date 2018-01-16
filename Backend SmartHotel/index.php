@@ -166,8 +166,10 @@ $app->post("/api/habitacion/{funcion}", function($funcion) use ($app, $controlad
     if($funcion == "obtenerPiso")
         $app->JsonResponse($controladorHabitaciones->obtenerPiso($app->getRequest()->post("id_piso")), 201);
     if($funcion == "editarPiso")
-        $app->JsonResponse($controladorHabitaciones->editarPiso($app->getRequest()->post("piso"),
-            $app->getRequest()->post("nombre")), 201);
+        $app->JsonResponse($controladorHabitaciones->editarPiso(
+            $app->getRequest()->post("piso"),
+            $app->getRequest()->post("nombre"),
+            $app->getRequest()->post("nuevoPiso")), 201);
     /**
      * Para habitaciones
      */

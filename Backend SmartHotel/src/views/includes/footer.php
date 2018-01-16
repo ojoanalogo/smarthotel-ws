@@ -36,8 +36,4 @@
 <script src="/public/js/datatables.min.js"></script>
 <!-- Plugin alertas  -->
 <script src="/public/js/sweetalert.min.js"></script>
-<!-- Google Maps -->
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3t37wmitrNWtfbKcIyfjRbKN8yp7duLk">
-</script>
 </html>

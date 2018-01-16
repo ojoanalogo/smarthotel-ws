@@ -24,10 +24,12 @@
                 registro de los huespedes en donde se están alojando</p>
                 <div class="footer">
                     <div class="stats">
+                        <div class="btn-group" role="group">
                         <a href="#" data-toggle="modal" data-target="#añadirHabitacion" class="btn btn-success btn-fill btn-md">
                             <i class="fa fa-plus-circle fa-fw"></i> Añadir habitacion</a>
                         <a href="#" data-toggle="modal" data-target="#añadirHabitacion" class="btn btn-success btn-fill btn-md">
                             <i class="fa fa-hotel fa-fw"></i> Añadir tipo de habitación</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,16 +55,13 @@
                 <table width="100%" class="table table-striped table-bordered table-hover" id="tabla-habitaciones">
                     <thead>
                     <tr>
-                        <th width="3%">Habitacion</th>
+                        <th width="3%">Habitación</th>
                         <th width="37%">Tipo de habitación</th>
-                        <th width="15%">Costo</th>
                         <th width="15%">IoT</th>
                         <th width="30%">Administrar</th>
                     </tr>
                     </thead>
-                    <tbody id="tabla-ajx">
-
-                    </tbody>
+                    <tbody id="tabla-ajx"></tbody>
                 </table>
                 <div class="ajxLoader centrar" style="margin-top: 60px;">
                     <i class="fa fa-circle-o-notch fa-spin fa-5x fa-fw text-muted"></i>
@@ -87,11 +86,14 @@
                 <form id="guardarHabitacion">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-12"> <label for="añadirHabitacionNumero">Habitacion</label>
-                                <input min="1" max="80" type="number" name="añadirHabitacionNumero" id="añadirHabitacionNumero" class="form-control" placeholder="1">
+                            <div class="col-md-12"> <label for="añadirHabitacionNumero">Numero de habitación</label>
+                                <input min="1" max="9999" type="number" name="añadirHabitacionNumero" id="añadirHabitacionNumero" class="form-control" placeholder="101">
                             </div>
-                            <div class="col-md-12"><label for="añadirHabitacionNombre">Nombre de planta</label>
-                                <input type="text" name="añadirHabitacionNombre" id="añadirHabitacionNombre" class="form-control" placeholder="Introduce un nombre">
+                            <div class="col-md-12"><label for="añadirHabitacionPiso">Piso de la habitación</label>
+                                <select name="añadirHabitacionPiso" id="añadirHabitacionPiso" class="form-control pisos"></select>
+                            </div>
+                            <div class="col-md-12"><label for="añadirHabitacionTipo">Tipo de habitación</label>
+                                <select name="añadirHabitacionTipo" id="añadirHabitacionTipo" class="form-control categorias"></select>
                             </div>
                         </div>
                     </div>
@@ -99,9 +101,9 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
                         <button type="submit" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar</button>
+            </div>
                 </form>
             </div>
-        </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
@@ -130,11 +132,12 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
                         <button type="submit" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar cambios</button>
+            </div>
                 </form>
             </div>
-        </div>
     </div>
     <!-- /.modal-content -->
+    </div>
 </div>
 <!-- /.modal-dialog -->
 <!-- /.modal -->
@@ -145,6 +148,7 @@
     $(document).ready(function() {
         obtenerHabitaciones();
     });
+
     /**
      * Obtener habitaciones e introducirlas en tabla
      */
@@ -156,13 +160,50 @@
             success: function(data) {
                 $('.ajxLoader').hide();
                 var $datos = JSON.parse(data);
-                console.log($datos["data"]);
                 if ($datos.code === 1) {
+                    /**
+                     * Mostrar habitaciones
+                     */
+                    $('#tabla-ajx').html('');
                     $.each($datos["data"], function(i, item) {
-                       console.log(i);
+                        $('#tabla-ajx').append('<tr><td colspan="5" class="bg-success"><b>' + i + '</b></td></tr>');
+                        function $template($habitacion, $tipo, $iot) {
+                            var $hasIot = $iot === ""
+                                ? "<i class='fa fa-times-circle fa-fw text-danger'></i> No"
+                                : "<i class='fa fa-check-circle fa-fw text-success'></i> Si &nbsp;<a href='/dashboard/habitaciones/detalle/" +
+                                $habitacion + "' class='btn btn-sm btn-default'><i class='fa fa-dashboard'></i> Detalles habitación</a>";
+                            return  '<tr><td align="center">' + $habitacion + '</td>' +
+                                '<td>' + $tipo + '</td>' +
+                            '<td>' + $hasIot + '</td>' +
+                            '<td align="center" valign="middle">' +
+                                '<a href="#" class="btn btn-md btn-info btn-fill editarHabitacion" style="color:#FFF;">' +
+                                '<i class="fa fa-edit fa-fw"></i> Editar' +
+                                '</a>' +
+                                '<a href="#" data-idPiso="' + $habitacion + '" class="btn btn-danger btn-md btn-fill eliminarHabitacion">' +
+                                '<i class="fa fa-trash fa-fw"></i> Eliminar' +
+                                '</a>' +
+                                '</td> '+
+                                '</tr>';
+                        }
                        $.each(item, function(i, item){
-                          console.log(item);
+                          $('#tabla-ajx').append($template(item["habitacion"], item["tipo_habitacion"], item["iot_id"]));
                        });
+                    });
+                    /**
+                     * Categorias
+                     */
+                    $('select.categorias').html('');
+                    $.each($datos["categorias"], function(i, item) {
+                        $('select.categorias').append(
+                            '<option data-idCat="' + item["id_tipo_habitacion"] + '">' + item["tipo_habitacion"] + '</option>');
+                    });
+                    /**
+                     * Pisos
+                     */
+                    $('select.pisos').html('');
+                    $.each($datos["pisos"], function(i, item) {
+                        $('select.pisos').append(
+                            '<option data-idPiso="' + item["piso"] + '">' + item["nombre"] + '</option>');
                     });
                 } else {
                     swal("Error", "Error en la base de datos", "error");

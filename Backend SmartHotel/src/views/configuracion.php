@@ -26,7 +26,7 @@
                     <div class="footer">
                         <hr>
                         <div class="stats">
-                            <a href="mailto:arc980103@gmail.com" class="btn btn-success btn-fill btn-lg">
+                            <a href="mailto:arc980103@gmail.com" class="btn btn-success btn-fill btn-md">
                                 <i class="fa fa-envelope-o fa-fw"></i> Contactar soporte</a>
                         </div>
                     </div>

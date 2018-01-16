@@ -22,9 +22,8 @@
                 <p class="text-muted">Un hotel es un edificio conformado por 1 o más pisos, es necesario añadir un piso al cual serán asignadas las
                 habitaciones posteriormente, esto con el fin de localizarlas y tenerlas mejor organizadas en el panel.</p>
                 <div class="footer">
-                    <hr>
                     <div class="stats">
-                        <a href="#" data-toggle="modal" data-target="#añadirPiso" class="btn btn-success btn-fill btn-lg">
+                        <a href="#" data-toggle="modal" data-target="#añadirPiso" class="btn btn-success btn-fill btn-md">
                             <i class="fa fa-plus-circle fa-fw"></i> Añadir piso</a>
                     </div>
                 </div>
@@ -93,9 +92,9 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
                         <button type="submit" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar</button>
+            </div>
                 </form>
             </div>
-        </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
@@ -124,9 +123,9 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
                         <button type="submit" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar cambios</button>
+            </div>
                 </form>
             </div>
-        </div>
     </div>
     <!-- /.modal-content -->
     </div>
@@ -219,7 +218,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/api/habitacion/editarPiso',
-                data: "piso=" + $id_piso + "&nombre=" + $nombre,
+                data: "piso=" + $id_piso + "&nuevoPiso=" + $piso + "&nombre=" + $nombre,
                 success: function(data) {
                     var $res = (JSON.parse(data));
                     if ($res.code === 1) {
