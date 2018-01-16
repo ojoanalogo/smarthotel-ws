@@ -85,14 +85,28 @@
                 <form id="guardarHabitacion">
                     <div class="form-group form-group-lg">
                         <div class="row">
-                            <div class="col-md-12"> <label for="añadirHabitacionNumero">Numero de habitación</label>
-                                <input min="1" max="9999" type="number" name="añadirHabitacionNumero" id="añadirHabitacionNumero" class="form-control" placeholder="101">
+
+                            <div class="col-md-12">
+                                <label for="añadirHabitacionNumero">Numero de habitación</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-edit text-muted"></i></div>
+                                    <input min="1" max="9999" type="number" name="añadirHabitacionNumero" id="añadirHabitacionNumero" class="form-control" placeholder="101">
+                                </div>
                             </div>
-                            <div class="col-md-12"><label for="añadirHabitacionPiso">Piso de la habitación</label>
+
+                            <div class="col-md-12">
+                                <label for="añadirHabitacionPiso">Piso de la habitación</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-building text-muted"></i></div>
                                 <select name="añadirHabitacionPiso" id="añadirHabitacionPiso" class="form-control pisos"></select>
+                                </div>
                             </div>
-                            <div class="col-md-12"><label for="añadirHabitacionTipo">Tipo de habitación</label>
-                                <select name="añadirHabitacionTipo" id="añadirHabitacionTipo" class="form-control categorias"></select>
+                            <div class="col-md-12">
+                                <label for="añadirHabitacionTipo">Tipo de habitación</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-bed text-muted"></i></div>
+                                    <select name="añadirHabitacionTipo" id="añadirHabitacionTipo" class="form-control categorias"></select>
+                                </div>
                             </div>
                             <!-- coso IoT -->
                             <div class="col-md-12">

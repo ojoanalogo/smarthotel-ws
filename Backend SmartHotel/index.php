@@ -41,196 +41,200 @@ $controladorHabitaciones = new ControladorHabitaciones();
 /**
  * Ruta principal
  */
-$app->get("/", function() use ($app, $controladorLogin, $controladorPrincipal) {
+$app->get("/", function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth()) {
         header("Location: /dashboard");
-        return $app->Response('dashboard.php', valoresDefault()  , 201);
-    }
-    else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('dashboard.php', valoresDefault(), 201);
+    } else
+        return $app->Response('login.php', array(), 201);
 });
 
 /**
  * Servir Index
  */
-$app->get('/dashboard', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+$app->get('/dashboard', function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
-        return $app->Response('dashboard.php', valoresDefault($controladorPrincipal->obtenerConfig())  , 201);
+        return $app->Response('dashboard.php', valoresDefault($controladorPrincipal->obtenerConfig()), 201);
     else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('login.php', array(), 201);
 });
 
 /**
  * Servir pag habitaciones
  */
-$app->get('/dashboard/habitaciones', function() use ( $app, $controladorLogin, $controladorPrincipal ) {
+$app->get('/dashboard/habitaciones', function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
-        return $app->Response('habitaciones.php', valoresDefault() , 201);
+        return $app->Response('habitaciones.php', valoresDefault(), 201);
     else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('login.php', array(), 201);
 });
 
 /**
  * Servir Detalle habitación
  */
-$app->get('/dashboard/habitaciones/detalle/:habitacion', function($habitacion) use ( $app, $controladorLogin, $controladorPrincipal ) {
+$app->get('/dashboard/habitaciones/detalle/:habitacion', function ($habitacion) use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
         return $app->Response('detalle_habitacion.php', valoresDefault(array($habitacion)), 201);
     else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('login.php', array(), 201);
 });
 
 /**
  * Servir pag huespedes
  */
-$app->get('/dashboard/huespedes',function() use ( $app, $controladorLogin, $controladorPrincipal ) {
+$app->get('/dashboard/huespedes', function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
         return $app->Response('huespedes.php', valoresDefault(), 201);
     else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('login.php', array(), 201);
 });
 
 
 /**
  * Servir pag Mapa
  */
-$app->get('/dashboard/mapa',function() use ( $app, $controladorLogin, $controladorPrincipal ) {
+$app->get('/dashboard/mapa', function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
         return $app->Response('mapa.php', valoresDefault(), 201);
     else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('login.php', array(), 201);
 });
 
 /**
  * Servir Configuración
  */
-$app->get('/dashboard/configuracion', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+$app->get('/dashboard/configuracion', function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
         return $app->Response('configuracion.php', valoresDefault(), 201);
     else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('login.php', array(), 201);
 });
 
 /**
  * Config pisos
  */
-$app->get('/dashboard/configuracion/pisos', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+$app->get('/dashboard/configuracion/pisos', function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
         return $app->Response('configuracion_pisos.php', valoresDefault(), 201);
     else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('login.php', array(), 201);
 });
 
 /**
  * Config habitaciones
  */
-$app->get('/dashboard/configuracion/habitaciones', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+$app->get('/dashboard/configuracion/habitaciones', function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
         return $app->Response('configuracion_habitaciones.php', valoresDefault(), 201);
     else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('login.php', array(), 201);
 });
 
 /**
  * Config tipos
  */
 
-$app->get('/dashboard/configuracion/tipos_habitacion', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+$app->get('/dashboard/configuracion/tipos_habitacion', function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
         return $app->Response('configuracion_tipos_habitacion.php', valoresDefault(), 201);
     else
-        return $app->Response('login.php', array(),201);
+        return $app->Response('login.php', array(), 201);
 });
 
 // Logout
-$app->get('/logout',function() use ( $app, $controladorLogin ) {
+$app->get('/logout', function () use ($app, $controladorLogin) {
     $controladorLogin->deslogear();
     header("Location: /dashboard");
 });
 
-$app->post("/authme_panel", function() use ($app, $controladorLogin) {
+$app->post("/authme_panel", function () use ($app, $controladorLogin) {
     if ($controladorLogin->validarUsuario($app->getRequest()->post("correo"), $app->getRequest()->post("clave"))) {
         header("Location: /dashboard");
         return null;
     }
-    return $app->Response('login.php', array("error" => true),201);
+    return $app->Response('login.php', array("error" => true), 201);
 });
 
-$app->post("/authme", function() use ($app, $controladorLogin) {
+$app->post("/authme", function () use ($app, $controladorLogin) {
     $controladorLogin->authMe($app->getRequest()->post("correo"), $app->getRequest()->post("clave"));
 });
 
 /**
  * API Habitación
  */
-$app->post("/api/habitacion/{funcion}", function($funcion) use ($app, $controladorHabitaciones) {
+$app->post("/api/habitacion/{funcion}", function ($funcion) use ($app, $controladorHabitaciones) {
+    $rq = $app->getRequest();
     /**
      * Para pisos
      */
-    if($funcion == "addPiso")
+    if ($funcion == "addPiso")
         $app->JsonResponse($controladorHabitaciones->añadirPiso(
-            $app->getRequest()->post("piso"),
-            $app->getRequest()->post("nombre")), 201);
-    if($funcion == "eliminarPiso")
-        $app->JsonResponse($controladorHabitaciones->eliminarPiso($app->getRequest()->post("id_piso")), 201);
-    if($funcion == "obtenerPisos")
+            $rq->post("piso"),
+            $rq->post("nombre")), 201);
+    if ($funcion == "eliminarPiso")
+        $app->JsonResponse($controladorHabitaciones->eliminarPiso($rq->post("id_piso")), 201);
+    if ($funcion == "obtenerPisos")
         $app->JsonResponse($controladorHabitaciones->obtenerPisos(), 201);
-    if($funcion == "obtenerPiso")
-        $app->JsonResponse($controladorHabitaciones->obtenerPiso($app->getRequest()->post("id_piso")), 201);
-    if($funcion == "editarPiso")
+    if ($funcion == "obtenerPiso")
+        $app->JsonResponse($controladorHabitaciones->obtenerPiso($rq->post("id_piso")), 201);
+    if ($funcion == "editarPiso")
         $app->JsonResponse($controladorHabitaciones->editarPiso(
-            $app->getRequest()->post("piso"),
-            $app->getRequest()->post("nombre"),
-            $app->getRequest()->post("nuevoPiso")), 201);
+            $rq->post("piso"),
+            $rq->post("nombre"),
+            $rq->post("nuevoPiso")), 201);
     /**
      * Para tipos de habitación
      */
-    if($funcion == "obtenerTipos")
+    if ($funcion == "obtenerTipos")
         $app->JsonResponse($controladorHabitaciones->obtenerTipos(), 201);
-    if($funcion == "addTipo")
+    if ($funcion == "addTipo")
         $app->JsonResponse($controladorHabitaciones->añadirTipo(
-            $app->getRequest()->post("tipo"),
-            $app->getRequest()->post("mxn"),
-            $app->getRequest()->post("usd")), 201);
-    if($funcion == "obtenerTipo")
+            $rq->post("tipo"),
+            $rq->post("mxn"),
+            $rq->post("usd")), 201);
+    if ($funcion == "obtenerTipo")
         $app->JsonResponse($controladorHabitaciones->obtenerTipo(
-            $app->getRequest()->post("id_tipo")), 201);
-    if($funcion == "editarTipo")
+            $rq->post("id_tipo")), 201);
+    if ($funcion == "editarTipo")
         $app->JsonResponse($controladorHabitaciones->editarTipo(
-            $app->getRequest()->post("id_tipo"),
-            $app->getRequest()->post("tipo"),
-            $app->getRequest()->post("mxn"),
-            $app->getRequest()->post("usd")), 201);
-    if($funcion == "eliminarTipo")
-        $app->JsonResponse($controladorHabitaciones->eliminarTipo($app->getRequest()->post("id_tipo")), 201);
+            $rq->post("id_tipo"),
+            $rq->post("tipo"),
+            $rq->post("mxn"),
+            $rq->post("usd")), 201);
+    if ($funcion == "eliminarTipo")
+        $app->JsonResponse($controladorHabitaciones->eliminarTipo($rq->post("id_tipo")), 201);
     /**
      * Para habitaciones
      */
-    if($funcion == "obtenerHabitaciones")
-        $app->JsonResponse($controladorHabitaciones->obtenerHabitaciones(), 200);
+    if ($funcion == "obtenerHabitaciones")
+        $app->JsonResponse($controladorHabitaciones->obtenerHabitaciones(), 201);
+    if ($funcion == "addHabitacion")
+        $app->JsonResponse($controladorHabitaciones->añadirHabitacion($rq->post()), 201);
 });
 
 /**
  * API Hotel
  */
-$app->post("/api/hotel/{funcion}", function($funcion) use ($app, $controladorPrincipal) {
-    if($funcion == "obtenerConfig")
+$app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPrincipal) {
+    if ($funcion == "obtenerConfig")
         $app->JsonResponse($controladorPrincipal->obtenerConfig(), 201);
-    if($funcion == "actualizarConfig")
+    if ($funcion == "actualizarConfig")
         $app->JsonResponse($controladorPrincipal->actualizarConfig($app->getRequest()->getBody()), 201);
 });
 
 // 404
-$app->respond( function() use ( $app ){
+$app->respond(function () use ($app) {
     return $app->ResponseHTML('<p> 404 </p>', 404);
 });
 
-function checkAuth() {
+function checkAuth()
+{
     global $controladorLogin;
     return $controladorLogin->verificarAcceso();
 }
 
-function valoresDefault($extraArgs = array()) {
+function valoresDefault($extraArgs = array())
+{
     global $controladorPrincipal, $controladorLogin;
     $datosUsuario = $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario());
     $datosUsuarios = $controladorPrincipal->obtenerUsuarios();

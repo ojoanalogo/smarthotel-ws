@@ -80,8 +80,12 @@
                 <form id="guardarTipoHabitacion">
                     <div class="form-group form-group-lg">
                         <div class="row">
-                            <div class="col-md-12"> <label for="añadirTipoNombre">Tipo de habitación</label>
+                            <div class="col-md-12">
+                                <label for="añadirTipoNombre">Tipo de habitación</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-bed text-muted"></i></div>
                                 <input name="añadirTipoNombre" id="añadirTipoNombre" class="form-control" placeholder="Cama sencilla">
+                                </div>
                             </div>
 
                             <div class="col-md-12">
@@ -129,8 +133,12 @@
                 <form id="editarTipo">
                     <div class="form-group form-group-lg">
                         <div class="row">
-                            <div class="col-md-12"> <label for="editarTipoNombre">Tipo de habitación</label>
+                            <div class="col-md-12">
+                                <label for="editarTipoNombre">Tipo de habitación</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-bed text-muted"></i></div>
                                 <input name="editarTipoNombre" id="editarTipoNombre" class="form-control" placeholder="Cama sencilla">
+                                </div>
                             </div>
 
                             <div class="col-md-12">

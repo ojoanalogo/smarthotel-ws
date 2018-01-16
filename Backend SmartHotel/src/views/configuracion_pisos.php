@@ -80,11 +80,19 @@
                 <form id="guardarPiso">
                     <div class="form-group form-group-lg">
                         <div class="row">
-                            <div class="col-md-12"> <label for="añadirPisoNumero">Piso</label>
+                            <div class="col-md-12">
+                                <label for="añadirPisoNumero">Piso</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-building text-muted"></i></div>
                                 <input min="1" max="80" type="number" name="añadirPisoNumero" id="añadirPisoNumero" class="form-control" placeholder="1">
+                                </div>
                             </div>
-                            <div class="col-md-12"><label for="añadirPisoNombre">Nombre de piso</label>
+                            <div class="col-md-12">
+                                <label for="añadirPisoNombre">Nombre de piso</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-tag text-muted"></i></div>
                                 <input type="text" name="añadirPisoNombre" id="añadirPisoNombre" class="form-control" placeholder="Introduce un nombre">
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -113,10 +121,19 @@
                 <form id="editarPiso">
                     <div class="form-group form-group-lg">
                         <div class="row">
-                            <div class="col-md-12"> <label for="editarPisoNumero">Piso</label>
-                                <input min="1" max="80" type="number" name="editarPisoNumero" id="editarPisoNumero" class="form-control" placeholder="1"></div>
-                            <div class="col-md-12"><label for="editarPisoNombre">Nombre de piso</label>
+                            <div class="col-md-12">
+                                <label for="editarPisoNumero">Piso</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-building text-muted"></i></div>
+                                <input min="1" max="80" type="number" name="editarPisoNumero" id="editarPisoNumero" class="form-control" placeholder="1">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="editarPisoNombre">Nombre de piso</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-tag text-muted"></i></div>
                                 <input type="text" name="editarPisoNombre" id="editarPisoNombre" class="form-control" placeholder="Introduce un nombre"> </div>
+                        </div>
                         </div>
                     </div>
                     <div class="msgError"></div>
