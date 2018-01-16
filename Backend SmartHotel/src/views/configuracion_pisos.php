@@ -78,7 +78,7 @@
             </div>
             <div class="modal-body">
                 <form id="guardarPiso">
-                    <div class="form-group">
+                    <div class="form-group form-group-lg">
                         <div class="row">
                             <div class="col-md-12"> <label for="añadirPisoNumero">Piso</label>
                                 <input min="1" max="80" type="number" name="añadirPisoNumero" id="añadirPisoNumero" class="form-control" placeholder="1">
@@ -111,7 +111,7 @@
             </div>
             <div class="modal-body">
                 <form id="editarPiso">
-                    <div class="form-group">
+                    <div class="form-group form-group-lg">
                         <div class="row">
                             <div class="col-md-12"> <label for="editarPisoNumero">Piso</label>
                                 <input min="1" max="80" type="number" name="editarPisoNumero" id="editarPisoNumero" class="form-control" placeholder="1"></div>

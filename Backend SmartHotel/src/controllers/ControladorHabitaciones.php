@@ -79,13 +79,18 @@ class ControladorHabitaciones {
         }
         return array("code" => 1, "msg" => "Piso obtenido", "data" => $datos);
     }
+
+    /**
+     * @param $id_piso
+     * @return array
+     */
     public function eliminarPiso($id_piso) {
         global $db;
         $args = array($id_piso);
         $query = "DELETE FROM sh_pisos WHERE piso=?";
         $rs = $db->query($query, $args);
         if ($rs === false) {
-            return array("code" => 0, "msg" => "Error al intentar borrar piso");
+            return array("code" => 0, "msg" => "Error al intentar eliminar piso");
         }
         return array("code" => 1, "msg" => "Pisos eliminado");
     }
@@ -99,6 +104,9 @@ class ControladorHabitaciones {
      * JOIN sh_habitaciones_tipos ON sh_habitaciones.id_tipo_habitacion = sh_habitaciones_tipos.id_tipo_habitacion
      * JOIN sh_pisos ON sh_habitaciones.id_piso = sh_pisos.id_piso
      *
+     */
+    /**
+     * @return array
      */
     public function obtenerHabitaciones() {
         global $db;
@@ -129,4 +137,74 @@ class ControladorHabitaciones {
             $pisos[] = $row;
         return array("code" => 1, "msg" => "Habitaciones obtenidas", "data" => $datos, "categorias" => $categorias, "pisos" => $pisos);
     }
+
+    /**
+     * @return array
+     */
+    public function obtenerTipos() {
+        global $db;
+        $query = "SELECT * FROM sh_habitaciones_tipos";
+        $rs = $db->query($query, array());
+        $datos = array();
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Error al intentar obtener piso");
+        }
+        foreach ($rs as $row) {
+            $datos[] = $row;
+        }
+        return array("code" => 1, "msg" => "Tipos de habitaciones obtenidas", "data" => $datos);
+    }
+
+    /**
+     * @param $tipo
+     * @param $mx
+     * @param $usd
+     * @return array
+     */
+    public function añadirTipo($tipo, $mx, $usd) {
+        global $db;
+        $query = "INSERT INTO sh_habitaciones_tipos(tipo_habitacion, costo_mx, costo_usd) VALUES (?, ?, ?)";
+        $rs = $db->query($query, array($tipo, $mx, $usd));
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Tipo de habitación ya existe");
+        }
+        return array("code" => 1, "msg" => "Tipo de habitación añadida");
+    }
+
+    public function obtenerTipo($id_tipo) {
+        global $db;
+        $args = array($id_tipo);
+        $query = "SELECT * FROM sh_habitaciones_tipos WHERE id_tipo_habitacion=?";
+        $rs = $db->query($query, $args);
+        $datos = array();
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Error al intentar obtener tipo de habitación");
+        }
+        foreach ($rs as $row) {
+            $datos[] = $row;
+        }
+        return array("code" => 1, "msg" => "Tipo de habitación obtenida", "data" => $datos);
+    }
+    public function editarTipo($id, $tipo, $mxn, $usd) {
+        global $db;
+        $args = array($tipo, $mxn, $usd, $id);
+        $query = "UPDATE sh_habitaciones_tipos SET tipo_habitacion=?, costo_mx=?, costo_usd=? WHERE id_tipo_habitacion=?";
+        $rs = $db->query($query, $args);
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Tipo de habitación ya existe");
+        }
+        return array("code" => 1, "msg" => "Tipo de habitación editado");
+    }
+    public function eliminarTipo($id_tipo) {
+        global $db;
+        $args = array($id_tipo);
+        $query = "DELETE FROM sh_habitaciones_tipos WHERE id_tipo_habitacion=?";
+        $rs = $db->query($query, $args);
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Error al intentar eliminar tipo de habitación");
+        }
+        return array("code" => 1, "msg" => "Tipo de habitación eliminada");
+    }
+
+
 }

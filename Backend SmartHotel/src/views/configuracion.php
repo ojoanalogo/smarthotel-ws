@@ -43,6 +43,9 @@
                     <li class="list-group-item">
                         <a href="/dashboard/configuracion/habitaciones" class="h3"><i class="fa fa-bed fa-fw"></i> Configurar habitaciones </a>
                     </li>
+                    <li class="list-group-item">
+                        <a href="/dashboard/configuracion/tipos_habitacion" class="h3"><i class="fa fa-bed fa-fw"></i> Configurar tipos de habitación </a>
+                    </li>
                 </ul>
             </div>
             <div class="panel panel-warning">

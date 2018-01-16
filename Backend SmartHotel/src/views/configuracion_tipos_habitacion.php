@@ -1,13 +1,13 @@
 <?php include "includes/header.php" ?>
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><i class="fa fa-gears fa-fw"></i> Configuración - Pisos</h1>
+            <h1 class="page-header"><i class="fa fa-gears fa-fw"></i> Configuración - Tipos de habitación</h1>
         </div>
     </div>
     <ol class="breadcrumb">
         <li><a href="/dashboard">Inicio</a></li>
         <li><a href="/dashboard/configuracion">Configuración</a></li>
-        <li class="active">Editar pisos</li>
+        <li class="active">Editar tipos de habitacion</li>
     </ol>
 <div class="row">
     <div class="col-lg-3 col-md-6">
@@ -17,14 +17,14 @@
                 <p class="category">Soporte</p>
             </div>
             <div class="content">
-                <div class="centrar"><i class="fa fa-building fa-4x"></i></div>
+                <div class="centrar"><i class="fa fa-bed fa-4x"></i></div>
                 <hr>
-                <p class="text-muted">Un hotel es un edificio conformado por 1 o más pisos, es necesario añadir un piso al cual serán asignadas las
-                habitaciones posteriormente, esto con el fin de localizarlas y tenerlas mejor organizadas en el panel.</p>
+                <p class="text-muted">Añade tipos de habitación para tener una mayor organización sobre las habitaciones del
+                    hotel, puedes establecer precio en dolares y pesos mexicanos.</p>
                 <div class="footer">
                     <div class="stats">
-                        <a href="#" data-toggle="modal" data-target="#añadirPiso" class="btn btn-success btn-fill btn-md">
-                            <i class="fa fa-plus-circle fa-fw"></i> Añadir piso</a>
+                        <a href="#" data-toggle="modal" data-target="#añadirTipo" class="btn btn-success btn-fill btn-md">
+                            <i class="fa fa-plus-circle fa-fw"></i> Añadir tipo de habitación</a>
                     </div>
                 </div>
             </div>
@@ -34,24 +34,24 @@
                 <p class="category">Soporte</p>
             </div>
             <div class="content">
-                <b class="text-info"><i class="fa fa-question-circle-o fa-fw"></i> ¿Cuantas habitaciones soporta cada piso?</b>
+                <b class="text-info"><i class="fa fa-question-circle-o fa-fw"></i> ¿Qué es un tipo de habitación?</b>
                 <div></div>
-                <p class="text-muted">Es un numero ilimitado, pero lo recomendado es tener un balance de habitaciones por piso para
-                    que la información no se colapse a la hora de visualizarlas y hacer reservaciones.
+                <p class="text-muted">Es meramente una categoría de habitación, como lo puede ser una habitación de doble cama, doble cuarto, etc.
                 </p>
             </div>
         </div>
     </div>
     <div class="col-lg-9 col-md-6">
         <div class="panel panel-default">
-            <div class="panel-heading panel-success">Pisos</div>
+            <div class="panel-heading panel-success">Tipos de habitación</div>
             <div class="table-responsive">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="tabla-pisos">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="tabla-tipos">
                     <thead>
                     <tr>
-                        <th width="3%">Piso</th>
-                        <th width="74%">Nombre del piso</th>
-                        <th width="23%">Administrar</th>
+                        <th width="50%">Tipo de habitación</th>
+                        <th width="10%">Costo $MXN</th>
+                        <th width="10%">Costo $USD</th>
+                        <th width="25%">Administrar</th>
                     </tr>
                     </thead>
                     <tbody id="tabla-ajx">
@@ -68,24 +68,40 @@
 </div>
 <?php include "includes/footer.php" ?>
 <!-- Modales -->
-<!-- Modal añadir piso -->
-<div class="modal fade" id="añadirPiso" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- Modal añadir tipo de habitación -->
+<div class="modal fade" id="añadirTipo" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2>Añadir piso <small>configuración</small></h2>
+                <h2>Añadir tipo de habitación <small>configuración</small></h2>
             </div>
             <div class="modal-body">
-                <form id="guardarPiso">
-                    <div class="form-group">
+                <form id="guardarTipoHabitacion">
+                    <div class="form-group form-group-lg">
                         <div class="row">
-                            <div class="col-md-12"> <label for="añadirPisoNumero">Piso</label>
-                                <input min="1" max="80" type="number" name="añadirPisoNumero" id="añadirPisoNumero" class="form-control" placeholder="1">
+                            <div class="col-md-12"> <label for="añadirTipoNombre">Tipo de habitación</label>
+                                <input name="añadirTipoNombre" id="añadirTipoNombre" class="form-control" placeholder="Cama sencilla">
                             </div>
-                            <div class="col-md-12"><label for="añadirPisoNombre">Nombre de piso</label>
-                                <input type="text" name="añadirPisoNombre" id="añadirPisoNombre" class="form-control" placeholder="Introduce un nombre">
+
+                            <div class="col-md-12">
+                                <label for="añadirTipoCostoMX">Costo pesos mexicanos</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-money text-success"></i></div>
+                                    <input type="number" class="form-control" name="añadirTipoCostoMX" id="añadirTipoCostoMX"
+                                           placeholder="200" min="0.00" max="99999.00">
+                                </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <label for="añadirTipoCostoUSD">Costo dólares</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-money text-success"></i></div>
+                                    <input type="number" class="form-control" name="añadirTipoCostoUSD" id="añadirTipoCostoUSD"
+                                           placeholder="200" min="0.00" max="99999.00">
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="msgError"></div>
@@ -101,22 +117,40 @@
 </div>
 </div>
 <!-- /.modal -->
-<!-- Modal editar piso -->
-<div class="modal fade" id="editarPiso" tabindex="-2" role="dialog" aria-hidden="true">
+<!-- Modal editar tipo de habitación -->
+<div class="modal fade" id="editarTipo" tabindex="-2" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2>Editar piso <small>configuración</small></h2>
+                <h2>Editar tipo de habitación <small>configuración</small></h2>
             </div>
             <div class="modal-body">
-                <form id="editarPiso">
-                    <div class="form-group">
+                <form id="editarTipo">
+                    <div class="form-group form-group-lg">
                         <div class="row">
-                            <div class="col-md-12"> <label for="editarPisoNumero">Piso</label>
-                                <input min="1" max="80" type="number" name="editarPisoNumero" id="editarPisoNumero" class="form-control" placeholder="1"></div>
-                            <div class="col-md-12"><label for="editarPisoNombre">Nombre de piso</label>
-                                <input type="text" name="editarPisoNombre" id="editarPisoNombre" class="form-control" placeholder="Introduce un nombre"> </div>
+                            <div class="col-md-12"> <label for="editarTipoNombre">Tipo de habitación</label>
+                                <input name="editarTipoNombre" id="editarTipoNombre" class="form-control" placeholder="Cama sencilla">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="editarTipoCostoMX">Costo pesos mexicanos</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-money text-success"></i></div>
+                                    <input type="number" class="form-control" name="editarTipoCostoMX" id="editarTipoCostoMX"
+                                           placeholder="200" min="0.00" max="99999.00">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="editarTipoCostoUSD">Costo dólares</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-money text-success"></i></div>
+                                    <input type="number" class="form-control" name="editarTipoCostoUSD" id="editarTipoCostoUSD"
+                                           placeholder="200" min="0.00" max="99999.00">
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="msgError"></div>
@@ -133,39 +167,40 @@
 <!-- /.modal -->
     <script>
         /**
-         * Código inicialización de pisos
+         * Código inicialización de tipos de habitación
          */
         $(document).ready(function() {
-            obtenerPisos();
-            handlerEliminarPiso();
-            handlerEditarPiso();
+            obtenerTiposDeHabitacion();
+            handlerEliminarTipo();
+            handlerEditarTipo();
         });
         /**
-         * Obtener pisos e introducirlos en tabla
+         * Obtener tipos de habitación e introducirlos en tabla
          */
-        function obtenerPisos() {
+        function obtenerTiposDeHabitacion() {
             $.ajax({
                 type: 'POST',
-                url: '/api/habitacion/obtenerPisos',
+                url: '/api/habitacion/obtenerTipos',
                 data: "",
                 success: function(data) {
                     $('.ajxLoader').hide();
                     var $datos = JSON.parse(data);
+                    console.log($datos);
                     if ($datos.code === 1) {
                         var $itera = $datos["data"];
                         if ($itera.length === 0) {
-                            $('#msgEmpty').html('No hay pisos añadidos, <a href="#" data-toggle="modal" data-target="#añadirPiso">¿qué tal si añades uno?</a>');
+                            $('#msgEmpty').html('No hay tipos de habitación añadidos, <a href="#" data-toggle="modal" data-target="#añadirTipo">¿qué tal si añades uno?</a>');
                         }
                         // Template:
-                        function template($piso, $nombre) {
-                            return '<tr>' + '<td align="center">' + $piso + '</td>' + '<td>' + $nombre + '</td>' + '<td align="center" valign="middle">' + '<a href="#" data-idPiso="' + $piso + '" class="btn btn-md btn-info btn-fill editarPiso" style="color:#FFF;">' + '<i class="fa fa-edit fa-fw"></i> Editar' + '</a>&nbsp;' + '<a href="#" data-idPiso="' + $piso + '" class="btn btn-danger btn-md btn-fill eliminarPiso">' + '<i class="fa fa-trash fa-fw"></i> Eliminar' + '</a>' + '</td>' + '</tr>';
+                        function template($id, $tipo, $mx, $usd) {
+                            return '<tr>' + '<td align="center">' + $tipo + '</td>' + '<td>$' + $mx + '</td>' + '<td>$' + $usd + '</td>' + '<td align="center" valign="middle">' + '<a href="#" data-idTipo="' + $id + '" class="btn btn-md btn-info btn-fill editarTipo" style="color:#FFF;">' + '<i class="fa fa-edit fa-fw"></i> Editar' + '</a>&nbsp;' + '<a href="#" data-idTipo="' + $id + '" class="btn btn-danger btn-md btn-fill eliminarTipo">' + '<i class="fa fa-trash fa-fw"></i> Eliminar' + '</a>' + '</td>' + '</tr>';
                         }
                         $('#tabla-ajx').html('');
                         $.each($itera, function(i, item) {
-                            $('#tabla-ajx').append(template(item.piso, item.nombre));
+                            $('#tabla-ajx').append(template(item["id_tipo_habitacion"], item["tipo_habitacion"], item["costo_mx"], item["costo_usd"]));
                         });
-                        handlerEliminarPiso();
-                        handlerEditarPiso();
+                        handlerEliminarTipo();
+                        handlerEditarTipo();
                     } else {
                         swal("Error", "Error en la base de datos", "error");
                     }
@@ -176,23 +211,24 @@
             });
         }
         /**
-         * Handler editar piso
+         * Handler editar tipo de habitación
          */
-        function handlerEditarPiso() {
-            $('.editarPiso').unbind();
-            $('.editarPiso').click(function() {
-                var $id = $(this).attr('data-idPiso');
+        function handlerEditarTipo() {
+            $('.editarTipo').unbind();
+            $('.editarTipo').click(function() {
+                var $id = $(this).attr('data-idTipo');
                 $.ajax({
                     type: 'POST',
-                    url: '/api/habitacion/obtenerPiso',
-                    data: "id_piso=" + $id,
+                    url: '/api/habitacion/obtenerTipo',
+                    data: "id_tipo=" + $id,
                     success: function(data) {
                         var $datos = JSON.parse(data);
                         if ($datos.code === 1) {
-                            $('#editarPiso').modal('toggle');
-                            $('#editarPisoNumero').val($datos["data"][0]["piso"]);
-                            $('#editarPisoNombre').val($datos["data"][0]["nombre"]);
-                            $('form#editarPiso').attr("id-piso", $datos["data"][0]["piso"]);
+                            $('#editarTipo').modal('toggle');
+                            $('#editarTipoNombre').val($datos["data"][0]["tipo_habitacion"]);
+                            $('#editarTipoCostoMX').val($datos["data"][0]["costo_mx"]);
+                            $('#editarTipoCostoUSD').val($datos["data"][0]["costo_usd"]);
+                            $('form#editarTipo').attr("id-tipo", $datos["data"][0]["id_tipo_habitacion"]);
                         } else {
                             swal("No se pudo obtener información", "Ha ocurrido un error.", "error");
                         }
@@ -204,66 +240,70 @@
             });
         }
 
-        $('form#editarPiso').on('submit', function(e) {
-            editarPiso();
+        $('form#editarTipo').on('submit', function(e) {
+            editarTipo();
             e.preventDefault();
         });
-        function editarPiso() {
-            var $piso = $('#editarPisoNumero').val();
-            var $nombre = $('#editarPisoNombre').val();
-            var $id_piso = $('form#editarPiso').attr('id-piso');
-            if (!validarPiso($piso, $nombre)) {
+
+        function editarTipo() {
+            var $tipo = $('#editarTipoNombre').val();
+            var $mxn = $('#editarTipoCostoMX').val();
+            var $usd = $('#editarTipoCostoUSD').val();
+            var $id = $('form#editarTipo').attr("id-tipo");
+            if (!validarFormularioTipo($tipo, $mxn, $usd)) {
                 return true;
             }
             $.ajax({
                 type: 'POST',
-                url: '/api/habitacion/editarPiso',
-                data: "piso=" + $id_piso + "&nuevoPiso=" + $piso + "&nombre=" + $nombre,
+                url: '/api/habitacion/editarTipo',
+                data: "id_tipo=" + $id + "&tipo=" + $tipo + "&mxn=" + $mxn + "&usd=" + $usd,
                 success: function(data) {
-                    var $res = (JSON.parse(data));
-                    if ($res.code === 1) {
-                        $('#editarPiso').modal('toggle');
+                    var $data = JSON.parse(data);
+                    console.log($data);
+                    if ($data.code === 1) {
+                        $('#editarTipo').modal('toggle');
                         $('.msgError').html('');
-                        $('#editarPisoNumero').val('');
-                        $('#editarPisoNombre').val('');
-                        obtenerPisos();
-                        swal("Piso editado", "Se ha editado este piso", "success");
+                        $('#editarTipoNombre').val('');
+                        $('#editarTipoCostoMX').val('');
+                        $('#editarTipoCostoUSD').val('');
+                        obtenerTiposDeHabitacion();
+                        swal("Tipo de habitación editada", "Se ha editado este tipo de habitación", "success");
                     } else {
-                        $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Este piso ya existe</div>');
+                        $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Este tipo de habitación ya existe</div>');
                     }
                 },
                 error: function(xhr, type, exception) {
-                    $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Error en el servidor, no se pudo añadir el piso</div>');
+                    $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Error en el servidor, no se pudo añadir el tipo de habitación</div>');
                 }
             });
         }
 
         /**
-         * Handler eliminar piso
+         * Handler eliminar tipo de habitación
          */
-        function handlerEliminarPiso() {
-            $('.eliminarPiso').unbind();
-            $('.eliminarPiso').click(function() {
-                var $id = $(this).attr('data-idPiso');
+        function handlerEliminarTipo() {
+            $('.eliminarTipo').unbind();
+            $('.eliminarTipo').click(function() {
+                var $id = $(this).attr('data-idTipo');
                 swal({
-                    title: "¿Estás seguro que quieres eliminar este piso?",
+                    title: "¿Estás seguro que quieres eliminar este tipo de habitación?",
                     text: "Esta acción no se puede revertir",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Si, borralo!",
+                    confirmButtonText: "Si, borrala!",
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
                 }, function() {
                     $.ajax({
                         type: 'POST',
-                        url: '/api/habitacion/eliminarPiso',
-                        data: "id_piso=" + $id,
+                        url: '/api/habitacion/eliminarTipo',
+                        data: "id_tipo=" + $id,
                         success: function(data) {
                             var $datos = JSON.parse(data);
                             if ($datos.code === 1) {
-                                swal("Piso eliminado", "Se ha eliminado este piso", "success");
-                                obtenerPisos();
+                                swal("Tipo de habitación eliminada", "Se ha eliminado este tipo de habitación", "success");
+                                obtenerTiposDeHabitacion();
                             } else {
                                 swal("No se pudo eliminar", "Ha ocurrido un error.", "error");
                             }
@@ -276,61 +316,64 @@
             });
         }
         /**
-         * Guardar piso en la base de datos
+         * Guardar tipo de habitación en la base de datos
          */
-        $('form#guardarPiso').on('submit', function(e) {
-            guardarPiso();
+        $('form#guardarTipoHabitacion').on('submit', function(e) {
+            guardarTipo();
             e.preventDefault();
         });
         function isNumber(n) {
             return !isNaN(parseFloat(n)) && isFinite(n);
         }
-        function validarPiso($piso, $nombre) {
-            if (!isNumber($piso)) {
-                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'No es un numero de piso valido</div>');
+        function validarFormularioTipo($tipo, $mxn, $usd) {
+            if (!isNumber($mxn) || !isNumber($usd)) {
+                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'No es un numero de precio correcto</div>');
                 return false;
             }
-            if ($piso > 80 || $piso < 0) {
-                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Debes introducir un numero de piso entre 1 y 80</div>');
+            if ($mxn > 99999 || $mxn < 0 || $usd > 99999 || $usd < 0) {
+                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Debes introducir un costo valido</div>');
                 return false;
             }
-            if ($piso === "" || $piso === null) {
-                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Introduce un numero de piso</div>');
+            if ($tipo === "" || $tipo === null) {
+                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Introduce un tipo de habitación</div>');
                 return false;
             }
-            if ($nombre === "" || $nombre === null) {
-                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Introduce un nombre de piso</div>');
+            if ($mxn === "" || $mxn === null || $usd === "" || $usd === null) {
+                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Introduce un precio en dólares y pesos</div>');
                 return false;
             }
             return true;
         }
 
-        function guardarPiso() {
-            var $piso = $('#añadirPisoNumero').val();
-            var $nombre = $('#añadirPisoNombre').val();
-            if (!validarPiso($piso, $nombre)) {
+        function guardarTipo() {
+            var $tipo = $('#añadirTipoNombre').val();
+            var $mxn = $('#añadirTipoCostoMX').val();
+            var $usd = $('#añadirTipoCostoUSD').val();
+            if (!validarFormularioTipo($tipo, $mxn, $usd)) {
                 return true;
             }
             $.ajax({
                 type: 'POST',
-                url: '/api/habitacion/addPiso',
-                data: "piso=" + $piso + "&nombre=" + $nombre,
+                url: '/api/habitacion/addTipo',
+                data: "tipo=" + $tipo + "&mxn=" + $mxn + "&usd=" + $usd,
                 success: function(data) {
-                    var $res = (JSON.parse(data));
-                    if ($res.code === 1) {
-                        $('#añadirPiso').modal('toggle');
+                    var $data = JSON.parse(data);
+                    console.log($data);
+                    if ($data.code === 1) {
+                        $('#añadirTipo').modal('toggle');
                         $('.msgError').html('');
                         $('#msgEmpty').html('');
-                        $('#añadirPisoNumero').val('');
-                        $('#añadirPisoNombre').val('');
-                        obtenerPisos();
-                        swal("Piso añadido", "Se ha añadido este piso", "success");
+                        $('#añadirTipoNombre').val('');
+                        $('#añadirTipoCostoMX').val('');
+                        $('#añadirTipoCostoUSD').val('');
+                        obtenerTiposDeHabitacion();
+                        swal("Tipo de habitación añadida", "Se ha añadido esta habitación", "success");
                     } else {
-                        $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Este piso ya existe</div>');
+                        $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Esta habitación existe</div>');
                     }
                 },
                 error: function(xhr, type, exception) {
-                    $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Error en el servidor, no se pudo añadir el piso</div>');
+                    $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Error en el servidor, no se pudo añadir el tipo de habitación</div>');
                 }
             });
         }

@@ -45,7 +45,7 @@ class ControladorPrincipal {
     }
     public function obtenerConfig() {
         global $db;
-        $query = "SELECT * FROM sh_configuracion";
+        $query = "SELECT * FROM sh_configuracion LIMIT 1";
         $rs = $db->query($query);
         $datos = array();
         if ($rs === false) {

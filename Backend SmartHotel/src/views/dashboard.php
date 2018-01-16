@@ -14,9 +14,9 @@
                 <div class="author">
                     <a href="#">
                         <img class="avatar border-gray" src="/public/img/logo.png" alt="..."/>
-                        <h4 class="title"> <br />
-                            <small><?php echo $datosUsuario["correo"]?></small>
+                        <h4 class="title"><?php echo $args["data"][0]["nombre_hotel"];?> <br />
                         </h4>
+                        <p class="text-muted"><?php echo $args["data"][0]["correo"]; ?></p>
                     </a>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-7">
-                                    <h4 class="title">Habitaciones activas</h4>
+                                    <h4 class="title">Habitaciones libres</h4>
                                     <h2 class="title text-success">4</h2>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-7">
-                                <h4 class="title">Huespedes activos</h4>
+                                <h4 class="title">Huespedes hospedados</h4>
                                 <h2 class="title text-primary">5</h2>
                             </div>
                         </div>

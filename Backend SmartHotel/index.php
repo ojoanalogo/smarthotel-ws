@@ -55,7 +55,7 @@ $app->get("/", function() use ($app, $controladorLogin, $controladorPrincipal) {
  */
 $app->get('/dashboard', function() use ($app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
-        return $app->Response('dashboard.php', valoresDefault()  , 201);
+        return $app->Response('dashboard.php', valoresDefault($controladorPrincipal->obtenerConfig())  , 201);
     else
         return $app->Response('login.php', array(),201);
 });
@@ -114,7 +114,6 @@ $app->get('/dashboard/configuracion', function() use ($app, $controladorLogin, $
 /**
  * Config pisos
  */
-
 $app->get('/dashboard/configuracion/pisos', function() use ($app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
         return $app->Response('configuracion_pisos.php', valoresDefault(), 201);
@@ -123,12 +122,22 @@ $app->get('/dashboard/configuracion/pisos', function() use ($app, $controladorLo
 });
 
 /**
- * Config cuartos
+ * Config habitaciones
  */
-
 $app->get('/dashboard/configuracion/habitaciones', function() use ($app, $controladorLogin, $controladorPrincipal ) {
     if (checkAuth())
         return $app->Response('configuracion_habitaciones.php', valoresDefault(), 201);
+    else
+        return $app->Response('login.php', array(),201);
+});
+
+/**
+ * Config tipos
+ */
+
+$app->get('/dashboard/configuracion/tipos_habitacion', function() use ($app, $controladorLogin, $controladorPrincipal ) {
+    if (checkAuth())
+        return $app->Response('configuracion_tipos_habitacion.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(),201);
 });
@@ -151,6 +160,9 @@ $app->post("/authme", function() use ($app, $controladorLogin) {
     $controladorLogin->authMe($app->getRequest()->post("correo"), $app->getRequest()->post("clave"));
 });
 
+/**
+ * API Habitación
+ */
 $app->post("/api/habitacion/{funcion}", function($funcion) use ($app, $controladorHabitaciones) {
     /**
      * Para pisos
@@ -171,13 +183,36 @@ $app->post("/api/habitacion/{funcion}", function($funcion) use ($app, $controlad
             $app->getRequest()->post("nombre"),
             $app->getRequest()->post("nuevoPiso")), 201);
     /**
+     * Para tipos de habitación
+     */
+    if($funcion == "obtenerTipos")
+        $app->JsonResponse($controladorHabitaciones->obtenerTipos(), 201);
+    if($funcion == "addTipo")
+        $app->JsonResponse($controladorHabitaciones->añadirTipo(
+            $app->getRequest()->post("tipo"),
+            $app->getRequest()->post("mxn"),
+            $app->getRequest()->post("usd")), 201);
+    if($funcion == "obtenerTipo")
+        $app->JsonResponse($controladorHabitaciones->obtenerTipo(
+            $app->getRequest()->post("id_tipo")), 201);
+    if($funcion == "editarTipo")
+        $app->JsonResponse($controladorHabitaciones->editarTipo(
+            $app->getRequest()->post("id_tipo"),
+            $app->getRequest()->post("tipo"),
+            $app->getRequest()->post("mxn"),
+            $app->getRequest()->post("usd")), 201);
+    if($funcion == "eliminarTipo")
+        $app->JsonResponse($controladorHabitaciones->eliminarTipo($app->getRequest()->post("id_tipo")), 201);
+    /**
      * Para habitaciones
      */
-    if($funcion == "obtenerHabitaciones") {
+    if($funcion == "obtenerHabitaciones")
         $app->JsonResponse($controladorHabitaciones->obtenerHabitaciones(), 200);
-    }
 });
 
+/**
+ * API Hotel
+ */
 $app->post("/api/hotel/{funcion}", function($funcion) use ($app, $controladorPrincipal) {
     if($funcion == "obtenerConfig")
         $app->JsonResponse($controladorPrincipal->obtenerConfig(), 201);

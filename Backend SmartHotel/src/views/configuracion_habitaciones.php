@@ -27,8 +27,6 @@
                         <div class="btn-group" role="group">
                         <a href="#" data-toggle="modal" data-target="#añadirHabitacion" class="btn btn-success btn-fill btn-md">
                             <i class="fa fa-plus-circle fa-fw"></i> Añadir habitacion</a>
-                        <a href="#" data-toggle="modal" data-target="#añadirHabitacion" class="btn btn-success btn-fill btn-md">
-                            <i class="fa fa-hotel fa-fw"></i> Añadir tipo de habitación</a>
                         </div>
                     </div>
                 </div>
@@ -58,7 +56,8 @@
                         <th width="3%">Habitación</th>
                         <th width="37%">Tipo de habitación</th>
                         <th width="15%">IoT</th>
-                        <th width="30%">Administrar</th>
+                        <th width="10%">Estatus</th>
+                        <th width="20%">Administrar</th>
                     </tr>
                     </thead>
                     <tbody id="tabla-ajx"></tbody>
@@ -84,7 +83,7 @@
             </div>
             <div class="modal-body">
                 <form id="guardarHabitacion">
-                    <div class="form-group">
+                    <div class="form-group form-group-lg">
                         <div class="row">
                             <div class="col-md-12"> <label for="añadirHabitacionNumero">Numero de habitación</label>
                                 <input min="1" max="9999" type="number" name="añadirHabitacionNumero" id="añadirHabitacionNumero" class="form-control" placeholder="101">
@@ -95,6 +94,26 @@
                             <div class="col-md-12"><label for="añadirHabitacionTipo">Tipo de habitación</label>
                                 <select name="añadirHabitacionTipo" id="añadirHabitacionTipo" class="form-control categorias"></select>
                             </div>
+                            <!-- coso IoT -->
+                            <div class="col-md-12">
+                                <hr>
+                                <p class="h3">Detalles IoT</p>
+                                <p class="text-muted">(Dejar en blanco para no habilitar)</p>
+                                <hr>
+                                <label for="añadirHabitacionIoT-ID">ID de Dispositivo</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-plug text-success"></i></div>
+                                    <input type="text" class="form-control" name="añadirHabitacionIoT-ID" id="añadirHabitacionIoT-ID" placeholder="ID" maxlength="256">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="añadirHabitacionIoT-clave">Clave de Dispositivo</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-lock text-success"></i></div>
+                                    <input type="text" class="form-control" name="añadirHabitacionIoT-clave" id="añadirHabitacionIoT-ID" placeholder="Clave" maxlength="256">
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="msgError"></div>
@@ -161,21 +180,30 @@
                 $('.ajxLoader').hide();
                 var $datos = JSON.parse(data);
                 if ($datos.code === 1) {
+                    $('#msgEmpty').html('');
+                    if ($datos["data"].length === 0) {
+                        $('#msgEmpty').html('No hay tipos de habitación añadidos, <a href="#" data-toggle="modal" data-target="#añadirTipo">¿qué tal si añades uno?</a>');
+                    }
                     /**
                      * Mostrar habitaciones
                      */
                     $('#tabla-ajx').html('');
                     $.each($datos["data"], function(i, item) {
                         $('#tabla-ajx').append('<tr><td colspan="5" class="bg-success"><b>' + i + '</b></td></tr>');
-                        function $template($habitacion, $tipo, $iot) {
+                        function $template($habitacion, $tipo, $iot, $estatus) {
                             var $hasIot = $iot === ""
                                 ? "<i class='fa fa-times-circle fa-fw text-danger'></i> No"
                                 : "<i class='fa fa-check-circle fa-fw text-success'></i> Si &nbsp;<a href='/dashboard/habitaciones/detalle/" +
                                 $habitacion + "' class='btn btn-sm btn-default'><i class='fa fa-dashboard'></i> Detalles habitación</a>";
+                            var $estaHabilitada = $estatus === "1"
+                                ? "<i class='fa fa-check-circle fa-fw text-success'></i> Habilitada"
+                                : "<i class='fa fa-times-circle fa-fw text-danger'></i> Deshabilitada";
                             return  '<tr><td align="center">' + $habitacion + '</td>' +
                                 '<td>' + $tipo + '</td>' +
                             '<td>' + $hasIot + '</td>' +
-                            '<td align="center" valign="middle">' +
+                                '<td>' + $estaHabilitada + '</td>' +
+
+                                '<td align="center" valign="middle">' +
                                 '<a href="#" class="btn btn-md btn-info btn-fill editarHabitacion" style="color:#FFF;">' +
                                 '<i class="fa fa-edit fa-fw"></i> Editar' +
                                 '</a>' +
@@ -186,7 +214,7 @@
                                 '</tr>';
                         }
                        $.each(item, function(i, item){
-                          $('#tabla-ajx').append($template(item["habitacion"], item["tipo_habitacion"], item["iot_id"]));
+                          $('#tabla-ajx').append($template(item["habitacion"], item["tipo_habitacion"], item["iot_id"], item["estatus"]));
                        });
                     });
                     /**
