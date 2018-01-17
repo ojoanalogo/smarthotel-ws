@@ -29,10 +29,12 @@ if ($db->Cnxn() == false) {
 require_once __DIR__ . "/src/controllers/ControladorPrincipal.php";
 require_once __DIR__ . "/src/controllers/ControladorLogin.php";
 require_once __DIR__ . "/src/controllers/ControladorHabitaciones.php";
+require_once __DIR__ . "/src/controllers/ControladorHuespedes.php";
 
 $controladorPrincipal = new ControladorPrincipal();
 $controladorLogin = new ControladorLogin();
 $controladorHabitaciones = new ControladorHabitaciones();
+$controladorHuespedes = new ControladorHuespedes();
 
 /**
  * Rutas de la aplicación
@@ -52,7 +54,7 @@ $app->get("/", function () use ($app, $controladorLogin, $controladorPrincipal) 
 /**
  * Servir Index
  */
-$app->get('/dashboard', function () use ($app, $controladorLogin, $controladorPrincipal) {
+$app->get('/dashboard', function () use ($app, $controladorPrincipal) {
     if (checkAuth())
         return $app->Response('dashboard.php', valoresDefault($controladorPrincipal->obtenerConfig()), 201);
     else
@@ -82,9 +84,9 @@ $app->get('/dashboard/habitaciones/detalle/:habitacion', function ($habitacion) 
 /**
  * Servir pag huespedes
  */
-$app->get('/dashboard/huespedes', function () use ($app, $controladorLogin, $controladorPrincipal) {
+$app->get('/dashboard/huespedes', function () use ($app, $controladorHuespedes) {
     if (checkAuth())
-        return $app->Response('huespedes.php', valoresDefault(), 201);
+        return $app->Response('huespedes.php', valoresDefault($controladorHuespedes->obtenerHuespedes()), 201);
     else
         return $app->Response('login.php', array(), 201);
 });
@@ -103,9 +105,9 @@ $app->get('/dashboard/mapa', function () use ($app, $controladorLogin, $controla
 /**
  * Servir Configuración
  */
-$app->get('/dashboard/configuracion', function () use ($app, $controladorLogin, $controladorPrincipal) {
+$app->get('/dashboard/configuracion', function () use ($app) {
     if (checkAuth())
-        return $app->Response('configuracion.php', valoresDefault(), 201);
+        return $app->Response('/configuracion/configuracion.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(), 201);
 });
@@ -113,9 +115,9 @@ $app->get('/dashboard/configuracion', function () use ($app, $controladorLogin, 
 /**
  * Config pisos
  */
-$app->get('/dashboard/configuracion/pisos', function () use ($app, $controladorLogin, $controladorPrincipal) {
+$app->get('/dashboard/configuracion/pisos', function () use ($app) {
     if (checkAuth())
-        return $app->Response('configuracion_pisos.php', valoresDefault(), 201);
+        return $app->Response('/configuracion/pisos.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(), 201);
 });
@@ -123,9 +125,9 @@ $app->get('/dashboard/configuracion/pisos', function () use ($app, $controladorL
 /**
  * Config habitaciones
  */
-$app->get('/dashboard/configuracion/habitaciones', function () use ($app, $controladorLogin, $controladorPrincipal) {
+$app->get('/dashboard/configuracion/habitaciones', function () use ($app) {
     if (checkAuth())
-        return $app->Response('configuracion_habitaciones.php', valoresDefault(), 201);
+        return $app->Response('/configuracion/habitaciones.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(), 201);
 });
@@ -134,9 +136,9 @@ $app->get('/dashboard/configuracion/habitaciones', function () use ($app, $contr
  * Config tipos
  */
 
-$app->get('/dashboard/configuracion/tipos_habitacion', function () use ($app, $controladorLogin, $controladorPrincipal) {
+$app->get('/dashboard/configuracion/tipos_habitacion', function () use ($app) {
     if (checkAuth())
-        return $app->Response('configuracion_tipos_habitacion.php', valoresDefault(), 201);
+        return $app->Response('/configuracion/tipos_habitacion.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(), 201);
 });
@@ -243,8 +245,7 @@ function valoresDefault($extraArgs = array())
 {
     global $controladorPrincipal, $controladorLogin;
     $datosUsuario = $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario());
-    $datosUsuarios = $controladorPrincipal->obtenerUsuarios();
-    return array("datosUsuario" => $datosUsuario, "datosUsuarios" => $datosUsuarios, "args" => $extraArgs);
+    return array("datosUsuario" => $datosUsuario, "args" => $extraArgs);
 }
 
 $app->listen();

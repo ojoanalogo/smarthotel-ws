@@ -1,4 +1,4 @@
-<?php include "includes/header.php" ?>
+<?php include "/../includes/header.php" ?>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><i class="fa fa-gears fa-fw"></i> Configuración - Habitaciones</h1>
@@ -71,7 +71,7 @@
         </div>
     </div>
 </div>
-<?php include "includes/footer.php" ?>
+<?php include "/../includes/footer.php" ?>
 <!-- Modales -->
 <!-- Modal añadir habitacion -->
 <div class="modal fade" id="añadirHabitacion" tabindex="-1" role="dialog" aria-hidden="true">

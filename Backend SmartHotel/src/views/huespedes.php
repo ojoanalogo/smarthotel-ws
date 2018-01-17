@@ -8,10 +8,12 @@
         <li><a href="/dashboard">Inicio</a></li>
         <li class="active">Huespedes</li>
     </ol>
-
 <a href="#" style="margin-bottom: 15px;" data-toggle="modal" data-target="#añadirMiembro" class="btn btn-success btn-fill btn-lg"><i class="fa fa-plus-circle fa-fw"></i> Añadir huesped</a>
 <div class="row">
     <div class="container">
+
+
+
 <div class="panel panel-default">
     <div class="panel-heading">Pisos</div>
     <div class="table-responsive">
@@ -27,7 +29,7 @@
     </thead>
     <tbody>
     <?php
-    foreach ($datosUsuarios as $usuario) {
+    foreach ($args["data"] as $usuario) {
     echo '<tr id="usuario">
         <td align="center">' . $usuario["id_usuario"] . '</td>
         <td>&nbsp;<span data-toggle="tooltip" data-placement="right" title="Nombre">' . $usuario["nombre"] . '</span></td>
@@ -63,7 +65,7 @@
                 <h2>Añadir huesped <small>usuarios</small></h2>
             </div>
             <div class="modal-body">
-                <div class="form-group">
+                <div class="form-group form-group-lg">
                     <div class="row">
                         <div class="col-md-6"> <label for="nombre">Name</label>
                             <input type="text" name="nombre" id="nombre" class="form-control"></div>
@@ -71,7 +73,6 @@
                             <input type="text" name="apellido" id="apellido" class="form-control"> </div>
                     </div>
                 </div>
-                <div class="form-group">
                     <div class="row">
                         <div class="col-md-12"><label for="usuario">Usuario</label>
                             <input type="text" name="usuario" id="usuario" class="form-control"></div>
@@ -84,15 +85,12 @@
                         <div class="col-md-12"><label for="clave">Clave</label>
                             <input type="password" name="clave" id="clave" class="form-control"></div>
                     </div>
-                </div>
-                <div class="form-group">
                     <label for="member_address">Dirección</label>
                     <textarea name="direccion" id="direccion" class="form-control"></textarea>
                     <div class="row">
                         <div class="col-md-12"><label for="clave">Telefono</label>
                             <input type="number" name="telefono" id="telefono" class="form-control"></div>
                     </div>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>

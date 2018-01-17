@@ -1,5 +1,5 @@
-<?php include "includes/header.php" ?>
-    <div class="row">
+<?php include "/../includes/header.php" ?>
+<div class="row">
         <div class="col-lg-12">
             <h1 class="page-header"><i class="fa fa-gears fa-fw"></i> Configuración - Pisos</h1>
         </div>
@@ -66,7 +66,7 @@
         </div>
     </div>
 </div>
-<?php include "includes/footer.php" ?>
+<?php include "/../includes/footer.php" ?>
 <!-- Modales -->
 <!-- Modal añadir piso -->
 <div class="modal fade" id="añadirPiso" tabindex="-1" role="dialog" aria-hidden="true">

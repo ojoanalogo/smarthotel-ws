@@ -114,7 +114,7 @@ class ControladorHabitaciones {
  sh_habitaciones_tipos.costo_mx, sh_habitaciones_tipos.costo_usd, sh_pisos.piso, sh_pisos.nombre,
   sh_habitaciones.iot_id, sh_habitaciones.iot_key FROM sh_habitaciones
    JOIN sh_habitaciones_tipos ON sh_habitaciones.id_tipo_habitacion = sh_habitaciones_tipos.id_tipo_habitacion
-   JOIN sh_pisos ON sh_habitaciones.id_piso = sh_pisos.piso ORDER BY sh_habitaciones.habitacion";
+   JOIN sh_pisos ON sh_habitaciones.id_piso = sh_pisos.piso ORDER BY sh_habitaciones.habitacion, sh_habitaciones.id_piso";
         $queryTipos = "SELECT * from sh_habitaciones_tipos";
         $rs = $db->query($query, array());
         if ($rs === false)

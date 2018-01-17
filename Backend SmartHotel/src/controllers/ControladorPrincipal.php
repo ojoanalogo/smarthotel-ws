@@ -29,20 +29,6 @@ class ControladorPrincipal {
         return $datos;
     }
 
-    public function obtenerUsuarios() {
-        global $db;
-        $datos = array();
-        $query = "SELECT id_usuario, correo, usuario, nombre, apellido, telefono,
-  fecha_registro FROM sh_huespedes";
-        $rs = $db->query($query);
-        if ($rs === false) {
-            return null;
-        }
-        foreach ($rs as $row) {
-            $datos[] = $row;
-        }
-        return $datos;
-    }
     public function obtenerConfig() {
         global $db;
         $query = "SELECT * FROM sh_configuracion LIMIT 1";

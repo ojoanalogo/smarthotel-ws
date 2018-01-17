@@ -1,4 +1,4 @@
-<?php include "includes/header.php" ?>
+<?php include "/../includes/header.php" ?>
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header"><i class="fa fa-gears fa-fw"></i> Configuración</h1>
@@ -41,10 +41,10 @@
                         <a href="/dashboard/configuracion/pisos" class="h3"><i class="fa fa-building fa-fw"></i> Configurar pisos </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/dashboard/configuracion/habitaciones" class="h3"><i class="fa fa-bed fa-fw"></i> Configurar habitaciones </a>
+                        <a href="/dashboard/configuracion/tipos_habitacion" class="h3"><i class="fa fa-bed fa-fw"></i> Configurar tipos de habitación </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/dashboard/configuracion/tipos_habitacion" class="h3"><i class="fa fa-bed fa-fw"></i> Configurar tipos de habitación </a>
+                        <a href="/dashboard/configuracion/habitaciones" class="h3"><i class="fa fa-bed fa-fw"></i> Configurar habitaciones </a>
                     </li>
                 </ul>
             </div>
@@ -127,7 +127,7 @@
             </div>
         </div>
     </div>
-<?php include "includes/footer.php" ?>
+<?php include "/../includes/footer.php" ?>
 <script>
     /**
      * Código inicialización de configuración

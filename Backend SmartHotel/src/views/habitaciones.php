@@ -177,9 +177,8 @@
     <tr>
         <td>
             <div class="row">
-                <div class="col-md-4" style="color:#5cb85c"><i class="fa fa-circle"></i>&nbsp;Disponible</div>
-                <div class="col-md-4" style="color:#d9534f"><i class="fa fa-circle"></i>&nbsp;Ocupada</div>
-                <div class="col-md-4" style="color:#ff7200"><i class="fa fa-circle"></i>&nbsp;Reservada</div>
+                <div class="col-md-6" style="color:#5cb85c"><i class="fa fa-circle"></i>&nbsp;Disponible</div>
+                <div class="col-md-6" style="color:#d9534f"><i class="fa fa-circle"></i>&nbsp;Ocupada</div>
             </div>
         </td>
     </tr>
