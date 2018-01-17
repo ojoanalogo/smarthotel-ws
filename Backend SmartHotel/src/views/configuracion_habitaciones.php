@@ -85,7 +85,6 @@
                 <form id="guardarHabitacion">
                     <div class="form-group form-group-lg">
                         <div class="row">
-
                             <div class="col-md-12">
                                 <label for="añadirHabitacionNumero">Numero de habitación</label>
                                 <div class="input-group">
@@ -114,17 +113,17 @@
                                 <p class="h3">Detalles IoT</p>
                                 <p class="text-muted">(Dejar en blanco para no habilitar)</p>
                                 <hr>
-                                <label for="añadirHabitacionIoT-ID">ID de Dispositivo</label>
+                                <label for="añadirHabitacionIoT_ID">ID de Dispositivo</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-plug text-success"></i></div>
-                                    <input type="text" class="form-control" name="añadirHabitacionIoT-ID" id="añadirHabitacionIoT-ID" placeholder="ID" maxlength="256">
+                                    <input type="text" class="form-control" name="añadirHabitacionIoT_ID" id="añadirHabitacionIoT_ID" placeholder="ID" maxlength="256">
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <label for="añadirHabitacionIoT-clave">Clave de Dispositivo</label>
+                                <label for="añadirHabitacionIoT_clave">Clave de Dispositivo</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-lock text-success"></i></div>
-                                    <input type="text" class="form-control" name="añadirHabitacionIoT-clave" id="añadirHabitacionIoT-ID" placeholder="Clave" maxlength="256">
+                                    <input type="text" class="form-control" name="añadirHabitacionIoT_clave" id="añadirHabitacionIoT_clave" placeholder="Clave" maxlength="256">
                                 </div>
                             </div>
 
@@ -153,33 +152,74 @@
             </div>
             <div class="modal-body">
                 <form id="editarHabitacion">
-                    <div class="form-group">
+                    <div class="form-group form-group-lg">
                         <div class="row">
-                            <div class="col-md-12"> <label for="editarHabitacionNumero">Habitacion</label>
-                                <input min="1" max="80" type="number" name="editarHabitacionNumero" id="editarHabitacionNumero" class="form-control" placeholder="1"></div>
-                            <div class="col-md-12"><label for="editarHabitacionNombre">Nombre de planta</label>
-                                <input type="text" name="editarHabitacionNombre" id="editarHabitacionNombre" class="form-control" placeholder="Introduce un nombre"> </div>
+                            <div class="col-md-12">
+                                <label for="editarHabitacionNumero">Numero de habitación</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-edit text-muted"></i></div>
+                                    <input min="1" max="9999" type="number" name="editarHabitacionNumero" id="editarHabitacionNumero" class="form-control" placeholder="101">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="editarHabitacionPiso">Piso de la habitación</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-building text-muted"></i></div>
+                                    <select name="editarHabitacionPiso" id="editarHabitacionPiso" class="form-control pisos"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="editarHabitacionTipo">Tipo de habitación</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-bed text-muted"></i></div>
+                                    <select name="editarHabitacionTipo" id="editarHabitacionTipo" class="form-control categorias"></select>
+                                </div>
+                            </div>
+                            <!-- coso IoT -->
+                            <div class="col-md-12">
+                                <hr>
+                                <p class="h3">Detalles IoT</p>
+                                <p class="text-muted">(Dejar en blanco para no habilitar)</p>
+                                <hr>
+                                <label for="editarHabitacionIoT_ID">ID de Dispositivo</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-plug text-success"></i></div>
+                                    <input type="text" class="form-control" name="editarHabitacionIoT_ID" id="editarHabitacionIoT_ID" placeholder="ID" maxlength="256">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="editarHabitacionIoT_clave">Clave de Dispositivo</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-lock text-success"></i></div>
+                                    <input type="text" class="form-control" name="editarHabitacionIoT_clave" id="editarHabitacionIoT_clave" placeholder="Clave" maxlength="256">
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="msgError"></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
-                        <button type="submit" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar cambios</button>
-            </div>
+                        <button type="submit" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar</button>
+                    </div>
                 </form>
             </div>
-    </div>
-    <!-- /.modal-content -->
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 </div>
 <!-- /.modal-dialog -->
 <!-- /.modal -->
 <script>
     /**
-     * Código inicialización de pisos
+     * Código inicialización de habitaciones
      */
     $(document).ready(function() {
         obtenerHabitaciones();
+        handlerEliminarHabitacion();
+        handlerEditarHabitacion();
     });
 
     /**
@@ -218,10 +258,10 @@
                                 '<td>' + $estaHabilitada + '</td>' +
 
                                 '<td align="center" valign="middle">' +
-                                '<a href="#" class="btn btn-md btn-info btn-fill editarHabitacion" style="color:#FFF;">' +
+                                '<a href="#" data-idHabitacion="' + $habitacion + '" class="btn btn-md btn-info btn-fill editarHabitacion" style="color:#FFF;">' +
                                 '<i class="fa fa-edit fa-fw"></i> Editar' +
                                 '</a>' +
-                                '<a href="#" data-idPiso="' + $habitacion + '" class="btn btn-danger btn-md btn-fill eliminarHabitacion">' +
+                                '<a href="#" data-idHabitacion="' + $habitacion + '" class="btn btn-danger btn-md btn-fill eliminarHabitacion">' +
                                 '<i class="fa fa-trash fa-fw"></i> Eliminar' +
                                 '</a>' +
                                 '</td> '+
@@ -247,6 +287,8 @@
                         $('select.pisos').append(
                             '<option data-idPiso="' + item["piso"] + '">' + item["nombre"] + '</option>');
                     });
+                    handlerEliminarHabitacion();
+                    handlerEditarHabitacion();
                 } else {
                     swal("Error", "Error en la base de datos", "error");
                 }
@@ -256,4 +298,169 @@
             }
         });
     }
+    /**
+     * Guardar habitación en la base de datos
+     */
+    $('form#guardarHabitacion').on('submit', function(e) {
+        guardarHabitacion();
+        e.preventDefault();
+    });
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+    function validarHabitacion($habitacion) {
+        if (!isNumber($habitacion)) {
+            $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'No es un numero de habitación valido</div>');
+            return false;
+        }
+        if ($habitacion === "" || $habitacion === null) {
+            $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Introduce un numero de habitación</div>');
+            return false;
+        }
+        return true;
+    }
+
+    function guardarHabitacion() {
+        var $numeroHabitacion = $('#añadirHabitacionNumero').val();
+        var $piso = $('#añadirHabitacionPiso option:selected').attr("data-idPiso");
+        var $tipo_habitacion = $('#añadirHabitacionTipo option:selected').attr("data-idCat");
+        var $iot_id = $('#añadirHabitacionIoT_ID').val();
+        var $iot_key = $('#añadirHabitacionIoT_clave').val();
+        if (!validarHabitacion($numeroHabitacion)) {
+            return true;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/api/habitacion/addHabitacion',
+            data: "numeroHabitacion=" + $numeroHabitacion + "&piso=" + $piso + "&tipo=" + $tipo_habitacion + "&iot_id=" + $iot_id + "&iot_key=" + $iot_key,
+            success: function(data) {
+                var $datos = (JSON.parse(data));
+                if ($datos.code === 1) {
+                    $('#añadirHabitacion').modal('toggle');
+                    $('.msgError').html('');
+                    $('#msgEmpty').html('');
+                    $('#añadirHabitacionNumero').val('');
+                    obtenerHabitaciones();
+                    swal("Habitación añadida", "Se ha añadido esta habitación", "success");
+                } else {
+                    $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Esta habitación ya existe</div>');
+                }
+            },
+            error: function(xhr, type, exception) {
+                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Error en el servidor, no se pudo añadir el piso</div>');
+            }
+        });
+    }
+
+    /**
+     * Handler eliminar habitación
+     */
+    function handlerEliminarHabitacion() {
+        $('.eliminarHabitacion').unbind();
+        $('.eliminarHabitacion').click(function() {
+            var $id = $(this).attr('data-idHabitacion');
+            swal({
+                title: "¿Estás seguro que quieres eliminar esta habitación?",
+                text: "Esta acción no se puede revertir",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Si, borrala!",
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true
+            }, function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/habitacion/eliminarHabitacion',
+                    data: "id_habitacion=" + $id,
+                    success: function(data) {
+                        var $datos = JSON.parse(data);
+                        if ($datos.code === 1) {
+                            swal("Habitación eliminada", "Se ha eliminado esta habitación", "success");
+                            obtenerHabitaciones();
+                        } else {
+                            swal("No se pudo eliminar", "Ha ocurrido un error.", "error");
+                        }
+                    },
+                    error: function(xhr, type, exception) {
+                        swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
+                    }
+                });
+            });
+        });
+    }
+
+
+    $('form#editarHabitacion').on('submit', function(e) {
+        editarHabitacion();
+        e.preventDefault();
+    });
+
+    function editarHabitacion() {
+        var $habitacion = $('#editarHabitacionNumero').val();
+        var $id_habitacion = $('form#editarHabitacion').attr('id-habitacion');
+        var $piso = $('#editarHabitacionPiso option:selected').attr("data-idPiso");
+        var $tipo_habitacion = $('#editarHabitacionTipo option:selected').attr("data-idCat");
+        var $iot_id = $('#editarHabitacionIoT_ID').val();
+        var $iot_key = $('#editarHabitacionIoT_clave').val();
+        if (!validarHabitacion($habitacion)) {
+            return true;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/api/habitacion/editarHabitacion',
+            data: "habitacion=" + $id_habitacion + "&nuevaHabitacion=" +
+            $habitacion + "&piso=" + $piso + "&tipo=" + $tipo_habitacion + "&iot_id="
+            + $iot_id + "&iot_key=" + $iot_key,
+            success: function(data) {
+                var $datos = (JSON.parse(data));
+                if ($datos.code === 1) {
+                    $('#editarHabitacion').modal('toggle');
+                    $('.msgError').html('');
+                    $('#editarHabitacionNumero').val('');
+                    obtenerHabitaciones();
+                    swal("Habitación editada", "Se ha editado esta habitación", "success");
+                } else {
+                    $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Esta habitación ya existe</div>');
+                }
+            },
+            error: function(xhr, type, exception) {
+                $('.msgError').html('<div class="alert alert-danger msgError" role="alert"><i class="fa fa-warning fw"></i> ' + 'Error en el servidor, no se pudo añadir el piso</div>');
+            }
+        });
+    }
+    /**
+     * Handler editar habitación
+     */
+    function handlerEditarHabitacion() {
+        $('.editarHabitacion').unbind();
+        $('.editarHabitacion').click(function() {
+            var $id = $(this).attr('data-idHabitacion');
+            $.ajax({
+                type: 'POST',
+                url: '/api/habitacion/obtenerHabitacion',
+                data: "id_habitacion=" + $id,
+                success: function(data) {
+                    var $datos = JSON.parse(data);
+                    console.log($datos);
+                    if ($datos.code === 1) {
+                        $('#editarHabitacion').modal('toggle');
+                        $('#editarHabitacionNumero').val($datos["data"][0]["habitacion"]);
+                        $("#editarHabitacionPiso option[data-idPiso='" + $datos['data'][0]['id_piso'] +"']").attr("selected","selected");
+                        $("#editarHabitacionTipo option[data-idCat='" + $datos['data'][0]['id_tipo_habitacion'] +"']").attr("selected","selected");
+                        $('#editarHabitacionIoT_ID').val($datos["data"][0]["iot_id"]);
+                        $('#editarHabitacionIoT_clave').val($datos["data"][0]["iot_key"]);
+                        $('form#editarHabitacion').attr("id-habitacion", $datos["data"][0]["habitacion"]);
+                    } else {
+                        swal("No se pudo obtener información", "Ha ocurrido un error.", "error");
+                    }
+                },
+                error: function(xhr, type, exception) {
+                    swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
+                }
+            });
+        });
+    }
+
+
 </script>

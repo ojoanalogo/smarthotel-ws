@@ -44,7 +44,7 @@ $controladorHabitaciones = new ControladorHabitaciones();
 $app->get("/", function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth()) {
         header("Location: /dashboard");
-        return $app->Response('dashboard.php', valoresDefault(), 201);
+        return $app->Response('dashboard.php', valoresDefault($controladorPrincipal->obtenerConfig()), 201);
     } else
         return $app->Response('login.php', array(), 201);
 });
@@ -209,7 +209,13 @@ $app->post("/api/habitacion/{funcion}", function ($funcion) use ($app, $controla
     if ($funcion == "obtenerHabitaciones")
         $app->JsonResponse($controladorHabitaciones->obtenerHabitaciones(), 201);
     if ($funcion == "addHabitacion")
-        $app->JsonResponse($controladorHabitaciones->añadirHabitacion($rq->post()), 201);
+        $app->JsonResponse($controladorHabitaciones->añadirHabitacion($rq->post("numeroHabitacion"), $rq->post("piso"), $rq->post("tipo"), $rq->post("iot_id"), $rq->post("iot_key")), 201);
+    if ($funcion == "eliminarHabitacion")
+        $app->JsonResponse($controladorHabitaciones->eliminarHabitacion($rq->post("id_habitacion")), 201);
+    if ($funcion == "obtenerHabitacion")
+        $app->JsonResponse($controladorHabitaciones->obtenerHabitacion($rq->post("id_habitacion")), 201);
+    if ($funcion == "editarHabitacion")
+        $app->JsonResponse($controladorHabitaciones->editarHabitacion($rq->post("habitacion"), $rq->post("nuevaHabitacion"), $rq->post("piso"), $rq->post("tipo"), $rq->post("iot_id"), $rq->post("iot_key")), 201);
 });
 
 /**

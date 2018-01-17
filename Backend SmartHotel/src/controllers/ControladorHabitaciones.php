@@ -139,6 +139,82 @@ class ControladorHabitaciones {
     }
 
     /**
+     * @param $numeroHabitacion
+     * @param $piso
+     * @param $tipo_habitacion
+     * @param $iot_id
+     * @param $iot_key
+     * @return array
+     */
+    public function añadirHabitacion($numeroHabitacion, $piso, $tipo_habitacion, $iot_id, $iot_key) {
+        global $db;
+        $args = array($numeroHabitacion, $piso, $tipo_habitacion, $iot_id, $iot_key);
+        $query = "INSERT INTO sh_habitaciones(habitacion, id_piso, id_tipo_habitacion, iot_id, iot_key, estatus) VALUES(?, ?, ?, ?, ?, 1)";
+        $rs = $db->query($query, $args);
+        if ($rs === false)
+            return array("code" => 0, "msg" => "Error al intentar añadir habitación");
+        return array("code" => 1, "msg" => "Habitaciones añadida");
+    }
+
+    /**
+     * @param $id_habitacion
+     * @return array
+     */
+    public function eliminarHabitacion($id_habitacion) {
+        global $db;
+        $args = array($id_habitacion);
+        $query = "DELETE FROM sh_habitaciones WHERE habitacion = ?";
+        $rs = $db->query($query, $args);
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Error al intentar eliminar habitación");
+        }
+        return array("code" => 1, "msg" => "Habitación eliminada");
+    }
+
+    /**
+     * @param $id_habitacion
+     * @return array
+     */
+    public function obtenerHabitacion($id_habitacion) {
+        global $db;
+        $args = array($id_habitacion);
+        $query = "SELECT * FROM sh_habitaciones WHERE habitacion=?";
+        $rs = $db->query($query, $args);
+        $datos = array();
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Error al intentar obtener habitación");
+        }
+        foreach ($rs as $row) {
+            $datos[] = $row;
+        }
+        return array("code" => 1, "msg" => "Habitación obtenida", "data" => $datos);
+    }
+
+    /**
+     * @param $id_habitacion
+     * @param $nuevaHabitacion
+     * @param $piso
+     * @param $tipo_habitacion
+     * @param $iot_id
+     * @param $iot_key
+     * @return array
+     */
+    public function editarHabitacion($id_habitacion, $nuevaHabitacion, $piso, $tipo_habitacion, $iot_id, $iot_key) {
+        global $db;
+        $args = array($nuevaHabitacion, $piso, $tipo_habitacion, $iot_id, $iot_key, $id_habitacion);
+        $query = "UPDATE sh_habitaciones SET habitacion=?, id_piso=?, id_tipo_habitacion=?, iot_id=?, iot_key=? WHERE habitacion=?";
+        $rs = $db->query($query, $args);
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "Esa habitación ya existe");
+        }
+        return array("code" => 1, "msg" => "Habitación editada");
+    }
+
+    /**
+     * Tipos de habitación
+     */
+
+    /**
      * @return array
      */
     public function obtenerTipos() {
