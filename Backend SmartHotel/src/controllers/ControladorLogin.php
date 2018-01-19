@@ -33,7 +33,11 @@ class ControladorLogin
         $user = strtolower(trim($user_post));
         $password = stripslashes(hash("sha256", $password_post));
         $args = array($user, $password);
-        $query = "SELECT * FROM sh_panel_usuarios WHERE correo=? AND clave=?";
+        $query = null;
+        if ($appLogin)
+            $query = "SELECT * FROM sh_huespedes WHERE correo=? AND clave=?";
+        else
+            $query = "SELECT * FROM sh_panel_usuarios WHERE correo=? AND clave=?";
         $rs = $db->query($query, $args);
         if ($rs === false) {
             return false;
@@ -81,25 +85,23 @@ class ControladorLogin
         session_destroy();
     }
 
-    public function authMe($correo_get, $password_get) {
-        if(!$correo_get|| !$password_get)  {
-            echo json_encode(array("code" => 1, "response" => "Datos insuficientes"));
-        }
-        $login = $this->validarUsuario($correo_get, $password_get, true);
+    public function authMe($body) {
+        $obj = json_decode($body, true);
+        $login = $this->validarUsuario($obj["correo"], $obj["clave"], true);
         if($login) {
             //ha hecho login
             $res = array("iat" => time(), "exp" => time() + $this->diasMinutos(3));
             $jwt = JWT::encode($res, '');
-            echo json_encode(
+            return
                 array(
-                    "code" => 0,
+                    "code" => 1,
                     "response" => array(
+                        "msg" => "Usuario validado",
                         "token" => $jwt
                     )
-                )
-            );
+                );
         } else {
-            echo json_encode(array("code" => 0, "response" => "Usuario/Clave no valido"));
+            return array("code" => 0, "response" => "Usuario/Clave no valido");
         }
     }
 

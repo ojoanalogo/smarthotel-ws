@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-01-2018 a las 09:47:21
+-- Tiempo de generación: 19-01-2018 a las 23:08:41
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -313,7 +313,7 @@ INSERT INTO `sh_configuracion` (`nombre_hotel`, `correo`, `ciudad`, `pais`, `cod
 --
 
 CREATE TABLE `sh_habitaciones` (
-  `id_habitacion` int(16) NOT NULL,
+  `habitacion` int(16) NOT NULL,
   `id_tipo_habitacion` int(16) NOT NULL,
   `id_piso` int(16) NOT NULL,
   `iot_id` varchar(256) NOT NULL,
@@ -325,8 +325,15 @@ CREATE TABLE `sh_habitaciones` (
 -- Volcado de datos para la tabla `sh_habitaciones`
 --
 
-INSERT INTO `sh_habitaciones` (`id_habitacion`, `id_tipo_habitacion`, `id_piso`, `iot_id`, `iot_key`, `estatus`) VALUES
-(1, 1, 43, 'Test-1', 'cWnotTdTGloChH87490UXorKXAT1I0wKqpRXTPCGuuQ=', 1);
+INSERT INTO `sh_habitaciones` (`habitacion`, `id_tipo_habitacion`, `id_piso`, `iot_id`, `iot_key`, `estatus`) VALUES
+(101, 2, 1, 'Test-1', 'cWnotTdTGloChH87490UXorKXAT1I0wKqpRXTPCGuuQ=', 1),
+(102, 2, 1, '', '', 1),
+(106, 2, 1, '', '', 1),
+(201, 2, 2, '', '', 1),
+(203, 2, 2, '', '', 1),
+(301, 1, 3, '', '', 1),
+(405, 1, 4, '', '', 1),
+(501, 2, 5, '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -339,14 +346,15 @@ CREATE TABLE `sh_habitaciones_tipos` (
   `tipo_habitacion` varchar(64) NOT NULL,
   `costo_mx` int(8) NOT NULL,
   `costo_usd` int(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Volcado de datos para la tabla `sh_habitaciones_tipos`
 --
 
 INSERT INTO `sh_habitaciones_tipos` (`id_tipo_habitacion`, `tipo_habitacion`, `costo_mx`, `costo_usd`) VALUES
-(1, 'Cama doble', 1500, 70);
+(1, 'Cama sencilla', 800, 35),
+(2, 'Cama doble', 1800, 85);
 
 -- --------------------------------------------------------
 
@@ -357,7 +365,6 @@ INSERT INTO `sh_habitaciones_tipos` (`id_tipo_habitacion`, `tipo_habitacion`, `c
 CREATE TABLE `sh_huespedes` (
   `id_usuario` int(16) NOT NULL,
   `correo` varchar(255) NOT NULL,
-  `usuario` varchar(16) NOT NULL,
   `nombre` text NOT NULL,
   `apellido` text NOT NULL,
   `telefono` varchar(128) NOT NULL,
@@ -373,8 +380,8 @@ CREATE TABLE `sh_huespedes` (
 -- Volcado de datos para la tabla `sh_huespedes`
 --
 
-INSERT INTO `sh_huespedes` (`id_usuario`, `correo`, `usuario`, `nombre`, `apellido`, `telefono`, `fecha_registro`, `pais_id`, `direccion`, `id_rol`, `ultimo_login`, `clave`) VALUES
-(1, 'arc980103@gmail.com', 'mrarc', 'Alfonso', 'Reyes', '6677749291', '2018-01-02 15:31:13', 0, '', 1, '0000-00-00 00:00:00', 'edc0fe321a62efbfc8eb900e3c590eb55a54bca0e381fd3e2ba93408a2ec0bf0');
+INSERT INTO `sh_huespedes` (`id_usuario`, `correo`, `nombre`, `apellido`, `telefono`, `fecha_registro`, `pais_id`, `direccion`, `id_rol`, `ultimo_login`, `clave`) VALUES
+(1, 'arc980103@gmail.com', 'Alfonso', 'Reyes', '6677749291', '2018-01-02 15:31:13', 1, 'Priv. Rio Suchiate 1125', 1, '0000-00-00 00:00:00', 'edc0fe321a62efbfc8eb900e3c590eb55a54bca0e381fd3e2ba93408a2ec0bf0');
 
 -- --------------------------------------------------------
 
@@ -399,7 +406,7 @@ CREATE TABLE `sh_panel_usuarios` (
 --
 
 INSERT INTO `sh_panel_usuarios` (`id_usuario`, `correo`, `usuario`, `nombre`, `apellido`, `fecha_registro`, `id_rol`, `ultimo_login`, `clave`) VALUES
-(1, 'hola@mrarc.xyz', 'mrarc', 'Alfonso', 'Reyes', '2018-01-11 14:46:22', 1, '2018-01-11 00:00:00', 'edc0fe321a62efbfc8eb900e3c590eb55a54bca0e381fd3e2ba93408a2ec0bf0');
+(1, 'hola@mrarc.xyz', 'mrarc', 'Alfonso', 'Reyes', '2018-01-11 14:46:22', 1, '2018-01-19 22:08:32', 'edc0fe321a62efbfc8eb900e3c590eb55a54bca0e381fd3e2ba93408a2ec0bf0');
 
 -- --------------------------------------------------------
 
@@ -408,7 +415,6 @@ INSERT INTO `sh_panel_usuarios` (`id_usuario`, `correo`, `usuario`, `nombre`, `a
 --
 
 CREATE TABLE `sh_pisos` (
-  `id_piso` int(16) NOT NULL,
   `piso` int(8) NOT NULL,
   `nombre` varchar(128) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
@@ -417,13 +423,12 @@ CREATE TABLE `sh_pisos` (
 -- Volcado de datos para la tabla `sh_pisos`
 --
 
-INSERT INTO `sh_pisos` (`id_piso`, `piso`, `nombre`) VALUES
-(43, 1, 'Piso 1'),
-(44, 2, 'Piso 2'),
-(45, 3, 'Piso 3'),
-(47, 5, 'Piso 5'),
-(48, 6, 'Piso 6'),
-(49, 4, 'Piso 4');
+INSERT INTO `sh_pisos` (`piso`, `nombre`) VALUES
+(1, 'Piso 1'),
+(2, 'Piso 2'),
+(3, 'Piso 3'),
+(4, 'Piso 4'),
+(5, 'Piso 5');
 
 -- --------------------------------------------------------
 
@@ -432,13 +437,20 @@ INSERT INTO `sh_pisos` (`id_piso`, `piso`, `nombre`) VALUES
 --
 
 CREATE TABLE `sh_reservas` (
-  `id_reserva` int(16) NOT NULL,
+  `id_reserva` varchar(8) NOT NULL,
   `huesped` int(16) NOT NULL,
   `desde` datetime NOT NULL,
   `hasta` datetime NOT NULL,
   `id_habitacion` int(16) NOT NULL,
   `notas` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sh_reservas`
+--
+
+INSERT INTO `sh_reservas` (`id_reserva`, `huesped`, `desde`, `hasta`, `id_habitacion`, `notas`) VALUES
+('lzl0Ahhx', 1, '2018-01-22 00:00:00', '2018-01-31 00:00:00', 101, 'No le gusta que lo molesten');
 
 -- --------------------------------------------------------
 
@@ -500,8 +512,8 @@ ALTER TABLE `sh_configuracion`
 -- Indices de la tabla `sh_habitaciones`
 --
 ALTER TABLE `sh_habitaciones`
-  ADD PRIMARY KEY (`id_habitacion`),
-  ADD UNIQUE KEY `id_habitacion` (`id_habitacion`);
+  ADD PRIMARY KEY (`habitacion`),
+  ADD UNIQUE KEY `id_habitacion` (`habitacion`);
 
 --
 -- Indices de la tabla `sh_habitaciones_tipos`
@@ -533,14 +545,18 @@ ALTER TABLE `sh_panel_usuarios`
 -- Indices de la tabla `sh_pisos`
 --
 ALTER TABLE `sh_pisos`
-  ADD UNIQUE KEY `id_piso` (`id_piso`),
-  ADD UNIQUE KEY `piso` (`piso`);
+  ADD PRIMARY KEY (`piso`),
+  ADD UNIQUE KEY `piso` (`piso`),
+  ADD UNIQUE KEY `piso_3` (`piso`),
+  ADD UNIQUE KEY `nombre` (`nombre`),
+  ADD KEY `piso_2` (`piso`);
 
 --
 -- Indices de la tabla `sh_reservas`
 --
 ALTER TABLE `sh_reservas`
-  ADD PRIMARY KEY (`id_reserva`);
+  ADD PRIMARY KEY (`id_reserva`),
+  ADD UNIQUE KEY `id_reserva` (`id_reserva`);
 
 --
 -- Indices de la tabla `sh_roles`
@@ -562,7 +578,7 @@ ALTER TABLE `apps_countries`
 -- AUTO_INCREMENT de la tabla `sh_habitaciones_tipos`
 --
 ALTER TABLE `sh_habitaciones_tipos`
-  MODIFY `id_tipo_habitacion` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tipo_habitacion` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `sh_huespedes`
 --
@@ -573,16 +589,6 @@ ALTER TABLE `sh_huespedes`
 --
 ALTER TABLE `sh_panel_usuarios`
   MODIFY `id_usuario` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `sh_pisos`
---
-ALTER TABLE `sh_pisos`
-  MODIFY `id_piso` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
---
--- AUTO_INCREMENT de la tabla `sh_reservas`
---
-ALTER TABLE `sh_reservas`
-  MODIFY `id_reserva` int(16) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `sh_roles`
 --

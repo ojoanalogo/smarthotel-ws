@@ -158,7 +158,7 @@ $app->post("/authme_panel", function () use ($app, $controladorLogin) {
 });
 
 $app->post("/authme", function () use ($app, $controladorLogin) {
-    $controladorLogin->authMe($app->getRequest()->post("correo"), $app->getRequest()->post("clave"));
+    $app->JsonResponse($controladorLogin->authMe($app->getRequest()->getBody()), 200);
 });
 
 /**
@@ -233,6 +233,9 @@ $app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPr
 // 404
 $app->respond(function () use ($app) {
     return $app->ResponseHTML('<p> 404 </p>', 404);
+});
+$app->get("/test", function () use ($app) {
+    echo stripslashes(hash("sha256", "comodorops3"));
 });
 
 function checkAuth()
