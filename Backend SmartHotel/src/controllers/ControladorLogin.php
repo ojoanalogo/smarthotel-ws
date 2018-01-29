@@ -92,6 +92,7 @@ class ControladorLogin
             //ha hecho login
             $res = array("iat" => time(), "exp" => time() + $this->diasMinutos(3));
             $jwt = JWT::encode($res, '');
+            http_response_code(200);
             return
                 array(
                     "code" => 1,
@@ -101,6 +102,7 @@ class ControladorLogin
                     )
                 );
         } else {
+            http_response_code(401);
             return array("code" => 0, "response" => "Usuario/Clave no valido");
         }
     }

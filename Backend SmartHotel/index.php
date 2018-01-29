@@ -158,7 +158,7 @@ $app->post("/authme_panel", function () use ($app, $controladorLogin) {
 });
 
 $app->post("/authme", function () use ($app, $controladorLogin) {
-    $app->JsonResponse($controladorLogin->authMe($app->getRequest()->getBody()), 200);
+    $app->JsonResponse($controladorLogin->authMe($app->getRequest()->getBody()));
 });
 
 /**
