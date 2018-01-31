@@ -30,11 +30,13 @@ require_once __DIR__ . "/src/controllers/ControladorPrincipal.php";
 require_once __DIR__ . "/src/controllers/ControladorLogin.php";
 require_once __DIR__ . "/src/controllers/ControladorHabitaciones.php";
 require_once __DIR__ . "/src/controllers/ControladorHuespedes.php";
+require_once __DIR__ . "/src/controllers/ControladorReservaciones.php";
 
 $controladorPrincipal = new ControladorPrincipal();
 $controladorLogin = new ControladorLogin();
 $controladorHabitaciones = new ControladorHabitaciones();
 $controladorHuespedes = new ControladorHuespedes();
+$controladorReservaciones = new ControladorReservaciones();
 
 /**
  * Rutas de la aplicación
@@ -221,6 +223,17 @@ $app->post("/api/habitacion/{funcion}", function ($funcion) use ($app, $controla
 });
 
 /**
+ * API Reservaciones
+ */
+$app->post("/api/reservacion/{funcion}", function ($funcion) use ($app, $controladorReservaciones) {
+    $rq = $app->getRequest();
+    if ($funcion == "crearReservacion")
+        $app->JsonResponse($controladorReservaciones->crearReservacion($rq->post("idHuesped"), $rq->post("fechaDesde"),
+        $rq->post("fechaHasta"), $rq->post("idHabitacion"), $rq->post("notas")), 201);
+});
+
+
+/**
  * API Hotel
  */
 $app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPrincipal) {
@@ -234,8 +247,8 @@ $app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPr
 $app->respond(function () use ($app) {
     return $app->ResponseHTML('<p> 404 </p>', 404);
 });
-$app->get("/test", function () use ($app) {
-    echo stripslashes(hash("sha256", "comodorops3"));
+$app->get("/test", function () use ($app, $controladorReservaciones) {
+    return $app->ResponseHTML($controladorReservaciones->generarCodigoReservacion());
 });
 
 function checkAuth()

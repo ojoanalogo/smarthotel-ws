@@ -1,6 +1,6 @@
 <?php
 // Require
-include_once "/../libs/firebase/firebase.php";
+require_once  __DIR__ . "/../libs/firebase/firebase.php";
 use Firebase\JWT\JWT;
 
 /**

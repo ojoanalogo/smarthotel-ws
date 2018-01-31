@@ -1,4 +1,4 @@
-<?php include "/../includes/header.php" ?>
+<?php include __DIR__ . "/../includes/header.php" ?>
 <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header"><i class="fa fa-gears fa-fw"></i> Configuración - Tipos de habitación</h1>
@@ -66,7 +66,7 @@
         </div>
     </div>
 </div>
-<?php include "/../includes/footer.php" ?>
+<?php include __DIR__ . "/../includes/footer.php" ?>
 <!-- Modales -->
 <!-- Modal añadir tipo de habitación -->
 <div class="modal fade" id="añadirTipo" tabindex="-1" role="dialog" aria-hidden="true">
