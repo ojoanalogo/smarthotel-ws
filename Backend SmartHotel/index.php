@@ -93,6 +93,37 @@ $app->get('/dashboard/huespedes', function () use ($app, $controladorHuespedes) 
         return $app->Response('login.php', array(), 201);
 });
 
+/**
+ * Añadir huespede
+ */
+$app->post('/dashboard/huespedes/add', function () use ($app, $controladorHuespedes) {
+    $rq = $app->getRequest();
+    if (checkAuth()) {
+            if($controladorHuespedes->crearHuesped($rq->post("correo_huesped"),
+                $rq->post("clave_huesped"), $rq->post("nombre"), $rq->post("apellido"), $rq->post("telefono"),
+                $rq->post("pais"), $rq->post("direccion"))) {
+                header("Location: /dashboard/huespedes");
+                return $app->Response('huespedes.php', valoresDefault($controladorHuespedes->obtenerHuespedes(), array("ok" => "Usuario añadido")), 201);
+            } else {
+                return $app->Response('huespedes.php"', valoresDefault($controladorHuespedes->obtenerHuespedes(), array("error" => "Usuario ya existe")), 201);
+            }
+    }
+});
+/**
+ * Remover huesped
+ */
+$app->get('/dashboard/huespedes/remove/{id}', function ($id) use ($app, $controladorHuespedes) {
+    if (checkAuth()) {
+        if($controladorHuespedes->removerHuesped($id)) {
+            header("Location: /dashboard/huespedes/");
+            return $app->Response('huespedes.php', valoresDefault($controladorHuespedes->obtenerHuespedes(), array("removido" => "Huesped removido")), 201);
+        } else {
+            header("Location: /dashboard/huespedes/");
+            return $app->Response('huespedes.php', valoresDefault($controladorHuespedes->obtenerHuespedes(), array("errorRemovido" => "Error al remover huesped")), 201);
+        }
+    }
+});
+
 
 /**
  * Servir pag Mapa
@@ -243,6 +274,11 @@ $app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPr
         $app->JsonResponse($controladorPrincipal->actualizarConfig($app->getRequest()->getBody()), 201);
 });
 
+/**
+ * API Reservaciones
+ */
+
+
 // 404
 $app->respond(function () use ($app) {
     return $app->ResponseHTML('<p> 404 </p>', 404);
@@ -257,11 +293,11 @@ function checkAuth()
     return $controladorLogin->verificarAcceso();
 }
 
-function valoresDefault($extraArgs = array())
+function valoresDefault($extraArgs = array(), $extraArgs2 = array())
 {
     global $controladorPrincipal, $controladorLogin;
     $datosUsuario = $controladorPrincipal->variablesUsuario($controladorLogin->obtenerUsuario());
-    return array("datosUsuario" => $datosUsuario, "args" => $extraArgs);
+    return array("datosUsuario" => $datosUsuario, "args" => $extraArgs, "extra" => $extraArgs2);
 }
 
 $app->listen();

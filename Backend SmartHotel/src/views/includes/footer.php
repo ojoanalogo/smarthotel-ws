@@ -36,4 +36,6 @@
 <script src="/public/js/datatables.min.js"></script>
 <!-- Plugin alertas  -->
 <script src="/public/js/sweetalert.min.js"></script>
+<!--  Plugin Paises JS -->
+<script src="/public/js/countries.js"></script>
 </html>
