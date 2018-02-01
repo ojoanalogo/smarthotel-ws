@@ -69,9 +69,9 @@
 <?php include "includes/footer.php" ?>
 <!-- Modales -->
 <div class="modal fade" id="añadirHuesped" tabindex="-1" role="dialog" aria-hidden="true">
+    <form id="añadirHuesped" method="post" action="/dashboard/huespedes/add">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="añadirHuesped" method="post" action="/dashboard/huespedes/add">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h2>Añadir huesped <small>usuarios</small></h2>
@@ -134,11 +134,11 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
                 <button type="submit" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar</button>
-            </div>
-            </form>
+        </div>
         </div>
         <!-- /.modal-content -->
     </div>
+    </form>
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->

@@ -94,7 +94,7 @@ $app->get('/dashboard/huespedes', function () use ($app, $controladorHuespedes) 
 });
 
 /**
- * Añadir huespede
+ * Añadir huesped
  */
 $app->post('/dashboard/huespedes/add', function () use ($app, $controladorHuespedes) {
     $rq = $app->getRequest();
@@ -123,7 +123,6 @@ $app->get('/dashboard/huespedes/remove/{id}', function ($id) use ($app, $control
         }
     }
 });
-
 
 /**
  * Servir pag Mapa
@@ -274,15 +273,11 @@ $app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPr
         $app->JsonResponse($controladorPrincipal->actualizarConfig($app->getRequest()->getBody()), 201);
 });
 
-/**
- * API Reservaciones
- */
-
-
 // 404
 $app->respond(function () use ($app) {
     return $app->ResponseHTML('<p> 404 </p>', 404);
 });
+
 $app->get("/test", function () use ($app, $controladorReservaciones) {
     return $app->ResponseHTML($controladorReservaciones->generarCodigoReservacion());
 });

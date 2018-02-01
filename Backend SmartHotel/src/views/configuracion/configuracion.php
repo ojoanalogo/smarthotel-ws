@@ -48,16 +48,6 @@
                     </li>
                 </ul>
             </div>
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Avisos</h3>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a href="/dashboard/configuracion/avisos" class="h3"><i class="fa fa-bullhorn fa-fw"></i> Configurar avisos </a>
-                    </li>
-                </ul>
-            </div>
         </div>
         <div class="col-lg-9 col-md-6">
             <div class="panel panel-default">

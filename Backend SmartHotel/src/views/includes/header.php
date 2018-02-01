@@ -72,12 +72,6 @@ function obtenerSeccionNavbar($requestUri) {
                         <p>Habitaciones</p>
                     </a>
                 </li>
-                <li <?php obtenerSeccionNavbar("reservaciones") ?>>
-                    <a href="/dashboard/reservaciones">
-                        <i class="fa fa-bookmark"></i>
-                        <p>Reservaciones</p>
-                    </a>
-                </li>
                 <li <?php obtenerSeccionNavbar("huespedes") ?>>
                     <a href="/dashboard/huespedes">
                         <i class="fa fa-users"></i>

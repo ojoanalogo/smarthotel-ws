@@ -8,6 +8,40 @@
     <li><a href="/dashboard">Inicio</a></li>
     <li class="active">Habitaciones</li>
 </ol>
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Ayuda</h4>
+                <p class="category">Soporte</p>
+            </div>
+            <div class="content">
+                <div class="centrar"><i class="fa fa-bookmark-o fa-4x"></i></div>
+                <hr>
+                <p class="text-muted">Cuando quieras asignar o registrar a un huesped a una habitación hazlo desde esta ubicación</p>
+                <p class="text-muted">También puedes ver los detalles de habitación si tienen el sistema IoT activado</p>
+            </div>
+            <hr>
+            <div class="header">
+                <h4 class="title">Preguntas frecuentes</h4>
+                <p class="category">Soporte</p>
+            </div>
+            <div class="content">
+                <b class="text-info"><i class="fa fa-question-circle-o fa-fw"></i> ¿Como registro un huesped?</b>
+                <div></div>
+                <p class="text-muted">
+                    Selecciona la opción "Check-In" e introduce los datos del huesped para añadirlo a la base de datos y asignarle una habitación que podrá controlar desde la aplicación.
+                    Si el huesped ya ha sido hospedado antes, solo selecciona la opción "Llegada huesped registrado" y rellena los datos que se te solicitan
+                </p>
+                <b class="text-info"><i class="fa fa-question-circle-o fa-fw"></i> ¿Cómo veo el estatus de una habitación</b>
+                <div></div>
+                <p class="text-muted">
+                    Selecciona la opción detalles habitación, si tiene el sistema IoT activado saldrá la opción
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-6">
 <form class="navbar-form"  method="post">
 
     <div class="navbar navbar-default row" role="navigation">
@@ -133,7 +167,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="#" class="btn btn-fill btn-danger"
+                                <a href="#" class="btn btn-fill"
                                    style="color:#FFF; background-color: #ff7200;" title="Check-Out">
                                     <i class="fa fa-bookmark-o"></i> Check-Out</a>
                                 <a href="#" class="btn btn-fill"
@@ -171,6 +205,8 @@
             </div>
         </div>
 
+    </div>
+</div>
     </div>
 </div>
 <table width="50%" border="0" align="center">
