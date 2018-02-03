@@ -54,8 +54,8 @@
 <td align="center" valign="middle">' . $usuario["telefono"] . '</td>
 <td align="center" valign="middle">
     <a href="#" class="btn btn-md btn-fill btn-primary"><i class="fa fa-list"></i> Historial</a>
-    <a href="#" data-toggle="modal" data-target="#editarUsuario" class="btn btn-md btn-info btn-fill" style="color:#FFF;"><i class="fa fa-edit fa-fw"></i> Editar</a>
-    <a href="#" data-idHuesped="' . $usuario["id_usuario"] . '" class="btn btn-danger btn-md btn-fill eliminarHuesped"><i class="fa fa-trash fa-fw"></i> Eliminar</a>
+    <a href="#" class="btn btn-md btn-info btn-fill editarHuesped" data-idHuesped="' . $usuario["id_huesped"] . '" style="color:#FFF;"><i class="fa fa-edit fa-fw"></i> Editar</a>
+    <a href="#" data-idHuesped="' . $usuario["id_huesped"] . '" class="btn btn-danger btn-md btn-fill eliminarHuesped"><i class="fa fa-trash fa-fw"></i> Eliminar</a>
     </td>
  </tr>';
                     }
@@ -142,6 +142,69 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<!-- editar huesped -->
+
+<div class="modal fade" id="editarHuesped" tabindex="-1" role="dialog" aria-hidden="true">
+    <form id="editarHuesped">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2>Editar huesped <small>usuarios</small></h2>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form-group-lg">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="nombreEdicion">Nombre</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-pencil text-muted"></i></div>
+                                    <input type="text" name="nombreEdicion" id="nombreEdicion" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="apellidoEdicion">Apellido</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-pencil text-muted"></i></div>
+                                    <input type="text" name="apellidoEdicion" id="apellidoEdicion" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="correo_huespedEdicion">Correo</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-at text-muted"></i></div>
+                                    <input type="email" name="correo_huespedEdicion" id="correo_huespedEdicion" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="direccionEdicion">Dirección</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-signing text-muted"></i></div>
+                                    <textarea name="direccionEdicion" id="direccionEdicion" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="telefonoEdicion">Telefono</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-phone text-muted"></i></div>
+                                    <input type="number" name="telefonoEdicion" id="telefonoEdicion" class="form-control" maxlength="128" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
+                    <button type="submit" name="guardar" class="btn btn-primary btn-md"><i class="fa fa-save fa-fw"></i>Guardar datos</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </form>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <script>
     $(document).ready(function() {
         $('#tabla-huespedes').dataTable({
@@ -151,7 +214,68 @@
         });
         populateCountries("pais");
     });
-    $('.eliminarHuesped').click(function(){
+    $('.editarHuesped').click(function() {
+        var $idHuesped = $(this).attr('data-idHuesped');
+        $.ajax({
+            type: 'POST',
+            url: '/api/huespedes/obtenerHuesped',
+            data: "id_huesped=" + $idHuesped,
+            success: function(data) {
+                var $datos = JSON.parse(data);
+                console.log($datos);
+                if ($datos.code === 1) {
+                    var $data = $datos["data"][0];
+                    $('#nombreEdicion').val($data.nombre);
+                    $('#apellidoEdicion').val($data.apellido);
+                    $('#correo_huespedEdicion').val($data.correo);
+                    $('#direccionEdicion').val($data.direccion);
+                    $('#telefonoEdicion').val($data.telefono);
+                    $('#editarHuesped').modal('toggle');
+                    $('form#editarHuesped').attr("id-huesped", $idHuesped);
+                } else {
+                    swal("Error", "Error en la base de datos", "error");
+                }
+            },
+            error: function(xhr, type, exception) {
+                swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
+            }
+        });
+    });
+
+    $('form#editarHuesped').on('submit', function(e) {
+        editarHuesped();
+        e.preventDefault();
+    });
+
+    function editarHuesped() {
+        var $idHuesped = $('form#editarHuesped').attr('id-huesped');
+        var $nombre = $('#nombreEdicion').val();
+        var $apellido = $('#apellidoEdicion').val();
+        var $correo = $('#correo_huespedEdicion').val();
+        var $direccion = $('#direccionEdicion').val();
+        var $telefono = $('#telefonoEdicion').val();
+        $.ajax({
+            type: 'POST',
+            url: '/api/huespedes/editarHuesped',
+            data: "id_huesped=" + $idHuesped + "&nombre=" + $nombre + "&apellido=" + $apellido + "&correo=" + $correo + "&direccion=" + $direccion + "&telefono=" + $telefono,
+            success: function(data) {
+                var $datos = JSON.parse(data);
+                if ($datos.code === 1) {
+                    swal("Edición completa", "Información editada", "success");
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1500);
+                } else {
+                    swal("Error", "Error en la base de datos", "error");
+                }
+            },
+            error: function(xhr, type, exception) {
+                swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
+            }
+        });
+    }
+
+        $('.eliminarHuesped').click(function(){
        var $idHuesped = $(this).attr('data-idHuesped');
         swal({
                 title: "Estás seguro?",

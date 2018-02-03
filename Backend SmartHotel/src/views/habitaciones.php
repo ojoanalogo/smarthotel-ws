@@ -57,156 +57,22 @@
             </div>
             <div class="navbar-collapse collapse" id="nav_menu">
                 <ul class="nav navbar-nav">
-                    <li style="cursor:pointer; margin-top:5px;"><div class="input-group">
-                            <span class="input-group-addon">Fecha &nbsp;</span>
-                            <input type="text" name="bed_date" id="datepicker" value="<?php echo date("Y-m-d")?>" class="form-control text-info" autocomplete="off">
+                    <li style="margin-top:16px;"><div class="input-group">
+                            <span class="input-group-addon">Fecha &nbsp;<?php echo date("Y-m-d")?></span>
                         </div>
-                        <button name="show_data" class="btn btn-default "><i class="fa fa-search"></i> Buscar</button></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </div>
 </form>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        Piso 1
-    </div>
-    <div class="panel-body">
-        <div class="col-md-3"><div class="panel habitacion-disponible">
-                <div class="panel-heading">103<span class="pull-right"><span class="label label-default">Cama doble</span></span></div>
-                <div class="table-responsive">
-                    <table width="100%" border="0" class="table">
-                        <tr>
-                            <td><i class="fa fa-user" title="Huesped"></i>&nbsp;<strong>-</strong></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-clock-o" title="Hora"></i>&nbsp;<strong>-</strong></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="btn btn-fill btn-success"
-                                   style="color:#FFF; background-color: #5cb85c;" title="Check-In">
-                                    <i class="fa fa-bookmark-o"></i> Check-In</a>
-                                <a href="/dashboard/habitaciones/detalle/103" class="btn btn-fill"
-                                   style="color:#FFF; background-color: #009688;" title="Detalles">
-                                    <i class="fa fa-dashboard"></i> Detalles habitación</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+        <div class="ajxLoader centrar" style="margin-top: 60px;">
+            <i class="fa fa-circle-o-notch fa-spin fa-5x fa-fw text-muted"></i>
+            <span class="sr-only">Loading...</span>
         </div>
+        <h4 class="centrar" id="msgEmpty"></h4>
+        <div id="habitaciones">
 
-        <div class="col-md-3"><div class="panel habitacion-disponible">
-                <div class="panel-heading">104<span class="pull-right"><span class="label label-default">Cama doble</span></span></div>
-                <div class="table-responsive">
-                    <table width="100%" border="0" class="table">
-                        <tr>
-                            <td><i class="fa fa-user" title="Huesped"></i>&nbsp;<strong>-</strong></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-clock-o" title="Hora"></i>&nbsp;<strong>-</strong></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="btn btn-fill btn-success"
-                                   style="color:#FFF; background-color: #5cb85c;" title="Check-In">
-                                    <i class="fa fa-bookmark-o"></i> Check-In</a>
-                                <a href="#" class="btn btn-fill"
-                                   style="color:#FFF; background-color: #009688;" title="Detalles">
-                                    <i class="fa fa-dashboard"></i> Detalles habitación</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
         </div>
-
-        <div class="col-md-3"><div class="panel habitacion-disponible">
-                <div class="panel-heading">105<span class="pull-right"><span class="label label-default">Cama doble</span></span></div>
-                <div class="table-responsive">
-                    <table width="100%" border="0" class="table">
-                        <tr>
-                            <td><i class="fa fa-user" title="Huesped"></i>&nbsp;<strong>-</strong></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-clock-o" title="Hora"></i>&nbsp;<strong>-</strong></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="btn btn-fill btn-success"
-                                   style="color:#FFF; background-color: #5cb85c;" title="Check-In">
-                                    <i class="fa fa-bookmark-o"></i> Check-In</a>
-                                <a href="#" class="btn btn-fill"
-                                   style="color:#FFF; background-color: #009688;" title="Detalles">
-                                    <i class="fa fa-dashboard"></i> Detalles habitación</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        Piso 2
-    </div>
-    <div class="panel-body">
-
-        <div class="col-md-3"><div class="panel habitacion-ocupada">
-                <div class="panel-heading">220<span class="pull-right"><span class="label label-default">Cama sencilla</span></span></div>
-                <div class="table-responsive">
-                    <table width="100%" border="0" class="table">
-                        <tr>
-                            <td><i class="fa fa-user" title="Huesped"></i>&nbsp;<strong>Alfonso Reyes</strong></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-clock-o" title="Hora"></i>&nbsp;<strong>2 días</strong></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="btn btn-fill"
-                                   style="color:#FFF; background-color: #ff7200;" title="Check-Out">
-                                    <i class="fa fa-bookmark-o"></i> Check-Out</a>
-                                <a href="#" class="btn btn-fill"
-                                   style="color:#FFF; background-color: #009688;" title="Detalles">
-                                    <i class="fa fa-dashboard"></i> Detalles habitación</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3"><div class="panel habitacion-disponible">
-                <div class="panel-heading">221<span class="pull-right"><span class="label label-default">Cama doble</span></span></div>
-                <div class="table-responsive">
-                    <table width="100%" border="0" class="table">
-                        <tr>
-                            <td><i class="fa fa-user" title="Huesped"></i>&nbsp;<strong>-</strong></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-clock-o" title="Hora"></i>&nbsp;<strong>-</strong></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" class="btn btn-fill btn-success"
-                                   style="color:#FFF; background-color: #5cb85c;" title="Check-In">
-                                    <i class="fa fa-bookmark-o"></i> Check-In</a>
-                                <a href="#" class="btn btn-fill"
-                                   style="color:#FFF; background-color: #009688;" title="Detalles">
-                                    <i class="fa fa-dashboard"></i> Detalles habitación</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
     </div>
 </div>
 <table width="50%" border="0" align="center">
@@ -224,4 +90,117 @@
     $('#datepicker').datepicker({
         format: "yyyy-mm-dd"
     });
+    /**
+     * Código inicialización de habitaciones
+     */
+    $(document).ready(function() {
+        obtenerHabitaciones();
+    });
+
+    /**
+     * Obtener habitaciones e introducirlas en tabla
+     */
+    function obtenerHabitaciones() {
+        $.ajax({
+            type: 'POST',
+            url: '/api/habitacion/obtenerHabitaciones',
+            data: "",
+            success: function(data) {
+                $('.ajxLoader').hide();
+                var $datos = JSON.parse(data);
+                if ($datos.code === 1) {
+                    $('#msgEmpty').html('');
+                    if ($datos["data"].length === 0) {
+                        $('#msgEmpty').html('No hay tipos de habitación añadidos, <a href="#" data-toggle="modal" data-target="#añadirTipo">¿qué tal si añades uno?</a>');
+                    }
+                    /**
+                     * Mostrar habitaciones
+                     */
+                    $('#habitaciones').html('');
+                    $.each($datos["data"], function(i, item) {
+                        function $habitaciones($data) {
+                            var $str = "";
+                            $.each($data, function(i, item) {
+                                var $hasIot = item.habitacion_iot_id === "" ? '<a href="#" class="btn btn-fill" style="color:#FFF; background-color: #009688;" title="Detalles"><i class="fa fa-dashboard"></i> IoT</a>' : '';
+                                $str+= '<div class="col-md-3" data-habitacion="' + item.habitacion + '"><div class="panel habitacion-disponible"> <div class="panel-heading">' + item.habitacion + '<span class="pull-right"><span class="label label-default">' + item.tipo_habitacion +'</span></span></div>' +
+                                    '<div class="table-responsive">' +
+                                    '<table width="100%" border="0" class="table"> ' +
+                                    '<tr><td><i class="fa fa-user" title="Huesped"></i>&nbsp;<strong>-</strong></td></tr> ' +
+                                    '<tr><td><i class="fa fa-clock-o" title="Hora"></i>&nbsp;<strong>-</strong></td></tr> ' +
+                                    '<tr><td><a href="#" class="btn btn-fill btn-success" style="color:#FFF; background-color: #5cb85c;" title="Check-In"> <i class="fa fa-bookmark-o"></i> Check-In</a>&nbsp;' + $hasIot +  '</td></tr> ' +
+                                    '</table>' +
+                                    '</div> ' +
+                                    '</div> ' +
+                                    '</div>';
+                            });
+                            return $str;
+                        }
+                            $('#habitaciones').append('<div class="panel panel-default">' +
+                            '<div class="panel-heading">' +
+                            i +
+                            '</div>' +
+                            '<div class="panel-body">' +
+                                $habitaciones(item)
+                            + '</div></div>');
+                    });
+                    getReservadas();
+                } else {
+                    swal("Error", "Error en la base de datos", "error");
+                }
+            },
+            error: function(xhr, type, exception) {
+                swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
+            }
+        });
+    }
+    function handlerCheckout() {
+        $('.checkOut').unbind();
+            $('.checkOut').click((function(){
+            swal({
+                    title: "Estás seguro?",
+                    text: "Cuando hagas check-out el huesped ya no podrá usar la aplicación",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Si, terminar manualmente",
+                    closeOnConfirm: false
+                },
+                function(){
+                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                });
+        }));
+    }
+    function getReservadas() {
+        $.ajax({
+            type: 'POST',
+            url: '/api/reservacion/obtenerHabitacionesReservadas',
+            data: "",
+            success: function(data) {
+                var $datos = JSON.parse(data);
+                if ($datos.code === 1) {
+                    function $ocupado(item) {
+                        var $hasIot = item.habitacion_iot_id !== "" ? '<a href="#" class="btn btn-fill" style="color:#FFF; background-color: #009688;" title="Detalles"><i class="fa fa-dashboard"></i> IoT</a>' : '';
+                        return '<div class="panel habitacion-ocupada"> <div class="panel-heading">' + item.habitacion_numero + '<span class="pull-right"><span class="label label-default">' + item.habitacion_tipo +'</span></span></div>' +
+                            '<div class="table-responsive">' +
+                            '<table width="100%" border="0" class="table"> ' +
+                            '<tr><td><i class="fa fa-user" title="Huesped"></i>&nbsp;<strong>' + item.huesped_nombre + " " + item.huesped_apellido + '</strong></td></tr> ' +
+                            '<tr><td><i class="fa fa-clock-o" title="Hora"></i>&nbsp;<strong>' + item.reservacion_desde + " - " + item.reservacion_hasta + '</strong></td></tr> ' +
+                            '<tr><td><a href="#" data-idReservacion="' + item.reservacion_codigo + '" class="btn btn-fill btn-danger checkOut" style="color:#FFF; background-color: #F44336;" title="Check-Out"> <i class="fa fa-bookmark-o"></i> Check-Out</a>&nbsp;' + $hasIot + '</td> </tr> ' +
+                            '</table>' +
+                            '</div> ' +
+                            '</div>';
+                    }
+                    $.each($datos["data"], function(i, item) {
+                        $('[data-habitacion="' + item[0]["habitacion_numero"]  + '"]').html($ocupado(item[0]));
+                    });
+                    handlerCheckout();
+                } else {
+                    swal("Error", "Error en la base de datos", "error");
+                }
+            },
+            error: function(xhr, type, exception) {
+                swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
+            }
+        });
+    }
 </script>

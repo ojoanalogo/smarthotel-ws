@@ -131,6 +131,9 @@ class ControladorHabitaciones {
         $pisos = array();
         foreach ($rs as $row)
             $datos[$row["nombre"]][] = $row;
+        /**
+         * Categorias y pisos para las opciones select
+         */
         foreach($rsTipos as $row)
             $categorias[] = $row;
         foreach($rsPisos as $row)

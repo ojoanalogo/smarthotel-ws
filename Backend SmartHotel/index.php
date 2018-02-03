@@ -109,6 +109,8 @@ $app->post('/dashboard/huespedes/add', function () use ($app, $controladorHuespe
             }
     }
 });
+
+
 /**
  * Remover huesped
  */
@@ -260,6 +262,19 @@ $app->post("/api/reservacion/{funcion}", function ($funcion) use ($app, $control
     if ($funcion == "crearReservacion")
         $app->JsonResponse($controladorReservaciones->crearReservacion($rq->post("idHuesped"), $rq->post("fechaDesde"),
         $rq->post("fechaHasta"), $rq->post("idHabitacion"), $rq->post("notas")), 201);
+    if ($funcion == "obtenerHabitacionesReservadas")
+        $app->JsonResponse($controladorReservaciones->obtenerHabitacionesReservas(), 201);
+});
+
+/**
+ * API Usuarios
+ */
+$app->post("/api/huespedes/{funcion}", function ($funcion) use ($app, $controladorHuespedes) {
+    $rq = $app->getRequest();
+    if ($funcion == "obtenerHuesped")
+        $app->JsonResponse($controladorHuespedes->obtenerHuesped($rq->post("id_huesped")), 201);
+    if ($funcion == "editarHuesped")
+        $app->JsonResponse($controladorHuespedes->editarHuesped($rq->post("id_huesped"), $rq->post("nombre"), $rq->post("apellido"), $rq->post("correo"), $rq->post("direccion"), $rq->post("telefono")), 201);
 });
 
 
@@ -279,7 +294,7 @@ $app->respond(function () use ($app) {
 });
 
 $app->get("/test", function () use ($app, $controladorReservaciones) {
-    return $app->ResponseHTML($controladorReservaciones->generarCodigoReservacion());
+    return         $app->JsonResponse($controladorReservaciones->obtenerHabitacionesReservas(), 201);
 });
 
 function checkAuth()

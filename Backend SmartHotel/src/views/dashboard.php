@@ -20,7 +20,6 @@
                     </a>
                 </div>
             </div>
-            <small class="title"><i class="fa fa-bed"></i> Habitaciones disponibles</small>
         </div>
         <div class="card">
             <div class="header">
@@ -198,5 +197,6 @@
             }
         }]
     ];
+
     Chartist.Line('#chartHours', dataUso, opciones, responsivo);
 </script>
