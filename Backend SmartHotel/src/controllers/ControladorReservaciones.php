@@ -29,11 +29,22 @@ class ControladorReservaciones {
         $args = array($fechaDesde, $fechaHasta, $fechaDesde, $fechaHasta, $idHabitacion);
         $sql = "SELECT * FROM sh_reservaciones WHERE (? BETWEEN desde AND hasta 
                 OR ? BETWEEN desde AND hasta
-                OR desde BETWEEN ? AND ?) AND id_habitacion=?";
+                OR desde BETWEEN ? AND ?) AND id_habitacion=? AND activa=1";
         $db->query($sql, $args);
         if($db->rowcount())
             return true;
         return false;
+    }
+
+    function checkOutManual($idCheckout) {
+        global $db;
+        $args = array($idCheckout);
+        $sql = "UPDATE sh_reservaciones SET sh_reservaciones.activa=0 WHERE sh_reservaciones.id_reserva=?";
+        $rs = $db->query($sql, $args);
+        if ($rs === false) {
+            return array("code" => 0, "msg" => "No se pudo cancelar la reservación");
+        }
+        return array("code" => 1, "msg" => "Reservación modificada");
     }
 
     function huespedYaHospedado($idHuesped, $fechaDesde, $fechaHasta) {
@@ -41,7 +52,7 @@ class ControladorReservaciones {
         $args = array($fechaDesde, $fechaHasta, $fechaDesde, $fechaHasta, $idHuesped);
         $sql = "SELECT * FROM sh_reservaciones WHERE (? BETWEEN desde AND hasta 
                 OR ? BETWEEN desde AND hasta
-                OR desde BETWEEN ? AND ?) AND huesped=?";
+                OR desde BETWEEN ? AND ?) AND huesped=? AND activa=1";
         $db->query($sql, $args);
         if($db->rowcount())
             return true;

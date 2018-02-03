@@ -264,6 +264,8 @@ $app->post("/api/reservacion/{funcion}", function ($funcion) use ($app, $control
         $rq->post("fechaHasta"), $rq->post("idHabitacion"), $rq->post("notas")), 201);
     if ($funcion == "obtenerHabitacionesReservadas")
         $app->JsonResponse($controladorReservaciones->obtenerHabitacionesReservas(), 201);
+    if ($funcion == "checkout")
+        $app->JsonResponse($controladorReservaciones->checkOutManual($rq->post("id_reserva")), 201);
 });
 
 /**

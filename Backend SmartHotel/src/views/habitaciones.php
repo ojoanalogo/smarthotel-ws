@@ -156,6 +156,7 @@
     function handlerCheckout() {
         $('.checkOut').unbind();
             $('.checkOut').click((function(){
+                var $idReserva = $(this).attr('data-idReservacion');
             swal({
                     title: "Estás seguro?",
                     text: "Cuando hagas check-out el huesped ya no podrá usar la aplicación",
@@ -163,10 +164,27 @@
                     showCancelButton: true,
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Si, terminar manualmente",
-                    closeOnConfirm: false
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
                 },
                 function(){
-                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/reservacion/checkout',
+                        data: "id_reserva=" + $idReserva,
+                        success: function(data) {
+                            var $datos = JSON.parse(data);
+                            if ($datos.code === 1) {
+                                obtenerHabitaciones();
+                                swal("Check-Out hecho", "Huesped ya no tendrá acceso a la aplicación", "success");
+                            } else {
+                                swal("Error", "Error en la base de datos", "error");
+                            }
+                        },
+                        error: function(xhr, type, exception) {
+                            swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
+                        }
+                    });
                 });
         }));
     }
