@@ -31,6 +31,7 @@
                     <label for="mensajeGSM">Escribir Mensaje</label>
                     <textarea style="resize: none;" class="form-control" id="mensajeGSM" rows="3" draggable="false"></textarea>
                 </div>
+                <h6 class="pull-right" id="count_message"></h6>
                 <a href="#" class="btn btn-fill btn-warning" id="enviarMensajeGSM"> <i class="fa fa-paper-plane fa-lg"></i>&nbsp; Mandar aviso</a>
             </div>
         </div>
@@ -199,4 +200,18 @@
     ];
 
     Chartist.Line('#chartHours', dataUso, opciones, responsivo);
+
+    var text_max = 180;
+    $('#count_message').html(text_max + ' /180');
+
+    $('#mensajeGSM').keyup(function() {
+        var text_length = $('#mensajeGSM').val().length;
+        var text_remaining = text_max - text_length;
+        $('#count_message').html(text_remaining + ' /180');
+        if(text_remaining < 1) {
+            $('#enviarMensajeGSM').attr('disabled', 'disabled');
+        } else {
+            $('#enviarMensajeGSM').removeAttr('disabled');
+        }
+    });
 </script>

@@ -72,6 +72,13 @@ $app->get('/dashboard/habitaciones', function () use ($app, $controladorLogin, $
     else
         return $app->Response('login.php', array(), 201);
 });
+$app->get('/dashboard/habitaciones/llegada/:habitacion', function ($habitacion) use ($app, $controladorHuespedes, $controladorLogin, $controladorPrincipal) {
+    if (checkAuth())
+        return $app->Response('llegada.php', valoresDefault(array($habitacion), $controladorHuespedes->getEmails()), 201);
+    else
+        return $app->Response('login.php', array(), 201);
+});
+
 
 /**
  * Servir Detalle habitación
@@ -259,8 +266,8 @@ $app->post("/api/habitacion/{funcion}", function ($funcion) use ($app, $controla
  */
 $app->post("/api/reservacion/{funcion}", function ($funcion) use ($app, $controladorReservaciones) {
     $rq = $app->getRequest();
-    if ($funcion == "crearReservacion")
-        $app->JsonResponse($controladorReservaciones->crearReservacion($rq->post("idHuesped"), $rq->post("fechaDesde"),
+    if ($funcion == "crearReservacionExistente")
+        $app->JsonResponse($controladorReservaciones->crearReservacion($rq->post("correoHuesped"), $rq->post("fechaDesde"),
         $rq->post("fechaHasta"), $rq->post("idHabitacion"), $rq->post("notas")), 201);
     if ($funcion == "obtenerHabitacionesReservadas")
         $app->JsonResponse($controladorReservaciones->obtenerHabitacionesReservas(), 201);
@@ -296,7 +303,7 @@ $app->respond(function () use ($app) {
 });
 
 $app->get("/test", function () use ($app, $controladorReservaciones) {
-    return         $app->JsonResponse($controladorReservaciones->obtenerHabitacionesReservas(), 201);
+    return         $app->JsonResponse($controladorReservaciones->getIdHuesped("arc980103@gmail.com"), 201);
 });
 
 function checkAuth()

@@ -97,3 +97,7 @@ small {
     color: #fff;
     opacity: .8;
 }
+.typeahead.dropdown-menu {
+    visibility: visible !important;
+    opacity: 100 !important;
+}

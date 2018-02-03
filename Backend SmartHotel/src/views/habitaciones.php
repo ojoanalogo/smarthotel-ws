@@ -9,7 +9,7 @@
     <li class="active">Habitaciones</li>
 </ol>
 <div class="row">
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-12">
         <div class="card">
             <div class="header">
                 <h4 class="title">Ayuda</h4>
@@ -31,7 +31,6 @@
                 <div></div>
                 <p class="text-muted">
                     Selecciona la opción "Check-In" e introduce los datos del huesped para añadirlo a la base de datos y asignarle una habitación que podrá controlar desde la aplicación.
-                    Si el huesped ya ha sido hospedado antes, solo selecciona la opción "Llegada huesped registrado" y rellena los datos que se te solicitan
                 </p>
                 <b class="text-info"><i class="fa fa-question-circle-o fa-fw"></i> ¿Cómo veo el estatus de una habitación</b>
                 <div></div>
@@ -41,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-9 col-md-6">
+    <div class="col-lg-9 col-md-12">
 <form class="navbar-form"  method="post">
 
     <div class="navbar navbar-default row" role="navigation">
@@ -127,7 +126,7 @@
                                     '<table width="100%" border="0" class="table"> ' +
                                     '<tr><td><i class="fa fa-user" title="Huesped"></i>&nbsp;<strong>-</strong></td></tr> ' +
                                     '<tr><td><i class="fa fa-clock-o" title="Hora"></i>&nbsp;<strong>-</strong></td></tr> ' +
-                                    '<tr><td><a href="#" class="btn btn-fill btn-success" style="color:#FFF; background-color: #5cb85c;" title="Check-In"> <i class="fa fa-bookmark-o"></i> Check-In</a>&nbsp;' + $hasIot +  '</td></tr> ' +
+                                    '<tr><td><a href="/dashboard/habitaciones/llegada/' + item.habitacion + '" class="btn btn-fill btn-success" style="color:#FFF; background-color: #5cb85c;" title="Check-In"> <i class="fa fa-bookmark-o"></i> Check-In</a>&nbsp;' + $hasIot +  '</td></tr> ' +
                                     '</table>' +
                                     '</div> ' +
                                     '</div> ' +
@@ -209,7 +208,9 @@
                             '</div>';
                     }
                     $.each($datos["data"], function(i, item) {
-                        $('[data-habitacion="' + item[0]["habitacion_numero"]  + '"]').html($ocupado(item[0]));
+                        $.each(item, function(i, item){
+                            $('[data-habitacion="' + item["habitacion_numero"]  + '"]').html($ocupado(item));
+                        });
                     });
                     handlerCheckout();
                 } else {

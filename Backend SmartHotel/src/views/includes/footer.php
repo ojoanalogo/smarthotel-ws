@@ -24,6 +24,7 @@
 <!-- Archivos JS  -->
 <script src="/public/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 <script src="/public/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/public/js/typeahead.js" type="text/javascript"></script>
 <!--  Plugin Chartist JS -->
 <script src="/public/js/chartist.min.js"></script>
 <!--  Dashboard código JS helper  -->

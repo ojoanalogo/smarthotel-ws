@@ -7,13 +7,25 @@
  * @version 1.0
  */
 class ControladorReservaciones {
+
+    function getIdHuesped($correo) {
+        global $db;
+        $args = array($correo);
+        $query = "SELECT id_huesped FROM sh_huespedes WHERE correo=?";
+        $rs = $db->query($query, $args);
+        if ($rs === false) {
+            return 0;
+        }
+        return $rs[0]["id_huesped"];
+    }
+
     function crearReservacion($idHuesped, $fechaDesde, $fechaHasta, $idHabitacion, $notas) {
-        if(!$this->reservacionExiste($idHabitacion, $fechaDesde, $fechaHasta) && !$this->huespedYaHospedado($idHuesped, $fechaDesde, $fechaHasta)) {
+        if(!$this->reservacionExiste($idHabitacion, $fechaDesde, $fechaHasta) && !$this->huespedYaHospedado($this->getIdHuesped($idHuesped), $fechaDesde, $fechaHasta)) {
             global $db;
-            if(!$idHuesped || !$fechaDesde || !$fechaHasta || !$idHabitacion || !$notas) {
+            if(!$idHuesped || !$fechaDesde || !$fechaHasta || !$idHabitacion) {
                 return array("code" => 2, "msg" => "Hay campos vacios");
             }
-            $args = array($this->generarCodigoReservacion(), $idHuesped, $fechaDesde, $fechaHasta, $idHabitacion, $notas);
+            $args = array($this->generarCodigoReservacion(), $this->getIdHuesped($idHuesped), $fechaDesde, $fechaHasta, $idHabitacion, $notas);
             $query = "INSERT INTO sh_reservaciones(id_reserva, huesped, desde, hasta, id_habitacion, notas, activa) VALUES (?,?,?,?,?,?, 1)";
             $rs = $db->query($query, $args);
             if ($rs === false) {

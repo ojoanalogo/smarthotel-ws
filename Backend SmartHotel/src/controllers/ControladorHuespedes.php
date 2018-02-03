@@ -62,6 +62,20 @@ VALUES (?,?,?,?,?,?,?,?)";
         }
         return array("code" => 1, "msg" => "Huesped editado");
     }
+    public function getEmails() {
+        global $db;
+        $args = array();
+        $data = array();
+        $query = "SELECT correo FROM sh_huespedes";
+        $rs = $db->query($query, $args);
+        if ($rs === false) {
+            return array();
+        }
+        foreach ($rs as $row) {
+            $data[] = $row;
+        }
+        return $data;
+    }
     public function removerHuesped($id) {
         if (!$id) {
             return false;
