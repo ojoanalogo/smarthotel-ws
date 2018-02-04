@@ -120,7 +120,7 @@
                         function $habitaciones($data) {
                             var $str = "";
                             $.each($data, function(i, item) {
-                                var $hasIot = item.habitacion_iot_id === "" ? '<a href="#" class="btn btn-fill" style="color:#FFF; background-color: #009688;" title="Detalles"><i class="fa fa-dashboard"></i> IoT</a>' : '';
+                                var $hasIot = item.habitacion_iot_id === "" ? '<a href="/dashboard/habitaciones/iot/' + item.habitacion_numero + '" class="btn btn-fill" style="color:#FFF; background-color: #009688;" title="Detalles"><i class="fa fa-dashboard"></i> IoT</a>' : '';
                                 $str+= '<div class="col-md-3" data-habitacion="' + item.habitacion + '"><div class="panel habitacion-disponible"> <div class="panel-heading">' + item.habitacion + '<span class="pull-right"><span class="label label-default">' + item.tipo_habitacion +'</span></span></div>' +
                                     '<div class="table-responsive">' +
                                     '<table width="100%" border="0" class="table"> ' +
@@ -196,7 +196,7 @@
                 var $datos = JSON.parse(data);
                 if ($datos.code === 1) {
                     function $ocupado(item) {
-                        var $hasIot = item.habitacion_iot_id !== "" ? '<a href="#" class="btn btn-fill" style="color:#FFF; background-color: #009688;" title="Detalles"><i class="fa fa-dashboard"></i> IoT</a>' : '';
+                        var $hasIot = item.habitacion_iot_id !== "" ? '<a href="/dashboard/habitaciones/iot/' + item.habitacion_numero + '" class="btn btn-fill" style="color:#FFF; background-color: #009688;" title="Detalles"><i class="fa fa-dashboard"></i> IoT</a>' : '';
                         return '<div class="panel habitacion-ocupada"> <div class="panel-heading">' + item.habitacion_numero + '<span class="pull-right"><span class="label label-default">' + item.habitacion_tipo +'</span></span></div>' +
                             '<div class="table-responsive">' +
                             '<table width="100%" border="0" class="table"> ' +

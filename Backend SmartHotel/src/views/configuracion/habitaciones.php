@@ -247,7 +247,7 @@
                         function $template($habitacion, $tipo, $iot, $estatus) {
                             var $hasIot = $iot === ""
                                 ? "<i class='fa fa-times-circle fa-fw text-danger'></i> No"
-                                : "<i class='fa fa-check-circle fa-fw text-success'></i> Si &nbsp;<a href='/dashboard/habitaciones/detalle/" +
+                                : "<i class='fa fa-check-circle fa-fw text-success'></i> Si &nbsp;<a href='/dashboard/habitaciones/iot/" +
                                 $habitacion + "' class='btn btn-sm btn-default'><i class='fa fa-dashboard'></i> Detalles habitación</a>";
                             var $estaHabilitada = $estatus === "1"
                                 ? "<i class='fa fa-check-circle fa-fw text-success'></i> Habilitada"

@@ -81,9 +81,9 @@ $app->get('/dashboard/habitaciones/llegada/:habitacion', function ($habitacion) 
 
 
 /**
- * Servir Detalle habitación
+ * Servir IoT habitación
  */
-$app->get('/dashboard/habitaciones/detalle/:habitacion', function ($habitacion) use ($app, $controladorLogin, $controladorPrincipal) {
+$app->get('/dashboard/habitaciones/iot/:habitacion', function ($habitacion) use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
         return $app->Response('detalle_habitacion.php', valoresDefault(array($habitacion)), 201);
     else
@@ -199,7 +199,7 @@ $app->post("/authme_panel", function () use ($app, $controladorLogin) {
 });
 
 $app->post("/authme", function () use ($app, $controladorLogin) {
-    $app->JsonResponse($controladorLogin->authMe($app->getRequest()->getBody()));
+    $app->JsonResponse($controladorLogin->authMe($app->getRequest()->post("correo"), $app->getRequest()->post("clave")));
 });
 
 /**

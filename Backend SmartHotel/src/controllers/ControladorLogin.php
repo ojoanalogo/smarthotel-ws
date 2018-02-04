@@ -35,7 +35,7 @@ class ControladorLogin
         $args = array($user, $password);
         $query = null;
         if ($appLogin)
-            $query = "SELECT * FROM sh_huespedes WHERE correo=? AND clave=?";
+            $query = "SELECT * FROM sh_huespedes WHERE correo=? AND clave=? ";
         else
             $query = "SELECT * FROM sh_panel_usuarios WHERE correo=? AND clave=?";
         $rs = $db->query($query, $args);
@@ -43,7 +43,7 @@ class ControladorLogin
             return false;
         }
         foreach ($rs as $row) {
-            if ($row["id_usuario"] >= 1) {
+            if ($row["id_huesped"] >= 1) {
                 if(!$appLogin) {
                     $this->crearSesion($user);
                 }
@@ -85,26 +85,53 @@ class ControladorLogin
         session_destroy();
     }
 
-    public function authMe($body) {
-        $obj = json_decode($body, true);
-        $login = $this->validarUsuario($obj["correo"], $obj["clave"], true);
+    public function authMe($correo, $clave) {
+        global $db;
+        $login = $this->validarUsuario($correo, $clave, true);
         if($login) {
-            //ha hecho login
-            $res = array("iat" => time(), "exp" => time() + $this->diasMinutos(3));
-            $jwt = JWT::encode($res, '');
-            http_response_code(200);
-            return
-                array(
-                    "code" => 1,
-                    "response" => array(
-                        "msg" => "Usuario validado",
-                        "token" => $jwt
-                    )
-                );
+            if ($this->reservacionActiva($correo)) {
+                //ha hecho login
+                $res = array("iat" => time(), "exp" => time() + $this->diasMinutos(3));
+                $jwt = JWT::encode($res, 'txsh2018');
+                $consultaDatos = "SELECT sh_huespedes.correo AS huesped_correo, sh_huespedes.nombre AS huesped_nombre, sh_huespedes.apellido AS huesped_apellido, sh_reservaciones.desde AS reservacion_desde, sh_reservaciones.hasta AS reservacion_hasta, sh_reservaciones.id_habitacion AS habitacion_numero FROM sh_huespedes INNER JOIN sh_reservaciones WHERE sh_huespedes.id_huesped = sh_reservaciones.huesped AND (DATE(NOW()) BETWEEN sh_reservaciones.desde AND sh_reservaciones.hasta) AND activa=1 AND correo=? LIMIT 1";
+                $rs = $db->query($consultaDatos, array($correo));
+                if ($rs===false){
+                    http_response_code(500);
+                    return array("code" => 0, "response" => "Error al recuperar datos");
+                }
+                $datos = array();
+                foreach ($rs as $row) {
+                    $datos[] = $row;
+                }
+                http_response_code(200);
+                return
+                    array(
+                        "code" => 1,
+                        "response" => array(
+                            "msg" => "Usuario validado",
+                            "token" => $jwt,
+                            "userData" => $datos
+                        )
+                    );
+            } else {
+                http_response_code(200);
+                return array("code" => 2, "response" => "Reservación no activa");
+            }
         } else {
             http_response_code(401);
             return array("code" => 0, "response" => "Usuario/Clave no valido");
         }
+    }
+
+    function reservacionActiva($correo) {
+        global $db;
+        $args = array($correo);
+        $query = "SELECT * FROM sh_huespedes INNER JOIN sh_reservaciones WHERE sh_huespedes.id_huesped = sh_reservaciones.huesped AND (DATE(NOW()) BETWEEN sh_reservaciones.desde AND sh_reservaciones.hasta) AND activa=1 AND correo=? LIMIT 1";
+        $rs = $db->query($query, $args);
+        if($rs === false) {
+            return false;
+        }
+        return $db->rowcount();
     }
 
     private function diasMinutos($dias) {
