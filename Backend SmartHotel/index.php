@@ -199,7 +199,8 @@ $app->post("/authme_panel", function () use ($app, $controladorLogin) {
 });
 
 $app->post("/authme", function () use ($app, $controladorLogin) {
-    $app->JsonResponse($controladorLogin->authMe($app->getRequest()->post("correo"), $app->getRequest()->post("clave")));
+    $datos = json_decode($app->getRequest()->getBody(), true);
+    $app->JsonResponse($controladorLogin->authMe($datos["correo"], $datos["clave"]));
 });
 
 /**
