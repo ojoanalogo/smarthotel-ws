@@ -7,6 +7,7 @@
  * @version 1.0
  */
 
+
 // Libreria OneFramework
 require_once('src/core/one_framework.php');
 // Inicializar App
@@ -303,8 +304,19 @@ $app->respond(function () use ($app) {
     return $app->ResponseHTML('<p> 404 </p>', 404);
 });
 
-$app->get("/test", function () use ($app, $controladorReservaciones) {
-    return         $app->JsonResponse($controladorReservaciones->getIdHuesped("arc980103@gmail.com"), 201);
+$app->post("/api/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) use ($app) {
+    $iot = new IoThabitacion($habitacion);
+    if ($funcion == "obtenerDatos")
+        $app->JsonResponse($iot->getAllData());
+    if ($funcion == "obtenerDato")
+        $app->JsonResponse($iot->getData($app->getRequest()->post("feed")));
+    if ($funcion == "modificarDato")
+        $app->JsonResponse($iot->moveData($app->getRequest()->post("feed"), $app->getRequest()->post("data")));
+});
+
+$app->get("/test", function () use ($app) {
+    $iot = new IoThabitacion("101");
+    $app->JsonResponse($iot->moveData("foco-1", "1"));
 });
 
 function checkAuth()

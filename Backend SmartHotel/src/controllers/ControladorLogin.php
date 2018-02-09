@@ -43,13 +43,15 @@ class ControladorLogin
             return false;
         }
         foreach ($rs as $row) {
-            if ($row["id_huesped"] >= 1) {
-                if(!$appLogin) {
-                    $this->crearSesion($user);
+            if(!$appLogin) {
+                if ($row["id_usuario"] >= 1) {
+                     $this->crearSesion($user);
+                    return true;
                 }
-                return true;
+            } else {
+                return $row["id_huesped"] >= 1;
+                }
             }
-        }
         return false;
     }
 

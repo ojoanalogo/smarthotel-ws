@@ -119,13 +119,6 @@
                                     <input type="text" class="form-control" name="añadirHabitacionIoT_ID" id="añadirHabitacionIoT_ID" placeholder="ID" maxlength="256">
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <label for="añadirHabitacionIoT_clave">Clave de Dispositivo</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-lock text-success"></i></div>
-                                    <input type="text" class="form-control" name="añadirHabitacionIoT_clave" id="añadirHabitacionIoT_clave" placeholder="Clave" maxlength="256">
-                                </div>
-                            </div>
 
                         </div>
                     </div>
@@ -186,13 +179,6 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-plug text-success"></i></div>
                                     <input type="text" class="form-control" name="editarHabitacionIoT_ID" id="editarHabitacionIoT_ID" placeholder="ID" maxlength="256">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="editarHabitacionIoT_clave">Clave de Dispositivo</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-lock text-success"></i></div>
-                                    <input type="text" class="form-control" name="editarHabitacionIoT_clave" id="editarHabitacionIoT_clave" placeholder="Clave" maxlength="256">
                                 </div>
                             </div>
 

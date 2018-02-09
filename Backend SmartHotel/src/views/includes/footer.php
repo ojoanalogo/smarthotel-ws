@@ -29,8 +29,6 @@
 <script src="/public/js/chartist.min.js"></script>
 <!--  Dashboard código JS helper  -->
 <script src="/public/js/light-bootstrap-dashboard.js"></script>
-<!--  Plugin notificaciones    -->
-<script src="/public/js/bootstrap-notify.js"></script>
 <!-- Plugin DatePicker -->
 <script src="/public/js/datepicker.min.js"></script>
 <!-- Plugin tablas  -->
@@ -39,4 +37,7 @@
 <script src="/public/js/sweetalert.min.js"></script>
 <!--  Plugin Paises JS -->
 <script src="/public/js/countries.js"></script>
+<!-- Valvulas canvas -->
+<script src="/public/js/gauge.min.js"></script>
+
 </html>

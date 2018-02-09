@@ -112,7 +112,7 @@ class ControladorHabitaciones {
         global $db;
         $query = "SELECT sh_habitaciones.habitacion, sh_habitaciones.estatus, sh_habitaciones_tipos.tipo_habitacion,
  sh_habitaciones_tipos.costo_mx, sh_habitaciones_tipos.costo_usd, sh_pisos.piso, sh_pisos.nombre,
-  sh_habitaciones.iot_id, sh_habitaciones.iot_key FROM sh_habitaciones
+  sh_habitaciones.iot_id FROM sh_habitaciones
    JOIN sh_habitaciones_tipos ON sh_habitaciones.id_tipo_habitacion = sh_habitaciones_tipos.id_tipo_habitacion
    JOIN sh_pisos ON sh_habitaciones.id_piso = sh_pisos.piso ORDER BY sh_habitaciones.habitacion, sh_habitaciones.id_piso";
         $queryTipos = "SELECT * from sh_habitaciones_tipos";
@@ -146,13 +146,12 @@ class ControladorHabitaciones {
      * @param $piso
      * @param $tipo_habitacion
      * @param $iot_id
-     * @param $iot_key
      * @return array
      */
-    public function añadirHabitacion($numeroHabitacion, $piso, $tipo_habitacion, $iot_id, $iot_key) {
+    public function añadirHabitacion($numeroHabitacion, $piso, $tipo_habitacion, $iot_id) {
         global $db;
-        $args = array($numeroHabitacion, $piso, $tipo_habitacion, $iot_id, $iot_key);
-        $query = "INSERT INTO sh_habitaciones(habitacion, id_piso, id_tipo_habitacion, iot_id, iot_key, estatus) VALUES(?, ?, ?, ?, ?, 1)";
+        $args = array($numeroHabitacion, $piso, $tipo_habitacion, $iot_id);
+        $query = "INSERT INTO sh_habitaciones(habitacion, id_piso, id_tipo_habitacion, iot_id, estatus) VALUES(?, ?, ?, ?, 1)";
         $rs = $db->query($query, $args);
         if ($rs === false)
             return array("code" => 0, "msg" => "Error al intentar añadir habitación");
@@ -199,13 +198,12 @@ class ControladorHabitaciones {
      * @param $piso
      * @param $tipo_habitacion
      * @param $iot_id
-     * @param $iot_key
      * @return array
      */
-    public function editarHabitacion($id_habitacion, $nuevaHabitacion, $piso, $tipo_habitacion, $iot_id, $iot_key) {
+    public function editarHabitacion($id_habitacion, $nuevaHabitacion, $piso, $tipo_habitacion, $iot_id) {
         global $db;
-        $args = array($nuevaHabitacion, $piso, $tipo_habitacion, $iot_id, $iot_key, $id_habitacion);
-        $query = "UPDATE sh_habitaciones SET habitacion=?, id_piso=?, id_tipo_habitacion=?, iot_id=?, iot_key=? WHERE habitacion=?";
+        $args = array($nuevaHabitacion, $piso, $tipo_habitacion, $iot_id, $id_habitacion);
+        $query = "UPDATE sh_habitaciones SET habitacion=?, id_piso=?, id_tipo_habitacion=?, iot_id=? WHERE habitacion=?";
         $rs = $db->query($query, $args);
         if ($rs === false) {
             return array("code" => 0, "msg" => "Esa habitación ya existe");
@@ -286,4 +284,39 @@ class ControladorHabitaciones {
     }
 
 
+}
+
+require_once __DIR__ . "/../../src/libs/adafruitio/adafruitio.php";
+
+class IoThabitacion {
+    private $habitacion;
+    private $iot_id;
+    private $iotKey = "7ac391b03ae24f24acdd28164d28434d"; //SECRET
+    function __construct($idHabitacion) {
+        $this->habitacion = $idHabitacion;
+        $this->iot_id = $this->getID();
+    }
+    private function getID() {
+            global $db;
+            $args = array($this->habitacion);
+            $query = "SELECT iot_id FROM sh_habitaciones WHERE habitacion=?";
+            $rs = $db->query($query, $args);
+            if($rs === false) {
+                return 0;
+            }
+            $datos = json_encode($rs[0]);
+            return json_decode($datos, true)["iot_id"];
+    }
+    public function getAllData() {
+        $adafruit = new AdaFruitIO($this->iotKey);
+        return $adafruit->getFeedNames($this->iot_id);
+    }
+    public function getData($feed) {
+        $adafruit = new AdaFruitIO($this->iotKey);
+        return $adafruit->getFeed($feed)->get();
+    }
+    public function moveData($feed, $data) {
+        $adafruit = new AdaFruitIO($this->iotKey);
+        return $adafruit->getFeed($this->iot_id . "." . $feed)->send($data);
+    }
 }
