@@ -76,7 +76,7 @@ class ControladorReservaciones {
         $sql = "SELECT sh_habitaciones.habitacion AS habitacion_numero, sh_habitaciones.estatus AS habitacion_estatus, sh_habitaciones_tipos.tipo_habitacion AS habitacion_tipo,
 sh_habitaciones_tipos.costo_mx AS habitacion_costo_MX, sh_habitaciones_tipos.costo_usd AS habitacion_costo_USD, sh_pisos.piso AS piso_numero, sh_pisos.nombre AS piso_nombre,
 sh_huespedes.nombre AS huesped_nombre, sh_huespedes.correo AS huesped_correo, sh_huespedes.apellido AS huesped_apellido,
-sh_habitaciones.iot_id AS habitacion_iot_id, sh_habitaciones.iot_key AS habitacion_iot_key, sh_reservaciones.huesped AS reservacion_idHuesped, sh_reservaciones.desde AS reservacion_desde,
+sh_habitaciones.iot_id AS habitacion_iot_id, sh_reservaciones.huesped AS reservacion_idHuesped, sh_reservaciones.desde AS reservacion_desde,
 sh_reservaciones.id_reserva AS reservacion_codigo,
 sh_reservaciones.hasta AS reservacion_hasta, sh_reservaciones.notas AS reservacion_notas
 FROM sh_habitaciones

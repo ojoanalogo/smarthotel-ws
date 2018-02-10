@@ -201,7 +201,7 @@ $app->post("/authme_panel", function () use ($app, $controladorLogin) {
 
 $app->post("/authme", function () use ($app, $controladorLogin) {
     $datos = json_decode($app->getRequest()->getBody(), true);
-    $app->JsonResponse($controladorLogin->authMe($datos["correo"], $datos["clave"]));
+    $app->JsonResponse($controladorLogin->authMe($datos["correo"], $datos["clave"], $datos["fcm"]));
 });
 
 /**
@@ -254,13 +254,13 @@ $app->post("/api/habitacion/{funcion}", function ($funcion) use ($app, $controla
     if ($funcion == "obtenerHabitaciones")
         $app->JsonResponse($controladorHabitaciones->obtenerHabitaciones(), 201);
     if ($funcion == "addHabitacion")
-        $app->JsonResponse($controladorHabitaciones->añadirHabitacion($rq->post("numeroHabitacion"), $rq->post("piso"), $rq->post("tipo"), $rq->post("iot_id"), $rq->post("iot_key")), 201);
+        $app->JsonResponse($controladorHabitaciones->añadirHabitacion($rq->post("numeroHabitacion"), $rq->post("piso"), $rq->post("tipo"), $rq->post("iot_id")), 201);
     if ($funcion == "eliminarHabitacion")
         $app->JsonResponse($controladorHabitaciones->eliminarHabitacion($rq->post("id_habitacion")), 201);
     if ($funcion == "obtenerHabitacion")
         $app->JsonResponse($controladorHabitaciones->obtenerHabitacion($rq->post("id_habitacion")), 201);
     if ($funcion == "editarHabitacion")
-        $app->JsonResponse($controladorHabitaciones->editarHabitacion($rq->post("habitacion"), $rq->post("nuevaHabitacion"), $rq->post("piso"), $rq->post("tipo"), $rq->post("iot_id"), $rq->post("iot_key")), 201);
+        $app->JsonResponse($controladorHabitaciones->editarHabitacion($rq->post("habitacion"), $rq->post("nuevaHabitacion"), $rq->post("piso"), $rq->post("tipo"), $rq->post("iot_id")), 201);
 });
 
 /**
@@ -304,6 +304,10 @@ $app->respond(function () use ($app) {
     return $app->ResponseHTML('<p> 404 </p>', 404);
 });
 
+$app->post("/api/iot/alarma/{id}", function($id) use ($app, $controladorHuespedes) {
+    $app->JsonResponse($controladorHuespedes->enviarAlarmaPuerta($id));
+});
+
 $app->post("/api/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) use ($app) {
     $iot = new IoThabitacion($habitacion);
     if ($funcion == "obtenerDatos")
@@ -315,8 +319,7 @@ $app->post("/api/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) u
 });
 
 $app->get("/test", function () use ($app) {
-    $iot = new IoThabitacion("101");
-    $app->JsonResponse($iot->moveData("foco-1", "1"));
+    echo stripslashes(hash("sha256", "comodorops3"));
 });
 
 function checkAuth()

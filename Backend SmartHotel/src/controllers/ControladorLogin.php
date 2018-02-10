@@ -87,7 +87,7 @@ class ControladorLogin
         session_destroy();
     }
 
-    public function authMe($correo, $clave) {
+    public function authMe($correo, $clave, $fcm) {
         global $db;
         $login = $this->validarUsuario($correo, $clave, true);
         if($login) {
@@ -104,6 +104,13 @@ class ControladorLogin
                 $datos = array();
                 foreach ($rs as $row) {
                     $datos[] = $row;
+                }
+                $updateArgs = array($fcm, $correo);
+                $sqlUpdate = "UPDATE sh_huespedes SET ultimo_login = now(), fcm_key = ? WHERE correo=?";
+                $rs = $db->query($sqlUpdate, $updateArgs);
+                if($rs === false) {
+                    http_response_code(500);
+                    return array("code" => 0, "response" => "Error al actualizar datos");
                 }
                 http_response_code(200);
                 return

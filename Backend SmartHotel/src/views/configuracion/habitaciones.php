@@ -311,14 +311,13 @@
         var $piso = $('#añadirHabitacionPiso option:selected').attr("data-idPiso");
         var $tipo_habitacion = $('#añadirHabitacionTipo option:selected').attr("data-idCat");
         var $iot_id = $('#añadirHabitacionIoT_ID').val();
-        var $iot_key = $('#añadirHabitacionIoT_clave').val();
         if (!validarHabitacion($numeroHabitacion)) {
             return true;
         }
         $.ajax({
             type: 'POST',
             url: '/api/habitacion/addHabitacion',
-            data: "numeroHabitacion=" + $numeroHabitacion + "&piso=" + $piso + "&tipo=" + $tipo_habitacion + "&iot_id=" + $iot_id + "&iot_key=" + $iot_key,
+            data: "numeroHabitacion=" + $numeroHabitacion + "&piso=" + $piso + "&tipo=" + $tipo_habitacion + "&iot_id=" + $iot_id,
             success: function(data) {
                 var $datos = (JSON.parse(data));
                 if ($datos.code === 1) {
@@ -388,7 +387,6 @@
         var $piso = $('#editarHabitacionPiso option:selected').attr("data-idPiso");
         var $tipo_habitacion = $('#editarHabitacionTipo option:selected').attr("data-idCat");
         var $iot_id = $('#editarHabitacionIoT_ID').val();
-        var $iot_key = $('#editarHabitacionIoT_clave').val();
         if (!validarHabitacion($habitacion)) {
             return true;
         }
@@ -397,7 +395,7 @@
             url: '/api/habitacion/editarHabitacion',
             data: "habitacion=" + $id_habitacion + "&nuevaHabitacion=" +
             $habitacion + "&piso=" + $piso + "&tipo=" + $tipo_habitacion + "&iot_id="
-            + $iot_id + "&iot_key=" + $iot_key,
+            + $iot_id,
             success: function(data) {
                 var $datos = (JSON.parse(data));
                 if ($datos.code === 1) {
@@ -435,7 +433,7 @@
                         $("#editarHabitacionPiso option[data-idPiso='" + $datos['data'][0]['id_piso'] +"']").attr("selected","selected");
                         $("#editarHabitacionTipo option[data-idCat='" + $datos['data'][0]['id_tipo_habitacion'] +"']").attr("selected","selected");
                         $('#editarHabitacionIoT_ID').val($datos["data"][0]["iot_id"]);
-                        $('#editarHabitacionIoT_clave').val($datos["data"][0]["iot_key"]);
+
                         $('form#editarHabitacion').attr("id-habitacion", $datos["data"][0]["habitacion"]);
                     } else {
                         swal("No se pudo obtener información", "Ha ocurrido un error.", "error");

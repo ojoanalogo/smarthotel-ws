@@ -9,7 +9,6 @@
     <li> <a href="/dashboard/habitaciones">Habitaciones</a></li>
     <li class="active">Detalles habitación <?php echo $args[0] ?></li>
 </ol>
-
     <div class="container">
         <div class="card">
             <div class="header">
@@ -35,14 +34,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 <?php include "includes/footer.php" ?>
 <script>
     /**
@@ -130,7 +125,7 @@
             });
     }
 
-    $('#btnLuces').click(function(){
+    $('#btnLuces').click(function() {
         var $accion = $(this).attr('data-action');
         var $numeroHabitacion = <?php echo $args[0] . ";" ?>
             $.ajax({

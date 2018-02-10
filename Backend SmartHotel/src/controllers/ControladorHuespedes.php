@@ -2,6 +2,50 @@
 
 class ControladorHuespedes {
 
+    public function enviarAlarmaPuerta($id_iot_device) {
+        global $db;
+        $args = array($id_iot_device);
+        $query = "SELECT fcm_key FROM sh_huespedes JOIN sh_reservaciones ON sh_reservaciones.huesped = sh_huespedes.id_huesped JOIN sh_habitaciones ON sh_reservaciones.id_habitacion = sh_habitaciones.habitacion WHERE sh_habitaciones.iot_id=? AND (DATE(NOW()) BETWEEN sh_reservaciones.desde AND sh_reservaciones.hasta) AND activa=1";
+        $rs = $db->query($query, $args);
+        if($rs === false) {
+            return array("code" => 0, "msg" => "No se pudo enviar la alarma");
+        }
+        $fcm = "";
+        foreach ($rs as $row) {
+            $fcm = $row["fcm_key"];
+        }
+        return array("code" => 1, "msg" => "Enviando alarma", "resultado" => array($this->sendFCM($fcm, "⚠️ Aviso", "🚪 Dejaste abierta la puerta de tu habitación")));
+    }
+    public function sendFCM($id, $titulo, $msg) {
+        if (!defined('API_ACCESS_KEY')) define( 'API_ACCESS_KEY', 'AAAAmnmTP8g:APA91bFiTrAY3E8OZ27F7pr_iFdJqMPZqoeUH_TXFbSzkLsOt2jdMc9PSEUBQp9Te7Fn_aYC3PpUGLvpv68FMkHh12Khbtgme7vsei-p2mkJaQ8Gzqbze7AcsOZLp9M4OqxZ8T6_pbOr' );
+        $tokenarray = array($id);
+        $msg = array(
+            'title' => $titulo,
+            'subtitle' => 'Notificaciones hotel',
+            'sound' => 'default',
+            'color' => '#009688',
+            'icon' => 'ic_stat_room',
+            'body' => $msg);
+        $fields = array(
+            'registration_ids' => $tokenarray,
+            'notification' => $msg);
+        $headers = array
+        ('Authorization: key=' . API_ACCESS_KEY,
+            'Content-Type: application/json'
+        );
+
+        $ch = curl_init();
+        curl_setopt( $ch,CURLOPT_URL, 'fcm.googleapis.com/fcm/send' );
+        curl_setopt( $ch,CURLOPT_POST, true );
+        curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+        curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+        curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+        curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+        $result = curl_exec($ch );
+        curl_close( $ch );
+        return $result;
+    }
+
     public function obtenerHuespedes() {
         global $db;
         $datos = array();
