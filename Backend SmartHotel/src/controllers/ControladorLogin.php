@@ -93,11 +93,11 @@ class ControladorLogin
         if($login) {
             if ($this->reservacionActiva($correo)) {
                 //ha hecho login
-                $res = array("iat" => time(), "exp" => time() + $this->diasMinutos(3));
-                $jwt = JWT::encode($res, 'txsh2018');
+                $res = array("data" => array('correo' => $correo), "iat" => time(), "exp" => time() + $this->diasMinutos(6));
+                $jwt = JWT::encode($res, 'eneit2018');
                 $consultaDatos = "SELECT sh_huespedes.correo AS huesped_correo, sh_huespedes.nombre AS huesped_nombre, sh_huespedes.apellido AS huesped_apellido, sh_reservaciones.desde AS reservacion_desde, sh_reservaciones.hasta AS reservacion_hasta, sh_reservaciones.id_habitacion AS habitacion_numero FROM sh_huespedes INNER JOIN sh_reservaciones WHERE sh_huespedes.id_huesped = sh_reservaciones.huesped AND (DATE(NOW()) BETWEEN sh_reservaciones.desde AND sh_reservaciones.hasta) AND activa=1 AND correo=? LIMIT 1";
                 $rs = $db->query($consultaDatos, array($correo));
-                if ($rs===false){
+                if ($rs===false) {
                     http_response_code(500);
                     return array("code" => 0, "response" => "Error al recuperar datos");
                 }

@@ -300,7 +300,7 @@ $app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPr
     if ($funcion == "actualizarConfig")
         $app->JsonResponse($controladorPrincipal->actualizarConfig($app->getRequest()->getBody()), 201);
     if($funcion == "solicitarLimpieza")
-        $app->JsonResponse($controladorReservaciones->solicitudLimpieza($app->getRequest()->post()), 201);
+        $app->JsonResponse($controladorReservaciones->solicitudLimpieza($app->getRequest()->getBody()), 201);
     if($funcion == "avisoGlobal") {
         $app->JsonResponse($controladorHuespedes->notificacionGlobal($app->getRequest()->post("msg")));
     }
@@ -313,6 +313,12 @@ $app->respond(function () use ($app) {
 
 $app->post("/api/iot/alarma/{id}", function($id) use ($app, $controladorHuespedes) {
     $app->JsonResponse($controladorHuespedes->enviarAlarmaPuerta($id));
+});
+
+$app->post("/api/mobile/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) use ($app) {
+    $iot = new IoThabitacion($habitacion);
+    if ($funcion == "obtenerDatos")
+        $app->JsonResponse($iot->getMobileData($app->getRequest()->getBody()));
 });
 
 $app->post("/api/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) use ($app) {

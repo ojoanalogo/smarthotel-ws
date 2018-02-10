@@ -6,6 +6,10 @@
  * @author Alfonso Reyes Cortés <hola@mrarc.xyz>
  * @version 1.0
  */
+
+// Require
+use Firebase\JWT\JWT;
+
 class ControladorReservaciones {
 
     function getIdHuesped($correo) {
@@ -17,6 +21,52 @@ class ControladorReservaciones {
             return 0;
         }
         return $rs[0]["id_huesped"];
+    }
+
+    function solicitudLimpieza($body) {
+        $datos = json_decode($body, true);
+        $token = $datos["token"];
+        if($this->validarToken($token)) {
+            global $db;
+            $correo = $datos["correo"];
+            $habitacion = $datos["habitacion"];
+            $notas = $datos["notas"];
+            if(!$this->solicitudLimpiezaActiva($this->getIdHuesped($correo), $habitacion)) {
+                $args = array($habitacion, $this->getIdHuesped($correo), $notas);
+                $sql = "INSERT into sh_limpieza (habitacion, huesped, fecha, notas, estatus) VALUES (?,?,now(),?, 1)";
+                $rs = $db->query($sql, $args);
+                if ($rs === false) {
+                    return array("code" => 0, "msg" => "Error procesando solicitud limpieza");
+                }
+                return array("code" => 1, "msg" => "Solicitud de limpieza añadida");
+            } else {
+                return array("code" => 2, "msg" => "Ya hay una solicitud activa de limpieza");
+            }
+        }
+        return array("code" => -1, "msg" => "Token invalido");
+    }
+
+    function solicitudLimpiezaActiva($id_huesped, $habitacion) {
+        global $db;
+        $args = array($id_huesped, $habitacion);
+        $sql = "SELECT * FROM sh_limpieza WHERE huesped=? AND habitacion=? AND estatus=1";
+        $db->query($sql, $args);
+        if($db->rowcount())
+            return true;
+        return false;
+    }
+
+    function validarToken($token) {
+        try {
+            $key = "eneit2018";
+            $data = JWT::decode($token, $key, array('HS256'));
+            if($data) {
+                return true;
+            }
+        } catch (\Exception $e) {
+            return false;
+        }
+        return false;
     }
 
     function obtenerHistorial($idHuesped) {

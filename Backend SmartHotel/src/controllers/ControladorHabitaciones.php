@@ -287,6 +287,8 @@ class ControladorHabitaciones {
 }
 
 require_once __DIR__ . "/../../src/libs/adafruitio/adafruitio.php";
+// Require
+use Firebase\JWT\JWT;
 
 class IoThabitacion {
     private $habitacion;
@@ -295,6 +297,18 @@ class IoThabitacion {
     function __construct($idHabitacion) {
         $this->habitacion = $idHabitacion;
         $this->iot_id = $this->getID();
+    }
+    function validarToken($token) {
+        try {
+            $key = "eneit2018";
+            $data = JWT::decode($token, $key, array('HS256'));
+            if($data) {
+                return true;
+            }
+        } catch (\Exception $e) {
+            return false;
+        }
+        return false;
     }
     private function getID() {
             global $db;
@@ -311,6 +325,22 @@ class IoThabitacion {
         $adafruit = new AdaFruitIO($this->iotKey);
         return $adafruit->getFeedNames($this->iot_id);
     }
+
+    public function getMobileData($body) {
+        $datos = json_decode($body, true);
+        $token = $datos["token"];
+        if($this->validarToken($token)) {
+            $luces = $this->getData($this->iot_id . "." . "foco-1");
+            $minisplit = $this->getData($this->iot_id . "." . "minisplit");
+            $puerta = $this->getData($this->iot_id . "." . "puerta");
+            $termostato = $this->getData($this->iot_id . "." . "termostato");
+            $tv = $this->getData($this->iot_id . "." . "tv");
+            $temperatura = $this->getData($this->iot_id . "." . "temperatura");
+            return array("code" => 1, "msg" => "Datos obtenidos", "data" => array($luces, $minisplit, $puerta, $termostato, $tv, $temperatura));
+        }
+        return array("code" => -1, "msg" => "Token invalido");
+    }
+
     public function getData($feed) {
         $adafruit = new AdaFruitIO($this->iotKey);
         return $adafruit->getFeed($feed)->get();
