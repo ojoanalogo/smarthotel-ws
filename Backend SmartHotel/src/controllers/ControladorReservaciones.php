@@ -19,6 +19,21 @@ class ControladorReservaciones {
         return $rs[0]["id_huesped"];
     }
 
+    function obtenerHistorial($idHuesped) {
+        global $db;
+        $args = array($idHuesped);
+        $sql = "SELECT * FROM sh_reservaciones WHERE huesped = ?";
+        $rs = $db->query($sql, $args);
+        if($rs === false) {
+            return array("code" => 0, "msg" => "No se pudo obtener el historial");
+        }
+        $historial = array();
+        foreach ($rs as $row) {
+            $historial[] = $row;
+        }
+        return array("code" => 1, "msg" => "Historial obtenido", "data" => $historial);
+    }
+
     function crearReservacion($idHuesped, $fechaDesde, $fechaHasta, $idHabitacion, $notas) {
         if(!$this->reservacionExiste($idHabitacion, $fechaDesde, $fechaHasta) && !$this->huespedYaHospedado($this->getIdHuesped($idHuesped), $fechaDesde, $fechaHasta)) {
             global $db;

@@ -10,15 +10,26 @@ class ControladorHuespedes {
         if($rs === false) {
             return array("code" => 0, "msg" => "No se pudo enviar la alarma");
         }
-        $fcm = "";
-        foreach ($rs as $row) {
-            $fcm = $row["fcm_key"];
-        }
-        return array("code" => 1, "msg" => "Enviando alarma", "resultado" => array($this->sendFCM($fcm, "⚠️ Aviso", "🚪 Dejaste abierta la puerta de tu habitación")));
+        return array("code" => 1, "msg" => "Enviando alarma", "resultado" => array($this->sendFCM(array($rs[0]["fcm_key"]), "⚠️ Aviso", "🚪 Dejaste abierta la puerta de tu habitación")));
     }
+
+    public function notificacionGlobal($msg) {
+        global $db;
+        $query = "SELECT fcm_key FROM sh_huespedes JOIN sh_reservaciones ON sh_huespedes.id_huesped = sh_reservaciones.huesped WHERE (DATE(NOW()) BETWEEN sh_reservaciones.desde AND sh_reservaciones.hasta) AND activa=1";
+        $rs = $db->query($query);
+        if($rs === false) {
+            return array("code" => 0, "msg" => "No se pudo enviar la alerta");
+        }
+        $ids = array();
+        foreach ($rs as $row) {
+            $ids[] = $row["fcm_key"];
+        }
+        return array("code" => 1, "msg" => "Enviando alarma", "resultado" => array($this->sendFCM($ids, "⚠️ Aviso", $msg)));
+    }
+
     public function sendFCM($id, $titulo, $msg) {
         if (!defined('API_ACCESS_KEY')) define( 'API_ACCESS_KEY', 'AAAAmnmTP8g:APA91bFiTrAY3E8OZ27F7pr_iFdJqMPZqoeUH_TXFbSzkLsOt2jdMc9PSEUBQp9Te7Fn_aYC3PpUGLvpv68FMkHh12Khbtgme7vsei-p2mkJaQ8Gzqbze7AcsOZLp9M4OqxZ8T6_pbOr' );
-        $tokenarray = array($id);
+        $tokenarray = $id;
         $msg = array(
             'title' => $titulo,
             'subtitle' => 'Notificaciones hotel',
@@ -45,6 +56,8 @@ class ControladorHuespedes {
         curl_close( $ch );
         return $result;
     }
+
+
 
     public function obtenerHuespedes() {
         global $db;

@@ -92,15 +92,18 @@
     }).draw();
 
     function obtenerValores() {
-        var $numeroHabitacion = <?php echo $args[0] . ";" ?>
+        <?php echo 'var $numeroHabitacion = ' . $args[0] . ';' ?>
             $.ajax({
                 type: 'POST',
                 url: '/api/iot/' + $numeroHabitacion + '/obtenerDatos',
                 data: "",
                 success: function(data) {
-                    console.log("i got called m8");
+                    console.log(data);
                     var $datos = (JSON.parse(data));
-                    console.log($datos);
+                    if($datos.error) {
+                        swal("Error IoT", "No se pudieron obtener los datos de la habitación, comprueba el ID de dispositivo", "error");
+                        return false;
+                    }
                     gTemp.value = $datos[1]["last_value"];
                     if($datos[3]["last_value"] === "1") {
                         $('#imgLuces').attr('src', "/public/img/light-on.png");
@@ -127,7 +130,7 @@
 
     $('#btnLuces').click(function() {
         var $accion = $(this).attr('data-action');
-        var $numeroHabitacion = <?php echo $args[0] . ";" ?>
+        <?php echo 'var $numeroHabitacion = ' . $args[0] . ';' ?>
             $.ajax({
             type: 'POST',
             url: '/api/iot/' + $numeroHabitacion + '/modificarDato/',

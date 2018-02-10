@@ -156,7 +156,7 @@
                     }
                 },
                 error: function(xhr, type, exception) {
-                    swal("No se pudo eliminar", "Ha ocurrido un error.", "danger");
+                    swal("No se pudo eliminar", "Ha ocurrido un error.", "error");
                 }
             });
         });
@@ -178,7 +178,7 @@
                 }
             },
             error: function(xhr, type, exception) {
-                swal("No se pudo eliminar", "Ha ocurrido un error.", "danger");
+                swal("No se pudo eliminar", "Ha ocurrido un error.", "error");
             }
         });
     }

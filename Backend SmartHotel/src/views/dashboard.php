@@ -27,12 +27,14 @@
                 <p class="category">Aviso</p>
             </div>
             <div class="content">
+                <form id="msgGlobal">
                 <div class="form-group">
                     <label for="mensajeGSM">Escribir Mensaje</label>
                     <textarea style="resize: none;" class="form-control" id="mensajeGSM" rows="3" draggable="false"></textarea>
                 </div>
                 <h6 class="pull-right" id="count_message"></h6>
-                <a href="#" class="btn btn-fill btn-warning" id="enviarMensajeGSM"> <i class="fa fa-paper-plane fa-lg"></i>&nbsp; Mandar aviso</a>
+                <button type="submit" class="btn btn-fill btn-warning" id="enviarMensajeGSM"> <i class="fa fa-paper-plane fa-lg"></i>&nbsp; Mandar aviso</button>
+                </form>
             </div>
         </div>
     </div>
@@ -214,4 +216,38 @@
             $('#enviarMensajeGSM').removeAttr('disabled');
         }
     });
+
+    $('form#msgGlobal').on('submit', function(e) {
+        enviarMsgGlobal();
+        e.preventDefault();
+    });
+
+    function enviarMsgGlobal() {
+        var $msg = $('#mensajeGSM').val();
+        if($msg.length <= 1) {
+            swal("Mensaje muy corto", "Introduce más texto", "error");
+            return false;
+        }
+        if($msg.length > 180) {
+            swal("Mensaje muy largo", "Escribe menos....", "error");
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/api/hotel/avisoGlobal',
+            data: "msg=" + $msg,
+            success: function(data) {
+                var $datos = JSON.parse(data);
+                if ($datos.code === 1) {
+                    swal("Mensaje enviado", "", "success");
+                    $('#mensajeGSM').val('');
+                } else {
+                    swal("Error", "No se pudo enviar el mensaje a la red", "error");
+                }
+            },
+            error: function(xhr, type, exception) {
+                swal("No se pudo eliminar", "Ha ocurrido un error.", "danger");
+            }
+        });
+    }
 </script>

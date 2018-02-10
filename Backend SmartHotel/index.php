@@ -135,11 +135,11 @@ $app->get('/dashboard/huespedes/remove/{id}', function ($id) use ($app, $control
 });
 
 /**
- * Servir pag Mapa
+ * Servir pag limpieza
  */
-$app->get('/dashboard/mapa', function () use ($app, $controladorLogin, $controladorPrincipal) {
+$app->get('/dashboard/limpieza', function () use ($app, $controladorLogin, $controladorPrincipal) {
     if (checkAuth())
-        return $app->Response('mapa.php', valoresDefault(), 201);
+        return $app->Response('limpieza.php', valoresDefault(), 201);
     else
         return $app->Response('login.php', array(), 201);
 });
@@ -275,6 +275,8 @@ $app->post("/api/reservacion/{funcion}", function ($funcion) use ($app, $control
         $app->JsonResponse($controladorReservaciones->obtenerHabitacionesReservas(), 201);
     if ($funcion == "checkout")
         $app->JsonResponse($controladorReservaciones->checkOutManual($rq->post("id_reserva")), 201);
+    if ($funcion == "obtenerHistorial")
+        $app->JsonResponse($controladorReservaciones->obtenerHistorial($rq->post("id_huesped")), 201);
 });
 
 /**
@@ -292,11 +294,16 @@ $app->post("/api/huespedes/{funcion}", function ($funcion) use ($app, $controlad
 /**
  * API Hotel
  */
-$app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPrincipal) {
+$app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPrincipal, $controladorReservaciones, $controladorHuespedes) {
     if ($funcion == "obtenerConfig")
         $app->JsonResponse($controladorPrincipal->obtenerConfig(), 201);
     if ($funcion == "actualizarConfig")
         $app->JsonResponse($controladorPrincipal->actualizarConfig($app->getRequest()->getBody()), 201);
+    if($funcion == "solicitarLimpieza")
+        $app->JsonResponse($controladorReservaciones->solicitudLimpieza($app->getRequest()->post()), 201);
+    if($funcion == "avisoGlobal") {
+        $app->JsonResponse($controladorHuespedes->notificacionGlobal($app->getRequest()->post("msg")));
+    }
 });
 
 // 404
@@ -318,8 +325,8 @@ $app->post("/api/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) u
         $app->JsonResponse($iot->moveData($app->getRequest()->post("feed"), $app->getRequest()->post("data")));
 });
 
-$app->get("/test", function () use ($app) {
-    echo stripslashes(hash("sha256", "comodorops3"));
+$app->get("/test", function () use ($app, $controladorHuespedes) {
+    $app->JsonResponse($controladorHuespedes->notificacionGlobal("hola putos"));
 });
 
 function checkAuth()

@@ -53,7 +53,7 @@
 <td>' . $usuario["correo"] . '</td>
 <td align="center" valign="middle">' . $usuario["telefono"] . '</td>
 <td align="center" valign="middle">
-    <a href="#" class="btn btn-md btn-fill btn-primary"><i class="fa fa-list"></i> Historial</a>
+    <a href="#" data-idHuesped="' . $usuario["id_huesped"] . '" class="btn btn-md btn-fill btn-primary historialHuesped"><i class="fa fa-list"></i> Historial</a>
     <a href="#" class="btn btn-md btn-info btn-fill editarHuesped" data-idHuesped="' . $usuario["id_huesped"] . '" style="color:#FFF;"><i class="fa fa-edit fa-fw"></i> Editar</a>
     <a href="#" data-idHuesped="' . $usuario["id_huesped"] . '" class="btn btn-danger btn-md btn-fill eliminarHuesped"><i class="fa fa-trash fa-fw"></i> Eliminar</a>
     </td>
@@ -205,6 +205,41 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<div class="modal fade" id="historialHuesped" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2>Historial <small>huesped</small></h2>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="tabla-huespedes">
+                            <thead>
+                            <tr>
+                                <th width="10%">ID Reserva</th>
+                                <th width="35%">Fecha llegada</th>
+                                <th width="35%">Fecha Salida</th>
+                                <th width="20%">Habitación</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tablaHistorial">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-md" data-dismiss="modal"><i class="fa fa-times fa-fw"></i>Cerrar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <script>
     $(document).ready(function() {
         $('#tabla-huespedes').dataTable({
@@ -234,6 +269,35 @@
                     $('form#editarHuesped').attr("id-huesped", $idHuesped);
                 } else {
                     swal("Error", "Error en la base de datos", "error");
+                }
+            },
+            error: function(xhr, type, exception) {
+                swal("Error", "Ha ocurrido un error.\nInformación: " + type, "error");
+            }
+        });
+    });
+
+    $('.historialHuesped').click(function() {
+        $('#tablaHistorial').html('');
+        var $idHuesped = $(this).attr('data-idHuesped');
+        $.ajax({
+            type: 'POST',
+            url: '/api/reservacion/obtenerHistorial',
+            data: "id_huesped=" + $idHuesped,
+            success: function(data) {
+                var $datos = JSON.parse(data);
+                if ($datos.code === 1) {
+                    var $data = $datos["data"];
+                    if($data.length > 0) {
+                        $.each($data, function (i, item) {
+                            $('#tablaHistorial').append('<tr><td>' + item["id_reserva"] + '</td> <td>' + item["desde"] + '</td> <td>' + item["hasta"] + '</td> <td>' + item["id_habitacion"] + '</td></tr>');
+                        });
+                    } else {
+                        $('#tablaHistorial').append('<tr><td colspan="4" class="bg-danger"><b>No hay historial de reservaciones</b></td></tr>');
+                    }
+                    $('#historialHuesped').modal('toggle');
+                } else {
+                    swal("Error", "No se pudo obtener el historial", "error");
                 }
             },
             error: function(xhr, type, exception) {

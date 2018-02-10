@@ -78,22 +78,10 @@ function obtenerSeccionNavbar($requestUri) {
                         <p>Huespedes</p>
                     </a>
                 </li>
-                <li <?php obtenerSeccionNavbar("mensajes") ?>>
-                    <a href="/dashboard/mensajes">
-                        <i class="fa fa-inbox"></i>
-                        <p>Mensajes</p>
-                    </a>
-                </li>
                 <li <?php obtenerSeccionNavbar("limpieza") ?>>
                     <a href="/dashboard/limpieza">
                         <i class="fa fa-paint-brush"></i>
                         <p>Solicitudes limpieza</p>
-                    </a>
-                </li>
-                <li <?php obtenerSeccionNavbar("mapa") ?>>
-                    <a href="/dashboard/mapa">
-                        <i class="fa fa-map"></i>
-                        <p>Mapa</p>
                     </a>
                 </li>
                 <li <?php obtenerSeccionNavbar("configuracion") ?>>
