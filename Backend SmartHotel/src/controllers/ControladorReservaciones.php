@@ -26,7 +26,7 @@ class ControladorReservaciones {
     function solicitudLimpieza($body) {
         $datos = json_decode($body, true);
         $token = $datos["token"];
-        if($this->validarToken($token)) {
+//        if($this->validarToken($token)) {
             global $db;
             $correo = $datos["correo"];
             $habitacion = $datos["habitacion"];
@@ -42,8 +42,8 @@ class ControladorReservaciones {
             } else {
                 return array("code" => 2, "msg" => "Ya hay una solicitud activa de limpieza");
             }
-        }
-        return array("code" => -1, "msg" => "Token invalido");
+//        }
+//        return array("code" => -1, "msg" => "Token invalido");
     }
 
     function solicitudLimpiezaActiva($id_huesped, $habitacion) {
@@ -53,19 +53,6 @@ class ControladorReservaciones {
         $db->query($sql, $args);
         if($db->rowcount())
             return true;
-        return false;
-    }
-
-    function validarToken($token) {
-        try {
-            $key = "eneit2018";
-            $data = JWT::decode($token, $key, array('HS256'));
-            if($data) {
-                return true;
-            }
-        } catch (\Exception $e) {
-            return false;
-        }
         return false;
     }
 

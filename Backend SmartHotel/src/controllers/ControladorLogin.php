@@ -132,6 +132,18 @@ class ControladorLogin
         }
     }
 
+    public function checkHuesped($body) {
+        global $db;
+        $datos = json_decode($body, true);
+        $args = array($datos["correo"]);
+        $query = "SELECT id_huesped FROM sh_huespedes INNER JOIN sh_reservaciones WHERE sh_huespedes.id_huesped = sh_reservaciones.huesped AND (DATE(NOW()) BETWEEN sh_reservaciones.desde AND sh_reservaciones.hasta) AND activa=1 AND correo=? LIMIT 1";
+        $rs = $db->query($query, $args);
+        if($rs === false) {
+            return array("code" => 0, "response" => "Error validación");
+        }
+        return $db->rowcount() >=1 ? array("code" => 1, "response" => "Si tiene reservación activa") : array("code" => 0, "response" => "No tiene reservación activa");
+    }
+
     function reservacionActiva($correo) {
         global $db;
         $args = array($correo);

@@ -282,14 +282,15 @@ $app->post("/api/reservacion/{funcion}", function ($funcion) use ($app, $control
 /**
  * API Usuarios
  */
-$app->post("/api/huespedes/{funcion}", function ($funcion) use ($app, $controladorHuespedes) {
+$app->post("/api/huespedes/{funcion}", function ($funcion) use ($app, $controladorHuespedes, $controladorLogin) {
     $rq = $app->getRequest();
     if ($funcion == "obtenerHuesped")
         $app->JsonResponse($controladorHuespedes->obtenerHuesped($rq->post("id_huesped")), 201);
     if ($funcion == "editarHuesped")
         $app->JsonResponse($controladorHuespedes->editarHuesped($rq->post("id_huesped"), $rq->post("nombre"), $rq->post("apellido"), $rq->post("correo"), $rq->post("direccion"), $rq->post("telefono")), 201);
+    if($funcion == "checarReservacion")
+        $app->JsonResponse($controladorLogin->checkHuesped($rq->getBody()));
 });
-
 
 /**
  * API Hotel
@@ -318,7 +319,9 @@ $app->post("/api/iot/alarma/{id}", function($id) use ($app, $controladorHuespede
 $app->post("/api/mobile/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) use ($app) {
     $iot = new IoThabitacion($habitacion);
     if ($funcion == "obtenerDatos")
-        $app->JsonResponse($iot->getMobileData($app->getRequest()->getBody()));
+        $app->JsonResponse($iot->getMobileData($habitacion, $app->getRequest()->getBody()));
+    if ($funcion == "modificarDato")
+        $app->JsonResponse($iot->moveDataMobile($habitacion, $app->getRequest()->getBody()));
 });
 
 $app->post("/api/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) use ($app) {
@@ -331,8 +334,8 @@ $app->post("/api/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) u
         $app->JsonResponse($iot->moveData($app->getRequest()->post("feed"), $app->getRequest()->post("data")));
 });
 
-$app->get("/test", function () use ($app, $controladorHuespedes) {
-    $app->JsonResponse($controladorHuespedes->notificacionGlobal("hola putos"));
+$app->get("/test", function () use ($app, $controladorLogin) {
+    $app->JsonResponse($controladorLogin->reservacionActiva("arc980103@gmail.com"));
 });
 
 function checkAuth()

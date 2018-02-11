@@ -298,18 +298,18 @@ class IoThabitacion {
         $this->habitacion = $idHabitacion;
         $this->iot_id = $this->getID();
     }
-    function validarToken($token) {
-        try {
-            $key = "eneit2018";
-            $data = JWT::decode($token, $key, array('HS256'));
-            if($data) {
-                return true;
-            }
-        } catch (\Exception $e) {
-            return false;
-        }
-        return false;
-    }
+//    private function validarToken($token) {
+//        try {
+//            $key = "eneit2018";
+//            $data = JWT::decode($token, $key, array('HS256'));
+//            if($data) {
+//                return true;
+//            }
+//        } catch (\Exception $e) {
+//            return false;
+//        }
+//        return false;
+//    }
     private function getID() {
             global $db;
             $args = array($this->habitacion);
@@ -326,25 +326,60 @@ class IoThabitacion {
         return $adafruit->getFeedNames($this->iot_id);
     }
 
-    public function getMobileData($body) {
+    private function iotDisponible($habitacion) {
+        global $db;
+        $args = array($habitacion);
+        $sql = "SELECT iot_id FROM sh_habitaciones WHERE habitacion=?";
+        $rs = $db->query($sql, $args);
+        if ($rs === false) {
+            return false;
+        }
+        return $rs[0]["iot_id"] != "";
+    }
+
+    public function getMobileData($habitacion, $body) {
         $datos = json_decode($body, true);
         $token = $datos["token"];
-        if($this->validarToken($token)) {
-            $luces = $this->getData($this->iot_id . "." . "foco-1");
-            $minisplit = $this->getData($this->iot_id . "." . "minisplit");
-            $puerta = $this->getData($this->iot_id . "." . "puerta");
-            $termostato = $this->getData($this->iot_id . "." . "termostato");
-            $tv = $this->getData($this->iot_id . "." . "tv");
-            $temperatura = $this->getData($this->iot_id . "." . "temperatura");
-            return array("code" => 1, "msg" => "Datos obtenidos", "data" => array($luces, $minisplit, $puerta, $termostato, $tv, $temperatura));
-        }
-        return array("code" => -1, "msg" => "Token invalido");
+//        if($this->validarToken($token)) {
+            if($this->iotDisponible($habitacion)) {
+                $luces = $this->getData("foco-1");
+                $minisplit = $this->getData("minisplit");
+                $puerta = $this->getData("puerta");
+                $termostato = $this->getData("termostato");
+                $tv = $this->getData("tv");
+                $temperatura = $this->getData("temperatura");
+                http_response_code(200);
+                return array("code" => 1, "msg" => "Datos obtenidos", "data" => array($luces, $minisplit, $puerta, $termostato, $tv, $temperatura));
+            }
+            http_response_code(202);
+            return array("code" => 0, "msg" => "IoT no disponible");
+//        }
+//        http_response_code(401);
+//        return array("code" => -1, "msg" => "Token invalido");
+    }
+
+    public function moveDataMobile($habitacion, $body) {
+        $datos = json_decode($body, true);
+        $token = $datos["token"];
+//        if($this->validarToken($token)) {
+            if($this->iotDisponible($habitacion)) {
+                $feed = $datos["feed"];
+                $data = $datos["data"];
+                http_response_code(200);
+                return array("code" => 1, "msg" => "Valor modificado", "data" => $this->moveData($feed, $data));
+            }
+            http_response_code(202);
+            return array("code" => 0, "msg" => "IoT no disponible");
+//        }
+//        http_response_code(401);
+//        return array("code" => -1, "msg" => "Token invalido");
     }
 
     public function getData($feed) {
         $adafruit = new AdaFruitIO($this->iotKey);
-        return $adafruit->getFeed($feed)->get();
+        return $adafruit->getFeed($this->iot_id . "." . $feed)->get();
     }
+
     public function moveData($feed, $data) {
         $adafruit = new AdaFruitIO($this->iotKey);
         return $adafruit->getFeed($this->iot_id . "." . $feed)->send($data);
