@@ -327,7 +327,7 @@ class IoThabitacion {
 
     public function getChart($feed) {
         $adafruit = new AdaFruitIO($this->iotKey);
-        return array("code" => 1, "msg" => "Datos obtenidos", "data" => $adafruit->getChartData($this->iot_id . "." . $feed));
+        return array("code" => 1, "msg" => "Datos obtenidos", "data" => $adafruit->getChartData($this->iot_id . "." . $feed, 5, 3));
     }
 
     public function getMobileData($habitacion, $body) {

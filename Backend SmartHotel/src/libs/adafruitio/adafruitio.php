@@ -56,8 +56,8 @@ class AdaFruitIO
         curl_close($c);
         return $json;
     }
-    public function getChartData($feed) {
-        $url = $this->url."/api/v2/MrARC/feeds/" . $feed . "/data/chart?resolution=5&hours=8";
+    public function getChartData($feed, $resolution, $horas) {
+        $url = $this->url."/api/v2/MrARC/feeds/" . $feed . "/data/chart?resolution=" . $resolution . "&hours=" . $horas;
         $c = curl_init($url);
         $headers = array();
         $headers[] = "X-AIO-Key: ".$this->key;

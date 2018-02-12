@@ -84,7 +84,7 @@
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-history"></i> Actualizado (<span class="contador">hace 0 segundos</span>)
+                                        <i class="fa fa-history"></i> Actualizado (<span class="contadorGraph">hace 0 segundos</span>)
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-history"></i> Actualizado (<span class="contador">hace 0 segundos</span>)
+                                        <i class="fa fa-history"></i> Actualizado (<span class="contadorGraph">hace 0 segundos</span>)
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="fa fa-history"></i> Actualizado (<span class="contador">hace 0 segundos</span>)
+                                        <i class="fa fa-history"></i> Actualizado (<span class="contadorGraph">hace 0 segundos</span>)
                                     </div>
                                 </div>
                             </div>
@@ -125,10 +125,12 @@
      */
     $(document).ready(function() {
         obtenerValores();
+        obtenerGraficas();
     });
 
     $('#update').click(function(){
        getDataRequest();
+       getGraphRequest();
         swal("Información actualizada", "", "success");
     });
 
@@ -317,6 +319,30 @@
             }, 1000);
     }
 
+    var $i_graph = 0;
+    var $contador_graph;
+
+    function setContadorGraph() {
+        $i_graph++;
+        $contador_graph = setTimeout(function() {
+            $('.contadorGraph').html('hace <b class="text-success">' + $i_graph + '</b> segundos');
+            setContadorGraph();
+        }, 1000);
+    }
+    function obtenerGraficas() {
+        getGraphRequest();
+        setTimeout(function(){
+            obtenerGraficas();
+        }, 1000*35);
+    }
+    function getGraphRequest() {
+        getChartData("temperatura");
+        getChartData("termostato");
+        getChartData("humedad");
+        clearTimeout($contador_graph);
+        setContadorGraph();
+    }
+
     function obtenerValores() {
         getDataRequest();
         setTimeout(function(){
@@ -378,9 +404,6 @@
                     $('#btnTV').addClass('btn-success');
                     $('#btnTV').attr('data-action', "1");
                 }
-                getChartData("temperatura");
-                getChartData("humedad");
-                getChartData("termostato");
             },
             error: function(xhr, type, exception) {
                 swal("Error IoT", "No se pudieron obtener los datos de la habitación, comprueba el ID de dispositivo", "error");
@@ -396,11 +419,20 @@
             url: '/api/iot/' + $numeroHabitacion + '/modificarDato/',
             data: "feed=" + "foco-1" + "&data=" + $accion,
             success: function(data) {
-                obtenerValores();
                 if($accion === "1") {
                     swal("Foco encendido", "", "success");
+                    $('#imgLuces').attr('src', "/public/img/light-on.png");
+                    $('#btnLuces').html('Apagar');
+                    $('#btnLuces').removeClass('btn-success');
+                    $('#btnLuces').addClass('btn-danger');
+                    $('#btnLuces').attr('data-action', "0");
                 } else {
                     swal("Foco apagado", "", "success");
+                    $('#imgLuces').attr('src', "/public/img/light-off.png");
+                    $('#btnLuces').html('Encender');
+                    $('#btnLuces').removeClass('btn-danger');
+                    $('#btnLuces').addClass('btn-success');
+                    $('#btnLuces').attr('data-action', "1");
                 }
             },
             error: function(xhr, type, exception) {
@@ -417,11 +449,18 @@
             url: '/api/iot/' + $numeroHabitacion + '/modificarDato/',
             data: "feed=" + "tv" + "&data=" + $accion,
             success: function(data) {
-                obtenerValores();
                 if($accion === "1") {
                     swal("Televisión encendida", "", "success");
+                    $('#btnTV').html('Apagar');
+                    $('#btnTV').removeClass('btn-success');
+                    $('#btnTV').addClass('btn-danger');
+                    $('#btnTV').attr('data-action', "0");
                 } else {
                     swal("Televisión apagada", "", "success");
+                    $('#btnTV').html('Encender');
+                    $('#btnTV').removeClass('btn-danger');
+                    $('#btnTV').addClass('btn-success');
+                    $('#btnTV').attr('data-action', "1");
                 }
             },
             error: function(xhr, type, exception) {
@@ -438,11 +477,18 @@
             url: '/api/iot/' + $numeroHabitacion + '/modificarDato/',
             data: "feed=" + "minisplit" + "&data=" + $accion,
             success: function(data) {
-                obtenerValores();
                 if($accion === "1") {
                     swal("Clima encendido", "", "success");
+                    $('#btnMiniSplit').html('Apagar');
+                    $('#btnMiniSplit').removeClass('btn-success');
+                    $('#btnMiniSplit').addClass('btn-danger');
+                    $('#btnMiniSplit').attr('data-action', "0");
                 } else {
                     swal("Clima apagado", "", "success");
+                    $('#btnMiniSplit').html('Encender');
+                    $('#btnMiniSplit').removeClass('btn-danger');
+                    $('#btnMiniSplit').addClass('btn-success');
+                    $('#btnMiniSplit').attr('data-action', "1");
                 }
             },
             error: function(xhr, type, exception) {
@@ -508,122 +554,6 @@
                 }
             }]
         ];
-        var chart = Chartist.Line("#chart_" + $id, dataUso, opciones, responsivo);
-
-// Let's put a sequence number aside so we can use it in the event callbacks
-        var seq = 0,
-            delays = 80,
-            durations = 500;
-
-// Once the chart is fully created we reset the sequence
-        chart.on('created', function() {
-            seq = 0;
-        });
-
-// On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
-        chart.on('draw', function(data) {
-            seq++;
-
-            if(data.type === 'line') {
-                // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
-                data.element.animate({
-                    opacity: {
-                        // The delay when we like to start the animation
-                        begin: seq * delays + 1000,
-                        // Duration of the animation
-                        dur: durations,
-                        // The value where the animation should start
-                        from: 0,
-                        // The value where it should end
-                        to: 1
-                    }
-                });
-            } else if(data.type === 'label' && data.axis === 'x') {
-                data.element.animate({
-                    y: {
-                        begin: seq * delays,
-                        dur: durations,
-                        from: data.y + 100,
-                        to: data.y,
-                        // We can specify an easing function from Chartist.Svg.Easing
-                        easing: 'easeOutQuart'
-                    }
-                });
-            } else if(data.type === 'label' && data.axis === 'y') {
-                data.element.animate({
-                    x: {
-                        begin: seq * delays,
-                        dur: durations,
-                        from: data.x - 100,
-                        to: data.x,
-                        easing: 'easeOutQuart'
-                    }
-                });
-            } else if(data.type === 'point') {
-                data.element.animate({
-                    x1: {
-                        begin: seq * delays,
-                        dur: durations,
-                        from: data.x - 10,
-                        to: data.x,
-                        easing: 'easeOutQuart'
-                    },
-                    x2: {
-                        begin: seq * delays,
-                        dur: durations,
-                        from: data.x - 10,
-                        to: data.x,
-                        easing: 'easeOutQuart'
-                    },
-                    opacity: {
-                        begin: seq * delays,
-                        dur: durations,
-                        from: 0,
-                        to: 1,
-                        easing: 'easeOutQuart'
-                    }
-                });
-            } else if(data.type === 'grid') {
-                // Using data.axis we get x or y which we can use to construct our animation definition objects
-                var pos1Animation = {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data[data.axis.units.pos + '1'] - 30,
-                    to: data[data.axis.units.pos + '1'],
-                    easing: 'easeOutQuart'
-                };
-
-                var pos2Animation = {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data[data.axis.units.pos + '2'] - 100,
-                    to: data[data.axis.units.pos + '2'],
-                    easing: 'easeOutQuart'
-                };
-
-                var animations = {};
-                animations[data.axis.units.pos + '1'] = pos1Animation;
-                animations[data.axis.units.pos + '2'] = pos2Animation;
-                animations['opacity'] = {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: 0,
-                    to: 1,
-                    easing: 'easeOutQuart'
-                };
-
-                data.element.animate(animations);
-            }
-        });
-
-// For the sake of the example we update the chart every time it's created with a delay of 10 seconds
-        chart.on('created', function() {
-            if(window.__exampleAnimateTimeout) {
-                clearTimeout(window.__exampleAnimateTimeout);
-                window.__exampleAnimateTimeout = null;
-            }
-            window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 12000);
-        });
-
+        Chartist.Line("#chart_" + $id, dataUso, opciones, responsivo);
     }
 </script>

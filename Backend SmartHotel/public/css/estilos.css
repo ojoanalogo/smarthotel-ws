@@ -102,6 +102,22 @@ small {
     opacity: 100 !important;
 }
 
-.ct-series-a .ct-point, .ct-series-a .ct-line {
-    stroke: red !important;
+#chart_termostato .ct-series-a .ct-point {
+    stroke: #F44336 !important;
+}
+#chart_termostato .ct-series-a .ct-line {
+    stroke: #F44336 !important;
+}
+
+#chart_temperatura .ct-series-a .ct-point {
+    stroke: #FF9800 !important;
+}
+#chart_temperatura .ct-series-a .ct-line {
+    stroke: #FF9800 !important;
+}
+#chart_humedad .ct-series-a .ct-point {
+    stroke: #8BC34A !important;
+}
+#chart_humedad .ct-series-a .ct-line {
+    stroke: #8BC34A !important;
 }

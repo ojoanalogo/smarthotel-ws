@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-02-2018 a las 20:05:01
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Tiempo de generación: 12-02-2018 a las 17:00:26
+-- Versión del servidor: 10.1.30-MariaDB
+-- Versión de PHP: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -54,7 +56,6 @@ CREATE TABLE `sh_habitaciones` (
   `id_tipo_habitacion` int(16) NOT NULL,
   `id_piso` int(16) NOT NULL,
   `iot_id` varchar(256) NOT NULL,
-  `iot_key` varchar(256) NOT NULL,
   `estatus` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -62,12 +63,12 @@ CREATE TABLE `sh_habitaciones` (
 -- Volcado de datos para la tabla `sh_habitaciones`
 --
 
-INSERT INTO `sh_habitaciones` (`habitacion`, `id_tipo_habitacion`, `id_piso`, `iot_id`, `iot_key`, `estatus`) VALUES
-(101, 2, 1, 'Test-1', '', 1),
-(102, 1, 1, '', '', 1),
-(201, 2, 2, '', '', 1),
-(202, 1, 2, '', '', 1),
-(301, 2, 3, '', '', 1);
+INSERT INTO `sh_habitaciones` (`habitacion`, `id_tipo_habitacion`, `id_piso`, `iot_id`, `estatus`) VALUES
+(101, 2, 1, 'sh-tx1', 1),
+(102, 1, 1, '', 1),
+(201, 2, 2, '', 1),
+(202, 1, 2, '', 1),
+(301, 2, 3, '', 1);
 
 -- --------------------------------------------------------
 
@@ -107,19 +108,41 @@ CREATE TABLE `sh_huespedes` (
   `direccion` text NOT NULL,
   `ultimo_login` datetime NOT NULL,
   `clave` char(64) NOT NULL,
-  `gsm_key` varchar(256) NOT NULL
+  `fcm_key` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Volcado de datos para la tabla `sh_huespedes`
 --
 
-INSERT INTO `sh_huespedes` (`id_huesped`, `correo`, `nombre`, `apellido`, `telefono`, `fecha_registro`, `pais_id`, `direccion`, `ultimo_login`, `clave`, `gsm_key`) VALUES
-(2, 'ricardoreyes@hotmail.com', 'Ricardo', 'Reyes Cortes', '667774489', '2018-02-03 00:55:24', 'Mexico', 'Priv. Rio Suchiate 1125', '0000-00-00 00:00:00', 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae', ''),
-(5, 'aldodanielfigueroa@gmail.com', 'Aldo Daniel', 'Figueroa Valle', '6677806811', '2018-02-03 01:05:14', 'Niger', 'Calle desconocida', '0000-00-00 00:00:00', '39be519c5e9629211acb2c9034e778e1e528f091f7650f962d438385bcec12dc', ''),
-(6, 'alexiatarinadln@gmail.com', 'Alexia Adilene', 'Tarin', '6442501555', '2018-02-03 01:39:40', 'Mexico', '612 N Claremont St', '0000-00-00 00:00:00', 'eb2de31bf5f0876db334c64cc142fa5f5ef1fd41ce8595a2e81769b85b2c48f6', ''),
-(7, 'mariselacortes@gmail.com', 'Marisela', 'CortÃ©s Gutierrez', '6671383065', '2018-02-04 05:25:56', 'Mexico', 'Priv. Rio Suchiate 1125', '0000-00-00 00:00:00', '7686e0a07516fbe42a6afc23ba7cbcc24435b8a38c10b46453a91cc07a673824', ''),
-(8, 'arc980103@gmail.com', 'Alfonso', 'Reyes CortÃ©s', '6677749291', '2018-02-04 20:58:14', 'Mexico', 'Priv. Rio Suchiate 1125', '0000-00-00 00:00:00', 'edc0fe321a62efbfc8eb900e3c590eb55a54bca0e381fd3e2ba93408a2ec0bf0', '');
+INSERT INTO `sh_huespedes` (`id_huesped`, `correo`, `nombre`, `apellido`, `telefono`, `fecha_registro`, `pais_id`, `direccion`, `ultimo_login`, `clave`, `fcm_key`) VALUES
+(1, 'arc980103@gmail.com', 'Alfonso', 'Reyes CortÃ©s', '6677749291', '2018-02-04 20:58:14', 'Mexico', 'Priv. Rio Suchiate 1125', '2018-02-11 17:23:03', 'edc0fe321a62efbfc8eb900e3c590eb55a54bca0e381fd3e2ba93408a2ec0bf0', 'f_tK1LcahgA:APA91bEpjLT2BHmKA12zQ8EZ5SatWsGJikiyqOE2kq9NRpRKAhWZNgfat7DyNKLUll9rJt99JHheXf0c2jD-Vj7FjXGC3bKWjrlmt_1PDxDEEhjYpnuySiXTIyO1xxVUhlhMezHccqcR');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sh_limpieza`
+--
+
+CREATE TABLE `sh_limpieza` (
+  `id_solicitud` int(16) NOT NULL,
+  `habitacion` int(11) NOT NULL,
+  `huesped` int(11) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `notas` text,
+  `estatus` int(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sh_limpieza`
+--
+
+INSERT INTO `sh_limpieza` (`id_solicitud`, `habitacion`, `huesped`, `fecha`, `notas`, `estatus`) VALUES
+(1, 101, 8, '2018-02-10 13:18:30', 'Nada jeje', 0),
+(2, 101, 8, '2018-02-10 13:18:51', 'test', 0),
+(3, 101, 8, '2018-02-10 13:32:17', 'Ya limpien prros', 0),
+(4, 101, 8, '2018-02-10 13:35:52', 'Holi', 0),
+(5, 101, 8, '2018-02-10 13:39:25', 'L tranz prros', 1);
 
 -- --------------------------------------------------------
 
@@ -144,7 +167,7 @@ CREATE TABLE `sh_panel_usuarios` (
 --
 
 INSERT INTO `sh_panel_usuarios` (`id_usuario`, `correo`, `usuario`, `nombre`, `apellido`, `fecha_registro`, `id_rol`, `ultimo_login`, `clave`) VALUES
-(1, 'hola@mrarc.xyz', 'mrarc', 'Alfonso', 'Reyes', '2018-01-11 14:46:22', 1, '2018-02-08 05:28:55', 'edc0fe321a62efbfc8eb900e3c590eb55a54bca0e381fd3e2ba93408a2ec0bf0');
+(1, 'hola@mrarc.xyz', 'mrarc', 'Alfonso', 'Reyes', '2018-01-11 14:46:22', 1, '2018-02-12 05:31:42', 'edc0fe321a62efbfc8eb900e3c590eb55a54bca0e381fd3e2ba93408a2ec0bf0');
 
 -- --------------------------------------------------------
 
@@ -187,8 +210,9 @@ CREATE TABLE `sh_reservaciones` (
 --
 
 INSERT INTO `sh_reservaciones` (`id_reserva`, `huesped`, `desde`, `hasta`, `id_habitacion`, `notas`, `activa`) VALUES
-('3IlxbVMa', 5, '2018-02-08', '2018-02-10', 102, '', 0),
-('gr0oqtaF', 8, '2018-02-04', '2018-02-09', 101, '', 1);
+('3yEjfGbV', 1, '2018-02-11', '2018-02-15', 101, '', 1),
+('ipmSDXMB', 1, '2018-02-11', '2018-02-14', 101, '', 0),
+('ZHXESveC', 1, '2018-02-11', '2018-02-16', 101, '', 0);
 
 -- --------------------------------------------------------
 
@@ -209,26 +233,6 @@ INSERT INTO `sh_roles` (`id_rol`, `rol`) VALUES
 (1, 'admin'),
 (3, 'empleado'),
 (2, 'manager');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `sh_sensor_data`
---
-
-CREATE TABLE `sh_sensor_data` (
-  `id_habitacion` int(16) NOT NULL,
-  `data` varchar(1024) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sh_sensor_data`
---
-
-INSERT INTO `sh_sensor_data` (`id_habitacion`, `data`) VALUES
-(0, 'asddddddddddddddddd'),
-(1, 'asdasdasdadadadas2312312312'),
-(1, 'asdasdasdadadadas2312312312');
 
 --
 -- Índices para tablas volcadas
@@ -263,6 +267,12 @@ ALTER TABLE `sh_huespedes`
   ADD UNIQUE KEY `correo` (`correo`),
   ADD UNIQUE KEY `correo_2` (`correo`),
   ADD KEY `id_usuario` (`id_huesped`);
+
+--
+-- Indices de la tabla `sh_limpieza`
+--
+ALTER TABLE `sh_limpieza`
+  ADD PRIMARY KEY (`id_solicitud`);
 
 --
 -- Indices de la tabla `sh_panel_usuarios`
@@ -306,21 +316,32 @@ ALTER TABLE `sh_roles`
 --
 ALTER TABLE `sh_habitaciones_tipos`
   MODIFY `id_tipo_habitacion` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `sh_huespedes`
 --
 ALTER TABLE `sh_huespedes`
-  MODIFY `id_huesped` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_huesped` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `sh_limpieza`
+--
+ALTER TABLE `sh_limpieza`
+  MODIFY `id_solicitud` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `sh_panel_usuarios`
 --
 ALTER TABLE `sh_panel_usuarios`
   MODIFY `id_usuario` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `sh_roles`
 --
 ALTER TABLE `sh_roles`
   MODIFY `id_rol` int(64) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
