@@ -1,3 +1,0 @@
-#include("/public/header.vm")
-<h1>Hola $nombre</h1>
-#include("/public/footer.vm")
