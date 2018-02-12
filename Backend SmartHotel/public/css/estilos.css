@@ -101,3 +101,7 @@ small {
     visibility: visible !important;
     opacity: 100 !important;
 }
+
+.ct-series-a .ct-point, .ct-series-a .ct-line {
+    stroke: red !important;
+}

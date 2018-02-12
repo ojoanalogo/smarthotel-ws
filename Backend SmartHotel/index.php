@@ -118,7 +118,6 @@ $app->post('/dashboard/huespedes/add', function () use ($app, $controladorHuespe
     }
 });
 
-
 /**
  * Remover huesped
  */
@@ -332,10 +331,12 @@ $app->post("/api/iot/{habitacion}/{funcion}", function ($habitacion, $funcion) u
         $app->JsonResponse($iot->getData($app->getRequest()->post("feed")));
     if ($funcion == "modificarDato")
         $app->JsonResponse($iot->moveData($app->getRequest()->post("feed"), $app->getRequest()->post("data")));
+    if($funcion == "obtenerGrafica")
+        return $app->JsonResponse($iot->getChart($app->getRequest()->post("feed")));
 });
 
 $app->get("/test", function () use ($app, $controladorLogin) {
-    $app->JsonResponse($controladorLogin->reservacionActiva("arc980103@gmail.com"));
+    $iot = new IoThabitacion("101");
 });
 
 function checkAuth()

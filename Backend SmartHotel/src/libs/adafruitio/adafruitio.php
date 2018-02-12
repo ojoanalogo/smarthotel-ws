@@ -45,12 +45,20 @@ class AdaFruitIO
      * Returns the all the feed names in an array
      * @return array of string
      */
-    public function getFeedNames($group)
-    {
+    public function getFeedNames($group) {
         $url = $this->url."/api/v2/MrARC/groups/" . $group . "/feeds";
-
         $c = curl_init($url);
-
+        $headers = array();
+        $headers[] = "X-AIO-Key: ".$this->key;
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
+        $json = json_decode(curl_exec($c));
+        curl_close($c);
+        return $json;
+    }
+    public function getChartData($feed) {
+        $url = $this->url."/api/v2/MrARC/feeds/" . $feed . "/data/chart?resolution=5&hours=8";
+        $c = curl_init($url);
         $headers = array();
         $headers[] = "X-AIO-Key: ".$this->key;
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
@@ -58,10 +66,6 @@ class AdaFruitIO
 
         $json = json_decode(curl_exec($c));
         curl_close($c);
-//
-//        $arr = array();
-//        foreach($json as $j)
-//            $arr[] = $j->name;
         return $json;
     }
 }

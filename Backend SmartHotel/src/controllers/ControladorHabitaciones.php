@@ -298,18 +298,6 @@ class IoThabitacion {
         $this->habitacion = $idHabitacion;
         $this->iot_id = $this->getID();
     }
-//    private function validarToken($token) {
-//        try {
-//            $key = "eneit2018";
-//            $data = JWT::decode($token, $key, array('HS256'));
-//            if($data) {
-//                return true;
-//            }
-//        } catch (\Exception $e) {
-//            return false;
-//        }
-//        return false;
-//    }
     private function getID() {
             global $db;
             $args = array($this->habitacion);
@@ -337,6 +325,11 @@ class IoThabitacion {
         return $rs[0]["iot_id"] != "";
     }
 
+    public function getChart($feed) {
+        $adafruit = new AdaFruitIO($this->iotKey);
+        return array("code" => 1, "msg" => "Datos obtenidos", "data" => $adafruit->getChartData($this->iot_id . "." . $feed));
+    }
+
     public function getMobileData($habitacion, $body) {
         $datos = json_decode($body, true);
         $token = $datos["token"];
@@ -360,7 +353,7 @@ class IoThabitacion {
 
     public function moveDataMobile($habitacion, $body) {
         $datos = json_decode($body, true);
-        $token = $datos["token"];
+//        $token = $datos["token"];
 //        if($this->validarToken($token)) {
             if($this->iotDisponible($habitacion)) {
                 $feed = $datos["feed"];

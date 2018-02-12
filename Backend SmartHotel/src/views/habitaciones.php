@@ -95,7 +95,6 @@
     $(document).ready(function() {
         obtenerHabitaciones();
     });
-
     /**
      * Obtener habitaciones e introducirlas en tabla
      */
@@ -120,13 +119,13 @@
                         function $habitaciones($data) {
                             var $str = "";
                             $.each($data, function(i, item) {
-                                var $hasIot = item.habitacion_iot_id === "" ? '<a href="/dashboard/habitaciones/iot/' + item.habitacion_numero + '" class="btn btn-fill" style="color:#FFF; background-color: #009688;" title="Detalles"><i class="fa fa-dashboard"></i> IoT</a>' : '';
+                                var $hasIot = item.iot_id !== "" ? '<a href="/dashboard/habitaciones/iot/' + item.habitacion + '" class="btn btn-fill" style="color:#FFF; background-color: #009688;" title="Detalles"><i class="fa fa-dashboard"></i> IoT</a>' : '';
                                 $str+= '<div class="col-md-3" data-habitacion="' + item.habitacion + '"><div class="panel habitacion-disponible"> <div class="panel-heading">' + item.habitacion + '<span class="pull-right"><span class="label label-default">' + item.tipo_habitacion +'</span></span></div>' +
                                     '<div class="table-responsive">' +
                                     '<table width="100%" border="0" class="table"> ' +
                                     '<tr><td><i class="fa fa-user" title="Huesped"></i>&nbsp;<strong>-</strong></td></tr> ' +
                                     '<tr><td><i class="fa fa-clock-o" title="Hora"></i>&nbsp;<strong>-</strong></td></tr> ' +
-                                    '<tr><td><a href="/dashboard/habitaciones/llegada/' + item.habitacion + '" class="btn btn-fill btn-success" style="color:#FFF; background-color: #5cb85c;" title="Check-In"> <i class="fa fa-bookmark-o"></i> Check-In</a>&nbsp;' + $hasIot +  '</td></tr> ' +
+                                    '<tr><td><a href="/dashboard/habitaciones/llegada/' + item.habitacion + '" class="btn btn-fill btn-success" style="color:#FFF; background-color: #5cb85c;" title="Check-In"> <i class="fa fa-bookmark-o"></i> Check-In</a>&nbsp;' + $hasIot + '</td> </tr> ' +
                                     '</table>' +
                                     '</div> ' +
                                     '</div> ' +
