@@ -301,6 +301,8 @@ $app->post("/api/hotel/{funcion}", function ($funcion) use ($app, $controladorPr
         $app->JsonResponse($controladorPrincipal->actualizarConfig($app->getRequest()->getBody()), 201);
     if($funcion == "solicitarLimpieza")
         $app->JsonResponse($controladorReservaciones->solicitudLimpieza($app->getRequest()->getBody()), 201);
+    if($funcion == "obtenerSolicitudesLimpieza")
+        $app->JsonResponse($controladorReservaciones->obtenerSolicitudesLimpieza(), 201);
     if($funcion == "avisoGlobal") {
         $app->JsonResponse($controladorHuespedes->notificacionGlobal($app->getRequest()->post("msg")));
     }

@@ -46,6 +46,12 @@ class ControladorReservaciones {
 //        return array("code" => -1, "msg" => "Token invalido");
     }
 
+    function obtenerSolicitudesLimpieza() {
+        global $db;
+        $sql = "SELECT * from sh_limpieza WHERE fecha = now()";
+
+    }
+
     function solicitudLimpiezaActiva($id_huesped, $habitacion) {
         global $db;
         $args = array($id_huesped, $habitacion);

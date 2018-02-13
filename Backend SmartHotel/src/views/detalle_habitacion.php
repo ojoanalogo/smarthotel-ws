@@ -45,21 +45,21 @@
                                 <img id="imgLuces" class="img-responsive centrar" src="/public/img/light-off.png" height="96">
                                 <div class="centrar">
                                     <p class="h2">Luces</p>
-                                    <a href="#" id="btnLuces" class="btn btn-lg">...</a>
+                                    <a class="btn btn-lg" id="btnLuces" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Procesando acción">...</a>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-6">
                                 <img class="img-responsive centrar" src="/public/img/air-aconditioner.png" height="96">
                                 <div class="centrar">
                                     <p class="h2">MiniSplit</p>
-                                    <a href="#" id="btnMiniSplit" class="btn btn-lg">...</a>
+                                    <a class="btn btn-lg" id="btnMiniSplit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Procesando acción">...</a>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-6">
                                 <img class="img-responsive centrar" src="/public/img/tv.png" height="96">
                                 <div class="centrar">
                                     <p class="h2">TV</p>
-                                    <a href="#" id="btnTV" class="btn btn-lg">...</a>
+                                    <a class="btn btn-lg" id="btnTV" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Procesando acción">...</a>
                                 </div>
                             </div>
                         </div>
@@ -75,6 +75,7 @@
                                 <canvas id="humedad"></canvas>
                             </div>
                         </div>
+                        <span class="h3 text-muted margin-top">Datos recientes</span>
                         <div class="row">
                             <div class="col-md-4 col-sm-12">
                                 <div id="chart_temperatura" class="ct-chart"></div>
@@ -412,6 +413,8 @@
     }
 
     $('#btnLuces').click(function() {
+        var $this = $(this);
+        $this.button('loading');
         var $accion = $(this).attr('data-action');
         <?php echo 'var $numeroHabitacion = ' . $args[0] . ';' ?>
             $.ajax({
@@ -422,17 +425,17 @@
                 if($accion === "1") {
                     swal("Foco encendido", "", "success");
                     $('#imgLuces').attr('src', "/public/img/light-on.png");
-                    $('#btnLuces').html('Apagar');
-                    $('#btnLuces').removeClass('btn-success');
-                    $('#btnLuces').addClass('btn-danger');
-                    $('#btnLuces').attr('data-action', "0");
+                    $this.removeClass('disabled').removeAttr('disabled').html('Apagar');
+                    $this.removeClass('btn-success');
+                    $this.addClass('btn-danger');
+                    $this.attr('data-action', "0");
                 } else {
                     swal("Foco apagado", "", "success");
                     $('#imgLuces').attr('src', "/public/img/light-off.png");
-                    $('#btnLuces').html('Encender');
-                    $('#btnLuces').removeClass('btn-danger');
-                    $('#btnLuces').addClass('btn-success');
-                    $('#btnLuces').attr('data-action', "1");
+                    $this.removeClass('disabled').removeAttr('disabled').html('Encender');
+                    $this.removeClass('btn-danger');
+                    $this.addClass('btn-success');
+                    $this.attr('data-action', "1");
                 }
             },
             error: function(xhr, type, exception) {
@@ -442,6 +445,8 @@
     });
 
     $('#btnTV').click(function() {
+        var $this = $(this);
+        $this.button('loading');
         var $accion = $(this).attr('data-action');
         <?php echo 'var $numeroHabitacion = ' . $args[0] . ';' ?>
         $.ajax({
@@ -450,17 +455,17 @@
             data: "feed=" + "tv" + "&data=" + $accion,
             success: function(data) {
                 if($accion === "1") {
-                    swal("Televisión encendida", "", "success");
-                    $('#btnTV').html('Apagar');
-                    $('#btnTV').removeClass('btn-success');
-                    $('#btnTV').addClass('btn-danger');
-                    $('#btnTV').attr('data-action', "0");
+                    swal("TV encendida", "", "success");
+                    $this.removeClass('disabled').removeAttr('disabled').html('Apagar');
+                    $this.removeClass('btn-success');
+                    $this.addClass('btn-danger');
+                    $this.attr('data-action', "0");
                 } else {
-                    swal("Televisión apagada", "", "success");
-                    $('#btnTV').html('Encender');
-                    $('#btnTV').removeClass('btn-danger');
-                    $('#btnTV').addClass('btn-success');
-                    $('#btnTV').attr('data-action', "1");
+                    swal("TV apagada", "", "success");
+                    $this.removeClass('disabled').removeAttr('disabled').html('Encender');
+                    $this.removeClass('btn-danger');
+                    $this.addClass('btn-success');
+                    $this.attr('data-action', "1");
                 }
             },
             error: function(xhr, type, exception) {
@@ -470,6 +475,8 @@
     });
 
     $('#btnMiniSplit').click(function() {
+        var $this = $(this);
+        $this.button('loading');
         var $accion = $(this).attr('data-action');
         <?php echo 'var $numeroHabitacion = ' . $args[0] . ';' ?>
         $.ajax({
@@ -479,16 +486,16 @@
             success: function(data) {
                 if($accion === "1") {
                     swal("Clima encendido", "", "success");
-                    $('#btnMiniSplit').html('Apagar');
-                    $('#btnMiniSplit').removeClass('btn-success');
-                    $('#btnMiniSplit').addClass('btn-danger');
-                    $('#btnMiniSplit').attr('data-action', "0");
+                    $this.removeClass('disabled').removeAttr('disabled').html('Apagar');
+                    $this.removeClass('btn-success');
+                    $this.addClass('btn-danger');
+                    $this.attr('data-action', "0");
                 } else {
                     swal("Clima apagado", "", "success");
-                    $('#btnMiniSplit').html('Encender');
-                    $('#btnMiniSplit').removeClass('btn-danger');
-                    $('#btnMiniSplit').addClass('btn-success');
-                    $('#btnMiniSplit').attr('data-action', "1");
+                    $this.removeClass('disabled').removeAttr('disabled').html('Encender');
+                    $this.removeClass('btn-danger');
+                    $this.addClass('btn-success');
+                    $this.attr('data-action', "1");
                 }
             },
             error: function(xhr, type, exception) {
@@ -507,6 +514,7 @@
                 if(data.code === 0) {
                     swal("Error IoT", "Error obteniendo gráficas", "error");
                 } else {
+                    $i_graph = 0;
                     var $datos = JSON.parse(data);
                     var $labels = [];
                     var $series = [];
