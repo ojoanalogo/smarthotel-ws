@@ -1,0 +1,40 @@
+version: "3.1"
+services:
+  www:
+    build: .
+    ports:
+      - "8001:80"
+    volumes:
+      - ./www:/var/www/html/
+    networks:
+      - shnet
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: smarthotel
+      MYSQL_USER: smarthotel
+      MYSQL_PASSWORD: docker
+      MYSQL_ROOT_PASSWORD: docker
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+      - ./conf:/etc/mysql/conf.d
+      - persistent:/var/lib/mysql
+    networks:
+      - shnet
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - shnet
+    ports:
+      - 8000:80
+    environment:
+      MYSQL_USER: smarthotel
+      MYSQL_PASSWORD: docker
+      MYSQL_ROOT_PASSWORD: docker
+volumes:
+  persistent:
+networks:
+  shnet:

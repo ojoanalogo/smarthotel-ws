@@ -21,6 +21,8 @@ require_once __DIR__ . "/src/libs/database_manager/pdo_database.class.php";
 require_once __DIR__ . "/src/config/config.php";
 $db = new wArLeY_DBMS(DB_TYPE, DB_HOST, DB_DB, DB_USR, DB_PWD, DB_PORT);
 if ($db->Cnxn() == false) {
+    var_dump($db);
+
     die(HNDLR_CNXNDB);
 }
 
