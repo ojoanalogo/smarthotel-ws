@@ -20,6 +20,10 @@ This was intended to be a remote monitoring solution to identify possible water 
 
 ## Some screenshots
 
+![photo_2021-03-09_11-06-19](https://user-images.githubusercontent.com/4296205/110517006-8699b680-80c7-11eb-8283-637384594386.jpg)
+![photo_2021-03-09_11-06-20](https://user-images.githubusercontent.com/4296205/110517011-87324d00-80c7-11eb-8743-b1c95fe1391f.jpg)
+![photo_2021-03-09_11-06-17](https://user-images.githubusercontent.com/4296205/110517015-87324d00-80c7-11eb-9815-f8d2b73daf65.jpg)
+![photo_2021-03-09_11-06-14](https://user-images.githubusercontent.com/4296205/110517018-87cae380-80c7-11eb-84ce-af0485b0f395.jpg)
 
 ## License
 MIT
